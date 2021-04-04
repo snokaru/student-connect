@@ -8,7 +8,7 @@ const studentSchema = new mongoose.Schema({
         },
         school: {
             type: String,
-            required: true,
+            //required: true,
             default: "", // TODO: REMOVE DEFAULT
         },
     },
