@@ -7,7 +7,7 @@ const app = express();
 // TODO: Add DB Connection
 
 app.use(express.json());
-
+app.use('/user',require('./routes/user'))
 /* 
  * Example route. Routes are supposed to be created in ~/routes using an express *Router()* and imported from there.
 */
