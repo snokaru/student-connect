@@ -1,7 +1,7 @@
 # API Routes for Login/Register
 
 ## Registering
-```json
+```javascript
 POST /api/user/register
 
 {
@@ -19,7 +19,7 @@ RESULT
 ```
 ## Logging In
 1. Getting Token based on credentials
-    ```json
+    ```javascript
     POST /api/user/login
 
     {
@@ -34,7 +34,7 @@ RESULT
     }
     ```
 2. Getting User data based on token
-    ```json
+    ```javascript
     GET /api/user/login
     Authorization: <token>
 
@@ -50,48 +50,3 @@ RESULT
     "id": String,
     "type": "Company"/"Student"
     ```
-
-Authorization: <token>
-
-```json
-```
-
-// COMPANY 
-GET /api/user/login
-Authorization: <token>
-RETURNEAZA
-{
-    "company": {
-        "activity": ""
-    },
-    "address": "",
-    "description": "",
-    "name": "test test",
-    "email": "testcompany@gmail.com",
-    "id": "6069d047809b5c5cc36db4fd",
-    "type": "company"
-}
-
-POST /api/user/login
-{
-  "email": "abcd",
-  "password": "asolkfasof"
-}
-RETURNEAZA
-{
-  "token": "<token>"
-}
-
-POST /api/user/register
-{
-  "email": "adfkamfa",
-  "type": "Student" / "Company",
-  "password": "sfoajsfo",
-  "name": "fasijfas",
-}
-RETURNEAZA
-{
-  "token": "<token">
-}
-
-
