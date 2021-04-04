@@ -39,14 +39,15 @@ RESULT
     Authorization: <token>
 
     RETURNS
-
-    "company": {
-        "activity": String
-    },
-    "address": String,
-    "description": String,
-    "name": String,
-    "email": String,
-    "id": String,
-    "type": "Company"/"Student"
+    {
+        "company": {
+            "activity": String
+        },
+        "address": String,
+        "description": String,
+        "name": String,
+        "email": String,
+        "id": String,
+        "type": "Company"/"Student"
+    }
     ```
