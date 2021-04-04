@@ -4,7 +4,7 @@
   "description": "Collective Project Proposed By IBM, West University of Timisoara, 2nd Year, Winter Semester",
   "main": "server.js",
   "scripts": {
-    "dev": "nodemon server.js",
+    "server": "nodemon server.js",
     "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

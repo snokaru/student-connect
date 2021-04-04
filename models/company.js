@@ -9,6 +9,7 @@ const companySchema = new mongoose.Schema({
         activity: {
             type: String,
             required: true,
+            default:""
         },
     },
 });
