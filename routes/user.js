@@ -85,7 +85,7 @@ async (req, res) => {
 
 router.get('/login', 
 middleware.tokenExtractor,
-async (req, res)=>{
+async (req, res) => {
     try {
         let user = await User.findById(req.user.id);
         logger.info(user);
