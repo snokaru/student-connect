@@ -5,7 +5,7 @@ export const Navbar = () => {
     return (
         <div className={classes.topnav} id="myTopnav">
   <a className={classes.active}>Home</a>
-  <a>Conectati-ma</a>
+  <a>ALOOOOOOOOOOOOOOO BUNADIMINETAAAAAA</a>
 </div>
     )
 }

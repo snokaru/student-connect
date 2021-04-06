@@ -1,5 +1,6 @@
 import React from 'react'
 import Job from "../Layout/JobComponent/Job";
+import User from './User';
 
  const Home = () => {
     return (
@@ -7,6 +8,7 @@ import Job from "../Layout/JobComponent/Job";
             <Job nume="Job1" descriere="AAAAAAAAAAAAAAAAAAAAAAAA" tip="Remote" locatie="Oras1"></Job>
             <Job nume="Job1" descriere="AAAAAAAAAAAAAAAAAAAAAAAA" tip="Remote" locatie="Oras1"></Job>
             <Job nume="Job1" descriere="AAAAAAAAAAAAAAAAAAAAAAAA" tip="Remote" locatie="Oras1"></Job>
+
         </div>
     )
 }
