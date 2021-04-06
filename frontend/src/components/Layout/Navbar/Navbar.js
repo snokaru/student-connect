@@ -14,6 +14,9 @@ export const Navbar = () => {
       <NavLink exact to="/register" activeClassName={classes.active}>
         Register
       </NavLink>
+      <NavLink exact to="/users" activeClassName={classes.active}>
+        User
+      </NavLink>
     </div>
   );
 };

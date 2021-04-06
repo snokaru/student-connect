@@ -6,7 +6,7 @@ const LoginForm = () => {
     <React.Fragment>
       <div className={classes.container}>
         <form className={classes.item}>
-          <h1>Please Log In</h1>
+          <h1>Log In</h1>
           <fieldset>
             <label for="email">Email</label>
             <input type="email" id="email" name="email" />

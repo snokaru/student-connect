@@ -1,6 +1,6 @@
 import React from 'react'
 import Job from "../Layout/JobComponent/Job";
-import User from './User';
+
 
  const Home = () => {
     return (
