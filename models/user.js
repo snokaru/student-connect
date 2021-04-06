@@ -7,7 +7,6 @@ const userSchema = new mongoose.Schema({
         minLength: 5,
         required: true,
     },
-    // TODO: Add Email Validation
     email: {
         type: String,
         required: true,
