@@ -5,6 +5,7 @@ import UserState from "./components/UserState/UserState";
 import Home from "./components/Pages/Home";
 import NavBar from "./components/Layout/Navbar/Navbar";
 import User from "./components/Pages/User";
+import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 const App = () => {
