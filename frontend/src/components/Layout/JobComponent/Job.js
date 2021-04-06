@@ -1,14 +1,19 @@
 import React from 'react'
+import Class from './Job.module.css'
 
 const Job = (props) => {
     return (
         <React.Fragment>
-            <div>
-                <p>{props.nume}</p>
-                <p>{props.descriere}</p>
-                <p>{props.tip}</p>
-                <p>{props.locatie}</p>
+            <div className = {Class.container}>
+                <p className = {Class.item}>{props.nume}</p>
+                <p className = {Class.item}>{props.descriere}</p>
+                <p className = {Class.item}>{props.tip}</p>
+                <p className = {Class.item}>{props.locatie}</p>
             </div>
+
+
+
+    
 
         </React.Fragment>
 
