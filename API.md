@@ -2,7 +2,7 @@
 
 ## Registering
 ```javascript
-POST /api/user/register
+POST /api/users
 
 {
   "email": "<email>",
@@ -18,27 +18,29 @@ RESULT
 }
 ```
 ## Logging In
-1. Getting Token based on credentials
-    ```javascript
-    POST /api/user/login
+```javascript
+POST /api/login
 
-    {
-        "email": "abcd",
-        "password": "asolkfasof"
-    }
+{
+    "email": "abcd",
+    "password": "asolkfasof"
+}
+
+RESULT
+
+{
+    "token": "<token>"
+}
+```
+
+# API Routes for Current User Management
+1. [AUTH] Getting User data based on token
+    ```javascript
+    GET /api/login
+    Authorization: <token>
 
     RESULT
 
-    {
-        "token": "<token>"
-    }
-    ```
-2. Getting User data based on token
-    ```javascript
-    GET /api/user/login
-    Authorization: <token>
-
-    RETURNS
     {
         "company": {
             "activity": String
@@ -50,4 +52,34 @@ RESULT
         "id": String,
         "type": "Company"/"Student"
     }
+    ```
+2. [AUTH] Updating User data
+    ```javascript
+    PUT /api/login
+    {
+        "description": "abcd",
+        "address": "asolkfasof"
+    }
+
+    RESULT
+
+    The whole user object with updated parameters.
+    ```
+
+# API Routes for General User Management
+1. Get All Users
+    ```
+    GET /api/users
+    ```
+2. Get Specific User
+    ```
+    GET /api/users/<id>
+    ```
+3. Create User
+    ```
+    POST /api/users
+    ```
+4. [AUTH] Update Specific User (Currently only updates based on auth, but can be expanded to update any user given the privilleges)
+    ```
+    PUT /api/users/<id>
     ```

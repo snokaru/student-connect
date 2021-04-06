@@ -4,7 +4,6 @@ const config = require("./utils/config");
 const mongoose=require("mongoose");
 const app = express();
 
-// TODO: Add DB Connection
 mongoose.connect(config.MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -13,12 +12,8 @@ mongoose.connect(config.MONGODB_URI, {
 }).then(()=>logger.info("Connected to MongoDB"));
 
 app.use(express.json());
-app.use('/api/user',require('./routes/user'))
-/* 
- * Example route. Routes are supposed to be created in ~/routes using an express *Router()* and imported from there.
-*/
-app.get("/", async (req, res) => {
-    res.status(200).json({"message": "Hello, World!"});
-});
+
+app.use('/api/login', require('./routes/login'));
+app.use('/api/users', require('./routes/users'));
 
 module.exports = app;
