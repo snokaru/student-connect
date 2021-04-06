@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "server": "nodemon server.js",
-    "start": "node server.js",
+    "start": "concurrently \"npm run server\" \"npm run frontend\"",
+    "frontend": "npm start --prefix frontend",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -20,6 +21,7 @@
   "homepage": "https://github.com/Snokaru/ibm-students-companies#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "concurrently": "^6.0.1",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-validator": "^6.10.0",
