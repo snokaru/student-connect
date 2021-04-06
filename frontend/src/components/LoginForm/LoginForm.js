@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import classes from "./LoginForm.module.css";
 
 const LoginForm = () => {
     return (
@@ -6,21 +7,25 @@ const LoginForm = () => {
         <div className={classes.container}>
         <form className={classes.item}>
         <h1>Please Log In</h1>
-        <label>
-            <p>Email</p>
-            <input />
+        <fieldset>
+          <label for="email">
+            Email
           </label>
-          <label>
-            <p>Password</p>
-            <input />
-          </label>
-          <div >
-            <button type="submit" className={classes.button}>Submit</button>
-          </div>
+          <input type="email" id="email" name="email" />
+        </fieldset>
+        <fieldset>
+            <label>
+              <p>Password</p>
+              <input type="password" id="password" name="password" />
+            </label>
+        </fieldset>
+        <div >
+          <button type="submit" className={classes.button}>Submit</button>
+        </div>
         </form>
       </div>
       </React.Fragment>
-    )
+    );
 }
 
-export default LoginForm
+export default LoginForm;
