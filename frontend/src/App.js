@@ -1,11 +1,13 @@
 import React from 'react'
 import RegisterForm from './components/RegisterForm/RegisterForm'
-
+import UserState from './components/UserState/UserState';
 const App = () => {
   return (
-    <div>
+    <React.Fragment>
+      <UserState>
       <RegisterForm/>
-    </div>
+      </UserState>
+    </React.Fragment>
   );
 };
 
