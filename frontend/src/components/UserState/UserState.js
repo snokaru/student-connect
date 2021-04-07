@@ -1,6 +1,7 @@
 import React, { useReducer } from "react";
 import UserContext from "./userContext";
 import UserReducer from "./userReducer";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 import {
   REGISTER_SUCCES,
@@ -12,6 +13,7 @@ import {
   LOGOUT,
 } from "../../types";
 const UserState = (props) => {
+  let history = useHistory();
   const initialState = {
     token: localStorage.getItem("Authorization"),
     isAuthenticated: false,
@@ -46,6 +48,7 @@ const UserState = (props) => {
     localStorage.removeItem("Authorization");
     try {
       dispatch({ type: LOGOUT });
+      history.push("/");
       console.log("delogare");
     } catch (error) {
       dispatch({ type: LOGIN_FAIL, payload: error.error });
