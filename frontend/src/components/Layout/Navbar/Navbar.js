@@ -15,7 +15,7 @@ export const Navbar = () => {
       {user ? (
         <React.Fragment>
           <NavLink exact to="/users" activeClassName={classes.active}>
-            User
+            Profile
           </NavLink>
           <Button onClick={Logout} size="lg" color="danger">
             >>

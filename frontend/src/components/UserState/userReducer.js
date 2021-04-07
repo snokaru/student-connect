@@ -16,7 +16,7 @@ export default function (state, action) {
     case LOGIN_FAIL:
       return { ...state, error: action.payload };
     case USER_LOADED:
-      return { ...state, user: action.payload };
+      return { ...state, isAuthenticated: true, user: action.payload };
     case LOGOUT:
       return { ...state, token: null, user: null, isAuthenticated: false };
     default:
