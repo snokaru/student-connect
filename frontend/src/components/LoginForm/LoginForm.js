@@ -1,7 +1,15 @@
-import React, { Fragment, useState } from "react";
-import classes from "./LoginForm.module.css";
-
-const LoginForm = () => {
+import React, { Fragment, useEffect, useContext, useState } from "react";
+import { useHistory } from "react-router-dom";
+import UserContext from "../UserState/userContext";
+const LoginForm = (props) => {
+  let history = useHistory();
+  const userContext = useContext(UserContext);
+  const { isAuthenticated, Login } = userContext;
+  useEffect(() => {
+    if (isAuthenticated === true) {
+      history.push("/");
+    }
+  });
   const [user, setUser] = useState({
     email: "",
     password: "",
@@ -13,7 +21,7 @@ const LoginForm = () => {
   };
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log("logat");
+    Login({ email, password });
   };
   return (
     <React.Fragment>

@@ -1,8 +1,16 @@
-import React, { Fragment, useState, useContext } from "react";
-import classes from "./RegisterForm.module.css";
+import React, { Fragment, useEffect, useState, useContext } from "react";
+import { useHistory } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import UserContext from "../UserState/userContext";
-const RegisterForm = () => {
+const RegisterForm = (props) => {
+  let history = useHistory();
+  const userContext = useContext(UserContext);
+  const { isAuthenticated, Register } = userContext;
+  useEffect(() => {
+    if (isAuthenticated === true) {
+      history.push("/");
+    }
+  });
   const [user, setUser] = useState({
     type: "",
     name: "",
@@ -27,8 +35,7 @@ const RegisterForm = () => {
     activity,
     creationDate,
   } = user;
-  const userContext = useContext(UserContext);
-  const { Register } = userContext;
+
   const onChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
@@ -36,7 +43,6 @@ const RegisterForm = () => {
     e.preventDefault();
 
     if (type === "Student") {
-      console.log("preparing register");
       Register({
         type,
         name,
@@ -58,7 +64,6 @@ const RegisterForm = () => {
         school,
       });
     } else {
-      console.log("preparing register 2");
       Register({
         type,
         name,
@@ -105,7 +110,6 @@ const RegisterForm = () => {
               className="form-control"
               name="school"
               value={school}
-              required
               placeholder="School"
             />
           </div>
@@ -136,7 +140,6 @@ const RegisterForm = () => {
               className="form-control"
               name="activity"
               value={activity}
-              required
               placeholder="Activity"
             />
           </div>
@@ -228,7 +231,6 @@ const RegisterForm = () => {
                     className="form-control"
                     name="address"
                     value={address}
-                    required
                     placeholder="Address"
                   />
                 </div>
@@ -265,12 +267,7 @@ const RegisterForm = () => {
               </div>
               {extraField}
               <div className="col-sm-offset-2 col-sm-10">
-                <input
-                  onSubmit={onSubmit}
-                  type="submit"
-                  class="btn btn-info"
-                  value="Submit"
-                />
+                <input type="submit" class="btn btn-info" value="Submit" />
               </div>
             </form>
           </div>
