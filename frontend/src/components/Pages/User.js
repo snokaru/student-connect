@@ -4,6 +4,17 @@ import "./User.css";
 export const User = (props) => {
   const userContext = useContext(UserContext);
   const { user } = userContext;
+  function formatDate(date) {
+    var d = new Date(date),
+      month = "" + (d.getMonth() + 1),
+      day = "" + d.getDate(),
+      year = d.getFullYear();
+
+    if (month.length < 2) month = "0" + month;
+    if (day.length < 2) day = "0" + day;
+
+    return [day, month, year].join("-");
+  }
   return (
     <div class="container">
       <div class="main-body">
@@ -63,7 +74,21 @@ export const User = (props) => {
                     </h6>
                   </div>
                   <div class="col-sm-9 text-secondary">
-                    {user && (user.school || user.activty)}
+                    {user && (user.student.school || user.company.activity)}
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-3">
+                    <h6 class="mb-0">
+                      {user && user.type === "student"
+                        ? "Date of birth"
+                        : "Creation Date"}
+                    </h6>
+                  </div>
+                  <div class="col-sm-9 text-secondary">
+                    {user &&
+                      (formatDate(user.student.birthDate) ||
+                        formatDate(user.company.creationDate))}
                   </div>
                 </div>
                 <div class="row">
