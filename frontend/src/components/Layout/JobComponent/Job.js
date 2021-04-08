@@ -1,14 +1,24 @@
 import React from "react";
-import Class from "./Job.module.css";
 
 const Job = (props) => {
   return (
     <React.Fragment>
-      <div className={Class.container}>
-        <p className={Class.item}>{props.nume}</p>
-        <p className={Class.item}>{props.descriere}</p>
-        <p className={Class.item}>{props.tip}</p>
-        <p className={Class.item}>{props.locatie}</p>
+      <div className="card m-3">
+        <div className="card-body d-flex flex-column justify-content-between">
+          <div className="card-title d-flex align-items-center">
+          <img src={props.companyPicture} class="d-inline" width="50" height="50"></img>
+          <p className="card-text m-0 ml-3 d-flex flex-column">
+            <span>{props.company}</span>
+            <span className="text-muted">{props.when}</span> 
+          </p>
+          </div>
+          <p className="card-title text-primary d-inline">{props.nume}</p>
+          <p className="card-text">{props.description}</p>
+          <div>
+            <p className="card-subtitle text-muted mb-1">{props.type}</p>
+            <p className="card-subtitle text-muted">{props.location}</p>
+          </div>
+        </div>
       </div>
     </React.Fragment>
   );

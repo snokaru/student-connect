@@ -1,37 +1,49 @@
 import React, { useContext } from "react";
-import classes from "./Navbar.module.css";
 import { NavLink } from "react-router-dom";
 import UserContext from "../../UserState/userContext";
-import { Button } from "reactstrap";
+import { Button, Navbar as BootstrapNavbar, Nav, NavItem } from "reactstrap";
 
 export const Navbar = () => {
   const userContext = useContext(UserContext);
-  const { user, Logout } = userContext;
+  const { user, logout } = userContext;
   return (
-    <div className={classes.topnav}>
-      <NavLink exact to="/" activeClassName={classes.active}>
-        Home
-      </NavLink>
-      {user ? (
-        <React.Fragment>
-          <NavLink exact to="/users" activeClassName={classes.active}>
-            Profile
+    <BootstrapNavbar className="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div className="navbar-nav mr-auto">
+        <NavItem class="nav-item">
+          <NavLink className="nav-link" exact to="/" activeClassName="active"> 
+               Home 
           </NavLink>
-          <Button onClick={Logout} size="lg" color="danger">
-            Log Out
-          </Button>{" "}
-        </React.Fragment>
-      ) : (
-        <React.Fragment>
-          <NavLink exact to="/register" activeClassName={classes.active}>
-            Register
-          </NavLink>
-          <NavLink exact to="/login" activeClassName={classes.active}>
-            Log In
-          </NavLink>
-        </React.Fragment>
-      )}
-    </div>
+        </NavItem>
+        {user ? (
+          <React.Fragment>
+            <NavItem>
+              <NavLink className="nav-link" exact to="/users" activeClassName="active">
+                Profile
+              </NavLink>
+            </NavItem>
+            <NavItem>
+                <Button className="nav-link" onClick={logout} size="lg" color="danger">
+                  Log Out
+                </Button>
+            </NavItem>
+          </React.Fragment>
+        ) : (
+          <React.Fragment>
+            <NavItem>
+              <NavLink className="nav-link" exact to="/register" activeClassName="active">
+                Register
+              </NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink className="nav-link" exact to="/login" activeClassName="active">
+                Log In
+              </NavLink>
+            </NavItem>
+          </React.Fragment>
+        )}
+      </div>
+    </BootstrapNavbar>
+
   );
 };
 export default Navbar;
