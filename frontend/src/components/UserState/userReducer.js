@@ -7,12 +7,15 @@ import {
   USER_LOADED,
   LOGOUT,
 } from "../../types";
+
 export default function (state, action) {
   switch (action.type) {
     case REGISTER_SUCCES:
+      break;
     case LOGIN_SUCCES:
       return { ...state, isAuthenticated: true, token: action.payload };
     case REGISTER_FAIL:
+      break;
     case LOGIN_FAIL:
       return { ...state, error: action.payload };
     case USER_LOADED:

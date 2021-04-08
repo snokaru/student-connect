@@ -1,16 +1,18 @@
 import React, { Fragment, useEffect, useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import UserContext from "../UserState/userContext";
+
 const RegisterForm = (props) => {
   let history = useHistory();
-  const userContext = useContext(UserContext);
-  const { isAuthenticated, Register } = userContext;
+  const { isAuthenticated, register } = useContext(UserContext);
+
   useEffect(() => {
     if (isAuthenticated === true) {
       history.push("/");
     }
   });
+
   const [user, setUser] = useState({
     type: "",
     name: "",
@@ -23,6 +25,7 @@ const RegisterForm = (props) => {
     activity: "",
     creationDate: "",
   });
+
   const {
     name,
     type,
@@ -39,54 +42,28 @@ const RegisterForm = (props) => {
   const onChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
+
   const onSubmit = (e) => {
     e.preventDefault();
 
+    let newUser = { type, name, email, password, address, description, };
     if (type === "Student") {
-      Register({
-        type,
-        name,
-        email,
-        password,
-        address,
-        description,
+      newUser = {
+        ...newUser,
         birthDate,
-        school,
-      });
-      console.log({
-        type,
-        name,
-        email,
-        password,
-        address,
-        description,
-        birthDate,
-        school,
-      });
+        school, 
+      };
     } else {
-      Register({
-        type,
-        name,
-        email,
-        password,
-        address,
-        description,
+      newUser = {
+        ...newUser,
         creationDate,
         activity,
-      });
-      console.log({
-        type,
-        name,
-        email,
-        password,
-        address,
-        description,
-        creationDate,
-        activity,
-      });
+      }
     }
+    register(newUser);
   };
   let extraField;
+
   if (type === "Student") {
     extraField = (
       <Fragment>
@@ -274,7 +251,7 @@ const RegisterForm = (props) => {
           <div className="col-sm">
             <h3>
               You already have an account?
-              <NavLink to="/login"> Sign in</NavLink>
+              <Link to="/login"> Sign in</Link>
             </h3>
           </div>
         </div>
