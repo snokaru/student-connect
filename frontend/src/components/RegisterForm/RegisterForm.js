@@ -68,9 +68,10 @@ const RegisterForm = (props) => {
     extraField = (
       <Fragment>
         <div className="form-group">
-          <label className="control-label col-sm-10">Birth Date</label>
-          <div className="col-sm-10">
+          <label className="control-label">Birth Date:</label>
+          <div className="">
             <input
+              className="form-control"
               onChange={onChange}
               type="date"
               name="birthDate"
@@ -79,8 +80,8 @@ const RegisterForm = (props) => {
           </div>
         </div>
         <div className="form-group">
-          <label className="control-label col-sm-10">School</label>
-          <div className="col-sm-10">
+          <label className="control-label">School:</label>
+          <div>
             <input
               onChange={onChange}
               type="text"
@@ -98,9 +99,10 @@ const RegisterForm = (props) => {
     extraField = (
       <Fragment>
         <div className="form-group">
-          <label className="control-label col-sm-10">Creation Date</label>
-          <div className="col-sm-10">
+          <label className="control-label">Creation Date:</label>
+          <div>
             <input
+              className="form-control"
               onChange={onChange}
               type="date"
               name="creationDate"
@@ -109,8 +111,8 @@ const RegisterForm = (props) => {
           </div>
         </div>
         <div className="form-group">
-          <label className="control-label col-sm-10">Activity</label>
-          <div className="col-sm-10">
+          <label className="control-label">Activity:</label>
+          <div>
             <input
               onChange={onChange}
               type="text"
@@ -129,133 +131,125 @@ const RegisterForm = (props) => {
   }
   return (
     <Fragment>
-      <div className="container">
-        <div className="row">
-          <div className="col-sm">
-            <form onSubmit={onSubmit}>
-              <div className="form-group">
-                <label className="control-label col-sm-5" for="type">
-                  Type
+      <div className="w-50 mx-auto my-4 p-4 card container">
+        <h1 class="mb-4 text-primary">Register now</h1>
+        <form onSubmit={onSubmit}>
+            <div className="form-group">
+              <label className="control-label" for="type">
+                Type<span class="text-primary">*</span>:
+              </label>
+              <div class="ml-4">
+                <input
+                  onChange={onChange}
+                  class="form-check-input"
+                  type="radio"
+                  name="type"
+                  value="Student"
+                  required
+                />
+                <label class="radio-inline" htmlFor="student-type">
+                  Student
                 </label>
-                <div className="col-sm-10">
-                  <label class="radio-inline">
-                    <input
-                      onChange={onChange}
-                      class="form-check-input"
-                      type="radio"
-                      name="type"
-                      value="Student"
-                      required
-                    />
-                    Student
-                  </label>
-                </div>
-                <div className="col-sm-10">
-                  <label class="radio-inline" for="exampleRadios1">
-                    <input
-                      required
-                      onChange={onChange}
-                      class="form-check-input"
-                      type="radio"
-                      name="type"
-                      value="Company"
-                    />
-                    Company
-                  </label>
-                </div>
               </div>
-              <div className="form-group">
-                <label className="control-label col-sm-5" for="name">
-                  Full name
-                </label>
-                <div className="col-sm-10">
+              <div class="ml-4">
                   <input
-                    onChange={onChange}
-                    type="text"
-                    className="form-control"
-                    name="name"
-                    value={name}
                     required
-                    placeholder="Full name"
+                    onChange={onChange}
+                    class="form-check-input"
+                    type="radio"
+                    name="type"
+                    value="Company"
                   />
-                </div>
-              </div>
-              <div className="form-group">
-                <label className="control-label col-sm-5" for="email">
-                  Email address
+                <label class="radio-inline" for="exampleRadios1">
+                  Company
                 </label>
-                <div className="col-sm-10">
-                  <input
-                    onChange={onChange}
-                    type="email"
-                    className="form-control"
-                    name="email"
-                    value={email}
-                    required
-                    placeholder="Email"
-                  />
-                </div>
               </div>
+            </div>
+            <div className="form-row">
+              <div className="form-group col-md-6">
+                <label className="control-label" for="name">
+                  Full Name<span class="text-primary">*</span>:
+                </label>
+                <input
+                  onChange={onChange}
+                  type="text"
+                  className="form-control"
+                  name="name"
+                  value={name}
+                  required
+                  placeholder="Full name"
+                />
+              </div>
+              <div className="form-group col-md-6">
+                <label className="control-label" for="email">
+                  Email<span class="text-primary">*</span>:
+                </label>
+                <input
+                  onChange={onChange}
+                  type="email"
+                  className="form-control"
+                  name="email"
+                  value={email}
+                  required
+                  placeholder="Email"
+                />
+            </div>
+            </div>
 
-              <div className="form-group">
-                <label className="control-label col-sm-5" for="Address">
-                  Address
-                </label>
-                <div className="col-sm-10">
-                  <input
-                    onChange={onChange}
-                    type="text"
-                    className="form-control"
-                    name="address"
-                    value={address}
-                    placeholder="Address"
-                  />
-                </div>
+            <div className="form-group">
+              <label className="control-label" for="Address">
+                Address:
+              </label>
+              <div>
+                <input
+                  onChange={onChange}
+                  type="text"
+                  className="form-control"
+                  name="address"
+                  value={address}
+                  placeholder="Address"
+                />
               </div>
-              <div className="form-group">
-                <label className="control-label col-sm-5">Password</label>
-                <div className="col-sm-10">
-                  <input
-                    onChange={onChange}
-                    type="password"
-                    className="form-control"
-                    name="password"
-                    value={password}
-                    required
-                    placeholder="Password"
-                  />
-                </div>
+            </div>
+            <div className="form-group">
+              <label className="control-label">Password<span class="text-primary">*</span>:</label>
+              <div>
+                <input
+                  onChange={onChange}
+                  type="password"
+                  className="form-control"
+                  name="password"
+                  value={password}
+                  required
+                  placeholder="Password"
+                />
               </div>
-              <div className="form-group">
-                <label className="control-label col-sm-10" for="password">
-                  Description
-                </label>
-                <div className="col-sm-10">
-                  <textarea
-                    onChange={onChange}
-                    type="text"
-                    className="form-control"
-                    name="description"
-                    placeholder="Description"
-                    value={description}
-                    rows="2"
-                  />
-                </div>
+            </div>
+            <div className="form-group">
+              <label className="control-label" for="password">
+                Description:
+              </label>
+              <div>
+                <textarea
+                  onChange={onChange}
+                  type="text"
+                  className="form-control"
+                  name="description"
+                  placeholder="Description"
+                  value={description}
+                  rows="2"
+                />
               </div>
-              {extraField}
-              <div className="col-sm-offset-2 col-sm-10">
-                <input type="submit" class="btn btn-info" value="Submit" />
-              </div>
-            </form>
-          </div>
-          <div className="col-sm">
-            <h3>
-              You already have an account?
-              <Link to="/login"> Sign in</Link>
-            </h3>
-          </div>
+            </div>
+            {extraField}
+            <div>
+              <input type="submit" class="btn btn-primary" value="Submit"/>
+            </div>
+            <p class="text-muted my-2">
+              You already have an account? <Link to="/login">Log In</Link>
+            </p>
+          </form>
         </div>
-      </div>
     </Fragment>
   );
 };

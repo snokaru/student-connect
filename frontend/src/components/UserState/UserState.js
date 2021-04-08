@@ -23,7 +23,7 @@ const UserState = (props) => {
   };
   const [state, dispatch] = useReducer(UserReducer, initialState);
   useEffect(() => {
-    if (localStorage.token) {
+    if (window.localStorage.token) {
       loadUser();
     }
   }, [state.token]);
