@@ -1,10 +1,11 @@
 import React, { useEffect, useContext, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import UserContext from "../UserState/userContext";
+
 const LoginForm = (props) => {
   let history = useHistory();
   const userContext = useContext(UserContext);
-  const { isAuthenticated, Login } = userContext;
+  const { isAuthenticated, login } = userContext;
   useEffect(() => {
     if (isAuthenticated === true) {
       history.push("/");
@@ -21,55 +22,48 @@ const LoginForm = (props) => {
   };
   const onSubmit = (e) => {
     e.preventDefault();
-    Login({ email, password });
+    login({ email, password });
   };
   return (
     <React.Fragment>
-      <div className="container">
-        <div className="row">
-          <div className="col-sm">
-            <form onSubmit={onSubmit}>
-              <div className="form-group">
-                <label className="control-label col-sm-5" for="email">
-                  Email address
-                </label>
-                <div className="col-sm-8">
-                  <input
-                    onChange={onChange}
-                    type="email"
-                    className="form-control"
-                    name="email"
-                    value={email}
-                    required
-                    placeholder="Email"
-                  />
-                </div>
-              </div>
-              <div className="form-group">
-                <label className="control-label col-sm-5" for="password">
-                  Password
-                </label>
-                <div className="col-sm-8">
-                  <input
-                    onChange={onChange}
-                    type="password"
-                    className="form-control"
-                    name="password"
-                    value={password}
-                    required
-                    placeholder="Password"
-                  />
-                </div>
-              </div>
-              <div className="col-sm-offset-2 col-sm-10">
-                <input type="submit" class="btn btn-info" value="Submit" />
-              </div>
-            </form>
+      <div className="w-25 my-4 p-4 card container">
+        <h1 className="text-primary ">Log In</h1>
+        <form onSubmit={onSubmit}>
+          <div className="form-group">
+            <label className="control-label" for="email">
+              Email
+            </label>
+            <input
+              onChange={onChange}
+              type="email"
+              className="form-control"
+              name="email"
+              value={email}
+              required
+              placeholder="Email"
+            />
           </div>
-          <div className="col-sm">
-            <h3>Sign in and search opportunities</h3>
+          <div className="form-group">
+            <label className="control-label" for="password">
+              Password
+            </label>
+            <div>
+              <input
+                onChange={onChange}
+                type="password"
+                className="form-control"
+                name="password"
+                value={password}
+                required
+                placeholder="Password"
+              />
+            </div>
           </div>
-        </div>
+          <div>
+            <input type="submit" class="btn btn-primary" value="Submit" />
+          </div>
+          <p className="mt-2 text-muted">Need an account? <Link to="/register">Register</Link></p>
+        </form>
       </div>
     </React.Fragment>
   );
