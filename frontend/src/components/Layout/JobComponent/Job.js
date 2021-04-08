@@ -3,7 +3,7 @@ import React from "react";
 const Job = (props) => {
   return (
     <React.Fragment>
-      <div className="card m-3">
+      <div className="card m-3 w-50 mx-auto">
         <div className="card-body d-flex flex-column justify-content-between">
           <div className="card-title d-flex align-items-center">
           <img src={props.companyPicture} class="d-inline" width="50" height="50"></img>
