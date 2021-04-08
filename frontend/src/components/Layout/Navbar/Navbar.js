@@ -22,9 +22,6 @@ export const Navbar = () => {
               </NavLink>
             </NavItem>
             <NavItem>
-                <Button className="nav-link" onClick={logout} size="lg" color="danger">
-                  Log Out
-                </Button>
             </NavItem>
           </React.Fragment>
         ) : (
@@ -42,6 +39,11 @@ export const Navbar = () => {
           </React.Fragment>
         )}
       </div>
+      {user ? 
+      <button className="btn btn-link nav-link border-0 text-white" onClick={logout}>
+        Log Out
+      </button>
+      : null}
     </BootstrapNavbar>
 
   );
