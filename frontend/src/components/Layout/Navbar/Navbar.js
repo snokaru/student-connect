@@ -18,13 +18,18 @@ export const Navbar = () => {
             Profile
           </NavLink>
           <Button onClick={Logout} size="lg" color="danger">
-            >>
+            Log Out
           </Button>{" "}
         </React.Fragment>
       ) : (
-        <NavLink exact to="/register" activeClassName={classes.active}>
-          Register
-        </NavLink>
+        <React.Fragment>
+          <NavLink exact to="/register" activeClassName={classes.active}>
+            Register
+          </NavLink>
+          <NavLink exact to="/login" activeClassName={classes.active}>
+            Log In
+          </NavLink>
+        </React.Fragment>
       )}
     </div>
   );

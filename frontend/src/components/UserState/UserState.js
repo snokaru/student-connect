@@ -12,6 +12,7 @@ import {
   USER_LOADED,
   LOGOUT,
 } from "../../types";
+
 const UserState = (props) => {
   let history = useHistory();
   const initialState = {
@@ -23,33 +24,34 @@ const UserState = (props) => {
   const [state, dispatch] = useReducer(UserReducer, initialState);
   useEffect(() => {
     if (localStorage.token) {
-      LoadUser();
+      loadUser();
     }
   }, [state.token]);
-  const Register = async (formData) => {
+
+  const register = async (formData) => {
     try {
       const res = await axios.post("http://localhost:3003/api/users", formData);
       dispatch({ type: REGISTER_SUCCES, payload: res.data.token });
       await localStorage.setItem("token", res.data.token);
-      LoadUser();
+      loadUser();
       console.log("inregistrare");
     } catch (error) {
       dispatch({ type: REGISTER_FAIL, payload: error.error });
     }
   };
 
-  const Login = async (formData) => {
+  const login = async (formData) => {
     try {
       const res = await axios.post("http://localhost:3003/api/login", formData);
       dispatch({ type: LOGIN_SUCCES, payload: res.data.token });
       await localStorage.setItem("token", res.data.token);
-      LoadUser();
+      loadUser();
       console.log("logare");
     } catch (error) {
       dispatch({ type: LOGIN_FAIL, payload: error.error });
     }
   };
-  const Logout = async () => {
+  const logout = async () => {
     delete axios.defaults.headers.common["token"];
     await localStorage.removeItem("token");
     try {
@@ -60,7 +62,8 @@ const UserState = (props) => {
       dispatch({ type: LOGIN_FAIL, payload: error.error });
     }
   };
-  const LoadUser = async () => {
+  
+  const loadUser = async () => {
     if (localStorage.token) {
       setAuthToken(localStorage.token);
     }
@@ -79,6 +82,7 @@ const UserState = (props) => {
       delete axios.defaults.headers.common["Authorization"];
     }
   };
+
   return (
     <UserContext.Provider
       value={{
@@ -86,9 +90,7 @@ const UserState = (props) => {
         error: state.error,
         token: state.token,
         isAuthenticated: state.isAuthenticated,
-        Register,
-        Login,
-        Logout,
+        register, login, logout,
       }}
     >
       {props.children}
