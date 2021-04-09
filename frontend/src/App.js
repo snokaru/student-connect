@@ -1,9 +1,9 @@
 import React from "react";
-import LoginForm from "./components/LoginForm/LoginForm";
-import RegisterForm from "./components/RegisterForm/RegisterForm";
+import LoginForm from "./components/LoginForm";
+import RegisterForm from "./components/RegisterForm";
 import UserState from "./components/UserState/UserState";
 import Home from "./components/Pages/Home";
-import NavBar from "./components/Layout/Navbar/Navbar";
+import NavBar from "./components/Layout/Navbar";
 import User from "./components/Pages/User";
 
 import "bootstrap/dist/css/bootstrap.min.css";

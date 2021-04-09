@@ -1,5 +1,5 @@
 import React from "react";
-import Job from "../Layout/JobComponent/Job";
+import Job from "../Layout/Job";
 
 const Home = () => {
   return (

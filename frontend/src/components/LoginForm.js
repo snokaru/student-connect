@@ -1,6 +1,6 @@
 import React, { useEffect, useContext, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import UserContext from "../UserState/userContext";
+import UserContext from "./UserState/userContext";
 
 const LoginForm = (props) => {
   let history = useHistory();
@@ -62,7 +62,9 @@ const LoginForm = (props) => {
           <div>
             <input type="submit" class="btn btn-primary" value="Submit" />
           </div>
-          <p className="mt-2 text-muted">Need an account? <Link to="/register">Register</Link></p>
+          <p className="mt-2 text-muted">
+            Need an account? <Link to="/register">Register</Link>
+          </p>
         </form>
       </div>
     </React.Fragment>
