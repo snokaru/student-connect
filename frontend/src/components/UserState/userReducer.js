@@ -10,18 +10,21 @@ import {
 
 export default function (state, action) {
   switch (action.type) {
-    case REGISTER_SUCCES:
-      break;
-    case LOGIN_SUCCES:
+    case REGISTER_SUCCES: case LOGIN_SUCCES:
       return { ...state, isAuthenticated: true, token: action.payload };
+
     case REGISTER_FAIL:
-      break;
+      return { ...state, itAuthenticated: false, token: null };
+
     case LOGIN_FAIL:
       return { ...state, error: action.payload };
+
     case USER_LOADED:
       return { ...state, isAuthenticated: true, user: action.payload };
+
     case LOGOUT:
       return { ...state, token: null, user: null, isAuthenticated: false };
+
     default:
       return state;
   }

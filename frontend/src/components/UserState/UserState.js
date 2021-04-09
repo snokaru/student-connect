@@ -22,19 +22,22 @@ const UserState = (props) => {
     error: null,
   };
   const [state, dispatch] = useReducer(UserReducer, initialState);
+  console.log(state);
+
   useEffect(() => {
     if (window.localStorage.token) {
       loadUser();
     }
   }, [state.token]);
 
-  const register = async (formData) => {
+  
+   const register = async (formData) => {
+     console.log("inregistrare");
     try {
       const res = await axios.post("http://localhost:3003/api/users", formData);
       dispatch({ type: REGISTER_SUCCES, payload: res.data.token });
       await localStorage.setItem("token", res.data.token);
       loadUser();
-      console.log("inregistrare");
     } catch (error) {
       dispatch({ type: REGISTER_FAIL, payload: error.error });
     }
