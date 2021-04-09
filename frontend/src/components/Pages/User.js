@@ -1,4 +1,7 @@
 import React, { useContext, useEffect } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFacebookF, faGithub } from "@fortawesome/free-brands-svg-icons";
+import { faPhone, faAddressCard } from "@fortawesome/free-solid-svg-icons";
 import UserContext from "../UserState/userContext";
 import { useHistory } from "react-router-dom";
 import "./User.css";
@@ -39,7 +42,72 @@ export const User = (props) => {
               </div>
             </div>
             <div class="card mt-3">
-              -----------------------------------------------------
+              <div class="row">
+                <div class="col-sm-3 pt-1 d-flex justify-content-center">
+                  {user && user.contact.facebook ? (
+                    <FontAwesomeIcon icon={faFacebookF} />
+                  ) : (
+                    <React.Fragment />
+                  )}
+                </div>
+                <div class="col-sm-9 text-secondary">
+                  {user && user.contact.facebook ? (
+                    <p class="text-muted font-size-sm">
+                      {user.contact.facebook}
+                    </p>
+                  ) : (
+                    <React.Fragment />
+                  )}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-3 pt-1 d-flex justify-content-center">
+                  {user && user.contact.github ? (
+                    <FontAwesomeIcon icon={faGithub} />
+                  ) : (
+                    <React.Fragment />
+                  )}
+                </div>
+                <div class="col-sm-9 text-secondary">
+                  {user && user.contact.github ? (
+                    <p class="text-muted font-size-sm">{user.contact.github}</p>
+                  ) : (
+                    <React.Fragment />
+                  )}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-3 pt-1 d-flex justify-content-center">
+                  {user && user.contact.phone ? (
+                    <FontAwesomeIcon icon={faPhone} />
+                  ) : (
+                    <React.Fragment />
+                  )}
+                </div>
+                <div class="col-sm-9 text-secondary">
+                  {user && user.contact.phone ? (
+                    <p class="text-muted font-size-sm">{user.contact.phone}</p>
+                  ) : (
+                    <React.Fragment />
+                  )}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-3 pt-1 d-flex justify-content-center">
+                  {user && user.contact.others ? (
+                    <FontAwesomeIcon icon={faAddressCard} />
+                  ) : (
+                    <React.Fragment />
+                  )}
+                </div>
+                <div class="col-sm-9 text-secondary">
+                  {user && user.contact.others ? (
+                    <p class="text-muted font-size-sm">{user.contact.others}</p>
+                  ) : (
+                    <React.Fragment />
+                  )}
+                </div>
+              </div>
             </div>
           </div>
           <div class="col-md-8">
