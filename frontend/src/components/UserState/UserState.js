@@ -22,7 +22,6 @@ const UserState = (props) => {
     error: null,
   };
   const [state, dispatch] = useReducer(UserReducer, initialState);
-  console.log(state);
 
   useEffect(() => {
     if (window.localStorage.token) {
@@ -30,9 +29,8 @@ const UserState = (props) => {
     }
   }, [state.token]);
 
-  
-   const register = async (formData) => {
-     console.log("inregistrare");
+  const register = async (formData) => {
+    console.log("inregistrare");
     try {
       const res = await axios.post("http://localhost:3003/api/users", formData);
       dispatch({ type: REGISTER_SUCCES, payload: res.data.token });
@@ -65,7 +63,7 @@ const UserState = (props) => {
       dispatch({ type: LOGIN_FAIL, payload: error.error });
     }
   };
-  
+
   const loadUser = async () => {
     if (localStorage.token) {
       setAuthToken(localStorage.token);
@@ -93,7 +91,9 @@ const UserState = (props) => {
         error: state.error,
         token: state.token,
         isAuthenticated: state.isAuthenticated,
-        register, login, logout,
+        register,
+        login,
+        logout,
       }}
     >
       {props.children}

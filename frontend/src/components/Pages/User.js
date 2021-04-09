@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faFacebookF,
@@ -13,12 +13,27 @@ export const User = (props) => {
   const userContext = useContext(UserContext);
   const { user } = userContext;
   let history = useHistory();
+  const [edit, setEdit] = useState(false);
+  const onEdit = () => {
+    switch (edit) {
+      case true:
+        setEdit(false);
+        break;
+      case false:
+        setEdit(true);
+        break;
+      default:
+    }
+  };
   useEffect(() => {
     if (!user) {
       history.push("/");
     }
   }, [user, history]);
-  function formatDate(date) {
+  const formatDate = (date) => {
+    if (!date) {
+      return "Not set";
+    }
     var d = new Date(date),
       month = "" + (d.getMonth() + 1),
       day = "" + d.getDate(),
@@ -28,7 +43,7 @@ export const User = (props) => {
     if (day.length < 2) day = "0" + day;
 
     return [day, month, year].join("-");
-  }
+  };
   return (
     <div class="container">
       <div class="main-body">
@@ -41,72 +56,159 @@ export const User = (props) => {
                     <h4>{user && user.name}</h4>
                     <p class="text-secondary mb-1">tag-uri</p>
                     <p class="text-muted font-size-sm">imagine</p>
+                    {edit === false ? (
+                      <button
+                        onClick={onEdit}
+                        type="button"
+                        class="btn btn-primary"
+                      >
+                        Edit Profile
+                      </button>
+                    ) : (
+                      <div class="row">
+                        <div class="col-sm-6 py-1 d-flex justify-content-center">
+                          <button type="button" class="btn btn-success">
+                            Save
+                          </button>
+                        </div>
+                        <div class="col-sm-6 py-1 d-flex justify-content-center">
+                          <button
+                            onClick={() => setEdit(false)}
+                            type="button"
+                            class="btn btn-danger"
+                          >
+                            Exit
+                          </button>
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
             </div>
             <div class="card mt-3">
               <div class="row">
-                <div class="col-sm-3 pt-1 d-flex justify-content-center">
+                <div class="col-sm-3 py-1 d-flex justify-content-center">
                   <FontAwesomeIcon icon={faFacebookF} />
                 </div>
-                <div class="col-sm-9 text-secondary">
-                  {user && user.contact.facebook ? (
-                    <p class="text-muted font-size-sm">
-                      {user.contact.facebook}
-                    </p>
+                <div class="col-sm-9 py-1 text-secondary">
+                  {user ? (
+                    edit === true ? (
+                      <input
+                        className="form-control form-control-sm"
+                        type="text"
+                        name="facebook"
+                        value={user.contact.facebook}
+                      />
+                    ) : user.contact.facebook ? (
+                      <p class="text-muted font-size-sm">
+                        {user.contact.facebook}
+                      </p>
+                    ) : (
+                      <p class="text-muted font-size-sm">Not set</p>
+                    )
                   ) : (
-                    <p class="text-muted font-size-sm">Not set</p>
+                    <React.Fragment />
                   )}
                 </div>
               </div>
               <div class="row">
-                <div class="col-sm-3 pt-1 d-flex justify-content-center">
+                <div class="col-sm-3 py-1 d-flex justify-content-center">
                   <FontAwesomeIcon icon={faGithub} />
                 </div>
-                <div class="col-sm-9 text-secondary">
-                  {user && user.contact.github ? (
-                    <p class="text-muted font-size-sm">{user.contact.github}</p>
+                <div class="col-sm-9 py-1 text-secondary">
+                  {user ? (
+                    edit === true ? (
+                      <input
+                        className="form-control form-control-sm"
+                        type="text"
+                        name="github"
+                        value={user.contact.github}
+                      />
+                    ) : user.contact.github ? (
+                      <p class="text-muted font-size-sm">
+                        {user.contact.github}
+                      </p>
+                    ) : (
+                      <p class="text-muted font-size-sm">Not set</p>
+                    )
                   ) : (
-                    <p class="text-muted font-size-sm">Not set</p>
+                    <React.Fragment />
                   )}
                 </div>
               </div>
               <div class="row">
-                <div class="col-sm-3 pt-1 d-flex justify-content-center">
+                <div class="col-sm-3 py-1 d-flex justify-content-center">
                   <FontAwesomeIcon icon={faLinkedin} />
                 </div>
-                <div class="col-sm-9 text-secondary">
-                  {user && user.contact.linkedin ? (
-                    <p class="text-muted font-size-sm">
-                      {user.contact.linkedin}
-                    </p>
+                <div class="col-sm-9 py-1 text-secondary">
+                  {user ? (
+                    edit === true ? (
+                      <input
+                        className="form-control form-control-sm"
+                        type="text"
+                        name="linkedin"
+                        value={user.contact.linkedin}
+                      />
+                    ) : user.contact.linkedin ? (
+                      <p class="text-muted font-size-sm">
+                        {user.contact.linkedin}
+                      </p>
+                    ) : (
+                      <p class="text-muted font-size-sm">Not set</p>
+                    )
                   ) : (
-                    <p class="text-muted font-size-sm">Not set</p>
+                    <React.Fragment />
                   )}
                 </div>
               </div>
               <div class="row">
-                <div class="col-sm-3 pt-1 d-flex justify-content-center">
+                <div class="col-sm-3 py-1 d-flex justify-content-center">
                   <FontAwesomeIcon icon={faPhone} />
                 </div>
-                <div class="col-sm-9 text-secondary">
-                  {user && user.contact.phone ? (
-                    <p class="text-muted font-size-sm">{user.contact.phone}</p>
+                <div class="col-sm-9 py-1 text-secondary">
+                  {user ? (
+                    edit === true ? (
+                      <input
+                        className="form-control form-control-sm"
+                        type="text"
+                        name="phone"
+                        value={user.contact.phone}
+                      />
+                    ) : user.contact.phone ? (
+                      <p class="text-muted font-size-sm">
+                        {user.contact.phone}
+                      </p>
+                    ) : (
+                      <p class="text-muted font-size-sm">Not set</p>
+                    )
                   ) : (
-                    <p class="text-muted font-size-sm">Not set</p>
+                    <React.Fragment />
                   )}
                 </div>
               </div>
               <div class="row">
-                <div class="col-sm-3 pt-1 d-flex justify-content-center">
+                <div class="col-sm-3 py-1 d-flex justify-content-center">
                   <FontAwesomeIcon icon={faAddressCard} />
                 </div>
-                <div class="col-sm-9 text-secondary">
-                  {user && user.contact.others ? (
-                    <p class="text-muted font-size-sm">{user.contact.others}</p>
+                <div class="col-sm-9 py-1 text-secondary">
+                  {user ? (
+                    edit === true ? (
+                      <input
+                        className="form-control form-control-sm-sm form-control form-control-sm"
+                        type="text"
+                        name="others"
+                        value={user.contact.others}
+                      />
+                    ) : user.contact.others ? (
+                      <p class="text-muted font-size-sm">
+                        {user.contact.others}
+                      </p>
+                    ) : (
+                      <p class="text-muted font-size-sm">Not set</p>
+                    )
                   ) : (
-                    <p class="text-muted font-size-sm">Not set</p>
+                    <React.Fragment />
                   )}
                 </div>
               </div>
@@ -116,30 +218,71 @@ export const User = (props) => {
             <div class="card mb-3">
               <div class="card-body">
                 <div class="row">
-                  <div class="col-sm-3">
+                  <div class="col-sm-3 py-1">
                     <h6 class="mb-0">Full Name</h6>
                   </div>
-                  <div class="col-sm-9 text-secondary">{user && user.name}</div>
+                  <div class="col-sm-9 py-1 text-secondary">
+                    {user ? (
+                      edit === true ? (
+                        <input
+                          className="form-control form-control-sm"
+                          type="text"
+                          name="name"
+                          value={user.name}
+                        />
+                      ) : (
+                        user.name
+                      )
+                    ) : (
+                      <React.Fragment />
+                    )}
+                  </div>
                 </div>
 
                 <div class="row">
-                  <div class="col-sm-3">
+                  <div class="col-sm-3 py-1">
                     <h6 class="mb-0">Email</h6>
                   </div>
-                  <div class="col-sm-9 text-secondary">
-                    {user && user.email}
+                  <div class="col-sm-9 py-1 text-secondary">
+                    {user ? (
+                      edit === true ? (
+                        <input
+                          className="form-control form-control-sm"
+                          type="text"
+                          name="email"
+                          value={user.email}
+                        />
+                      ) : (
+                        user.email
+                      )
+                    ) : (
+                      <React.Fragment />
+                    )}
                   </div>
                 </div>
                 <div class="row">
-                  <div class="col-sm-3">
+                  <div class="col-sm-3 py-1">
                     <h6 class="mb-0">Address</h6>
                   </div>
-                  <div class="col-sm-9 text-secondary">
-                    {user && user.address}
+                  <div class="col-sm-9 py-1 text-secondary">
+                    {user ? (
+                      edit === true ? (
+                        <input
+                          className="form-control form-control-sm"
+                          type="text"
+                          name="address"
+                          value={user.address}
+                        />
+                      ) : (
+                        user.address
+                      )
+                    ) : (
+                      <React.Fragment />
+                    )}
                   </div>
                 </div>
                 <div class="row">
-                  <div class="col-sm-3">
+                  <div class="col-sm-3 py-1">
                     <h6 class="mb-0">
                       {user ? (
                         user.type === "student" ? (
@@ -152,9 +295,25 @@ export const User = (props) => {
                       )}
                     </h6>
                   </div>
-                  <div class="col-sm-9 text-secondary">
+                  <div class="col-sm-9 py-1 text-secondary">
                     {user ? (
-                      user.type === "student" ? (
+                      edit === true ? (
+                        user.type === "student" ? (
+                          <input
+                            className="form-control form-control-sm"
+                            type="text"
+                            name="school"
+                            value={user.student.school}
+                          />
+                        ) : (
+                          <input
+                            className="form-control form-control-sm"
+                            type="text"
+                            name="activity"
+                            value={user.company.activity}
+                          />
+                        )
+                      ) : user.type === "student" ? (
                         user.student.school
                       ) : (
                         user.company.activity
@@ -165,16 +324,32 @@ export const User = (props) => {
                   </div>
                 </div>
                 <div class="row">
-                  <div class="col-sm-3">
+                  <div class="col-sm-3 py-1">
                     <h6 class="mb-0">
                       {user && user.type === "student"
                         ? "Date of birth"
                         : "Creation Date"}
                     </h6>
                   </div>
-                  <div class="col-sm-9 text-secondary">
+                  <div class="col-sm-9 py-1 text-secondary">
                     {user ? (
-                      user.type === "student" ? (
+                      edit === true ? (
+                        user.type === "student" ? (
+                          <input
+                            className="form-control form-control-sm"
+                            type="date"
+                            name="birthDate"
+                            value={user.student.birthDate}
+                          />
+                        ) : (
+                          <input
+                            className="form-control form-control-sm"
+                            type="date"
+                            name="creationDate"
+                            value={user.company.creationDate}
+                          />
+                        )
+                      ) : user.type === "student" ? (
                         formatDate(user.student.birthDate)
                       ) : (
                         formatDate(user.company.creationDate)
@@ -185,11 +360,23 @@ export const User = (props) => {
                   </div>
                 </div>
                 <div class="row">
-                  <div class="col-sm-3">
+                  <div class="col-sm-3 py-1">
                     <h6 class="mb-0">Description</h6>
                   </div>
-                  <div class="col-sm-9 text-secondary">
-                    {user && user.description}
+                  <div class="col-sm-9 py-1 text-secondary">
+                    {user ? (
+                      edit === true ? (
+                        <input
+                          className="form-control form-control-sm"
+                          type="text"
+                          name="description"
+                        />
+                      ) : (
+                        user.description
+                      )
+                    ) : (
+                      <React.Fragment />
+                    )}
                   </div>
                 </div>
               </div>
