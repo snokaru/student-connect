@@ -45,37 +45,37 @@ export const User = (props) => {
     return [day, month, year].join("-");
   };
   return (
-    <div class="container">
-      <div class="main-body">
-        <div class="row gutters-sm">
-          <div class="col-md-4 mb-3">
-            <div class="card">
-              <div class="card-body">
-                <div class="d-flex flex-column align-items-center text-center">
-                  <div class="mt-3">
+    <div className="container">
+      <div className="main-body">
+        <div className="row gutters-sm">
+          <div className="col-md-4 mb-3">
+            <div className="card">
+              <div className="card-body">
+                <div className="d-flex flex-column align-items-center text-center">
+                  <div className="mt-3">
                     <h4>{user && user.name}</h4>
-                    <p class="text-secondary mb-1">tag-uri</p>
-                    <p class="text-muted font-size-sm">imagine</p>
+                    <p className="text-secondary mb-1">tag-uri</p>
+                    <p className="text-muted font-size-sm">imagine</p>
                     {edit === false ? (
                       <button
                         onClick={onEdit}
                         type="button"
-                        class="btn btn-primary"
+                        className="btn btn-primary"
                       >
                         Edit Profile
                       </button>
                     ) : (
-                      <div class="row">
-                        <div class="col-sm-6 py-1 d-flex justify-content-center">
-                          <button type="button" class="btn btn-success">
+                      <div className="row">
+                        <div className="col-sm-6 py-1 d-flex justify-content-center">
+                          <button type="button" className="btn btn-success">
                             Save
                           </button>
                         </div>
-                        <div class="col-sm-6 py-1 d-flex justify-content-center">
+                        <div className="col-sm-6 py-1 d-flex justify-content-center">
                           <button
                             onClick={() => setEdit(false)}
                             type="button"
-                            class="btn btn-danger"
+                            className="btn btn-danger"
                           >
                             Exit
                           </button>
@@ -86,12 +86,12 @@ export const User = (props) => {
                 </div>
               </div>
             </div>
-            <div class="card mt-3">
-              <div class="row">
-                <div class="col-sm-3 py-1 d-flex justify-content-center">
+            <div className="card mt-3">
+              <div className="row">
+                <div className="col-sm-3 py-1 d-flex justify-content-center">
                   <FontAwesomeIcon icon={faFacebookF} />
                 </div>
-                <div class="col-sm-9 py-1 text-secondary">
+                <div className="col-sm-9 py-1 text-secondary">
                   {user ? (
                     edit === true ? (
                       <input
@@ -101,22 +101,22 @@ export const User = (props) => {
                         value={user.contact.facebook}
                       />
                     ) : user.contact.facebook ? (
-                      <p class="text-muted font-size-sm">
+                      <p className="text-muted font-size-sm">
                         {user.contact.facebook}
                       </p>
                     ) : (
-                      <p class="text-muted font-size-sm">Not set</p>
+                      <p className="text-muted font-size-sm">Not set</p>
                     )
                   ) : (
                     <React.Fragment />
                   )}
                 </div>
               </div>
-              <div class="row">
-                <div class="col-sm-3 py-1 d-flex justify-content-center">
+              <div className="row">
+                <div className="col-sm-3 py-1 d-flex justify-content-center">
                   <FontAwesomeIcon icon={faGithub} />
                 </div>
-                <div class="col-sm-9 py-1 text-secondary">
+                <div className="col-sm-9 py-1 text-secondary">
                   {user ? (
                     edit === true ? (
                       <input
@@ -126,22 +126,22 @@ export const User = (props) => {
                         value={user.contact.github}
                       />
                     ) : user.contact.github ? (
-                      <p class="text-muted font-size-sm">
+                      <p className="text-muted font-size-sm">
                         {user.contact.github}
                       </p>
                     ) : (
-                      <p class="text-muted font-size-sm">Not set</p>
+                      <p className="text-muted font-size-sm">Not set</p>
                     )
                   ) : (
                     <React.Fragment />
                   )}
                 </div>
               </div>
-              <div class="row">
-                <div class="col-sm-3 py-1 d-flex justify-content-center">
+              <div className="row">
+                <div className="col-sm-3 py-1 d-flex justify-content-center">
                   <FontAwesomeIcon icon={faLinkedin} />
                 </div>
-                <div class="col-sm-9 py-1 text-secondary">
+                <div className="col-sm-9 py-1 text-secondary">
                   {user ? (
                     edit === true ? (
                       <input
@@ -151,22 +151,22 @@ export const User = (props) => {
                         value={user.contact.linkedin}
                       />
                     ) : user.contact.linkedin ? (
-                      <p class="text-muted font-size-sm">
+                      <p className="text-muted font-size-sm">
                         {user.contact.linkedin}
                       </p>
                     ) : (
-                      <p class="text-muted font-size-sm">Not set</p>
+                      <p className="text-muted font-size-sm">Not set</p>
                     )
                   ) : (
                     <React.Fragment />
                   )}
                 </div>
               </div>
-              <div class="row">
-                <div class="col-sm-3 py-1 d-flex justify-content-center">
+              <div className="row">
+                <div className="col-sm-3 py-1 d-flex justify-content-center">
                   <FontAwesomeIcon icon={faPhone} />
                 </div>
-                <div class="col-sm-9 py-1 text-secondary">
+                <div className="col-sm-9 py-1 text-secondary">
                   {user ? (
                     edit === true ? (
                       <input
@@ -176,22 +176,22 @@ export const User = (props) => {
                         value={user.contact.phone}
                       />
                     ) : user.contact.phone ? (
-                      <p class="text-muted font-size-sm">
+                      <p className="text-muted font-size-sm">
                         {user.contact.phone}
                       </p>
                     ) : (
-                      <p class="text-muted font-size-sm">Not set</p>
+                      <p className="text-muted font-size-sm">Not set</p>
                     )
                   ) : (
                     <React.Fragment />
                   )}
                 </div>
               </div>
-              <div class="row">
-                <div class="col-sm-3 py-1 d-flex justify-content-center">
+              <div className="row">
+                <div className="col-sm-3 py-1 d-flex justify-content-center">
                   <FontAwesomeIcon icon={faAddressCard} />
                 </div>
-                <div class="col-sm-9 py-1 text-secondary">
+                <div className="col-sm-9 py-1 text-secondary">
                   {user ? (
                     edit === true ? (
                       <input
@@ -201,11 +201,11 @@ export const User = (props) => {
                         value={user.contact.others}
                       />
                     ) : user.contact.others ? (
-                      <p class="text-muted font-size-sm">
+                      <p className="text-muted font-size-sm">
                         {user.contact.others}
                       </p>
                     ) : (
-                      <p class="text-muted font-size-sm">Not set</p>
+                      <p className="text-muted font-size-sm">Not set</p>
                     )
                   ) : (
                     <React.Fragment />
@@ -214,14 +214,14 @@ export const User = (props) => {
               </div>
             </div>
           </div>
-          <div class="col-md-8">
-            <div class="card mb-3">
-              <div class="card-body">
-                <div class="row">
-                  <div class="col-sm-3 py-1">
-                    <h6 class="mb-0">Full Name</h6>
+          <div className="col-md-8">
+            <div className="card mb-3">
+              <div className="card-body">
+                <div className="row">
+                  <div className="col-sm-3 py-1">
+                    <h6 className="mb-0">Full Name</h6>
                   </div>
-                  <div class="col-sm-9 py-1 text-secondary">
+                  <div className="col-sm-9 py-1 text-secondary">
                     {user ? (
                       edit === true ? (
                         <input
@@ -239,16 +239,16 @@ export const User = (props) => {
                   </div>
                 </div>
 
-                <div class="row">
-                  <div class="col-sm-3 py-1">
-                    <h6 class="mb-0">Email</h6>
+                <div className="row">
+                  <div className="col-sm-3 py-1">
+                    <h6 className="mb-0">Email</h6>
                   </div>
-                  <div class="col-sm-9 py-1 text-secondary">
+                  <div className="col-sm-9 py-1 text-secondary">
                     {user ? (
                       edit === true ? (
                         <p>
                           {user.email}
-                          <span class="text-danger">*</span>
+                          <span className="text-danger">*</span>
                         </p>
                       ) : (
                         user.email
@@ -258,11 +258,11 @@ export const User = (props) => {
                     )}
                   </div>
                 </div>
-                <div class="row">
-                  <div class="col-sm-3 py-1">
-                    <h6 class="mb-0">Address</h6>
+                <div className="row">
+                  <div className="col-sm-3 py-1">
+                    <h6 className="mb-0">Address</h6>
                   </div>
-                  <div class="col-sm-9 py-1 text-secondary">
+                  <div className="col-sm-9 py-1 text-secondary">
                     {user ? (
                       edit === true ? (
                         <input
@@ -279,9 +279,9 @@ export const User = (props) => {
                     )}
                   </div>
                 </div>
-                <div class="row">
-                  <div class="col-sm-3 py-1">
-                    <h6 class="mb-0">
+                <div className="row">
+                  <div className="col-sm-3 py-1">
+                    <h6 className="mb-0">
                       {user ? (
                         user.type === "student" ? (
                           "School"
@@ -293,7 +293,7 @@ export const User = (props) => {
                       )}
                     </h6>
                   </div>
-                  <div class="col-sm-9 py-1 text-secondary">
+                  <div className="col-sm-9 py-1 text-secondary">
                     {user ? (
                       edit === true ? (
                         user.type === "student" ? (
@@ -321,15 +321,15 @@ export const User = (props) => {
                     )}
                   </div>
                 </div>
-                <div class="row">
-                  <div class="col-sm-3 py-1">
-                    <h6 class="mb-0">
+                <div className="row">
+                  <div className="col-sm-3 py-1">
+                    <h6 className="mb-0">
                       {user && user.type === "student"
                         ? "Date of birth"
                         : "Creation Date"}
                     </h6>
                   </div>
-                  <div class="col-sm-9 py-1 text-secondary">
+                  <div className="col-sm-9 py-1 text-secondary">
                     {user ? (
                       edit === true ? (
                         user.type === "student" ? (
@@ -357,11 +357,11 @@ export const User = (props) => {
                     )}
                   </div>
                 </div>
-                <div class="row">
-                  <div class="col-sm-3 py-1">
-                    <h6 class="mb-0">Description</h6>
+                <div className="row">
+                  <div className="col-sm-3 py-1">
+                    <h6 className="mb-0">Description</h6>
                   </div>
-                  <div class="col-sm-9 py-1 text-secondary">
+                  <div className="col-sm-9 py-1 text-secondary">
                     {user ? (
                       edit === true ? (
                         <input
