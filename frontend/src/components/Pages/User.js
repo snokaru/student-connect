@@ -1,6 +1,10 @@
 import React, { useContext, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFacebookF, faGithub } from "@fortawesome/free-brands-svg-icons";
+import {
+  faFacebookF,
+  faGithub,
+  faLinkedin,
+} from "@fortawesome/free-brands-svg-icons";
 import { faPhone, faAddressCard } from "@fortawesome/free-solid-svg-icons";
 import UserContext from "../UserState/userContext";
 import { useHistory } from "react-router-dom";
@@ -44,11 +48,7 @@ export const User = (props) => {
             <div class="card mt-3">
               <div class="row">
                 <div class="col-sm-3 pt-1 d-flex justify-content-center">
-                  {user && user.contact.facebook ? (
-                    <FontAwesomeIcon icon={faFacebookF} />
-                  ) : (
-                    <React.Fragment />
-                  )}
+                  <FontAwesomeIcon icon={faFacebookF} />
                 </div>
                 <div class="col-sm-9 text-secondary">
                   {user && user.contact.facebook ? (
@@ -56,55 +56,57 @@ export const User = (props) => {
                       {user.contact.facebook}
                     </p>
                   ) : (
-                    <React.Fragment />
+                    <p class="text-muted font-size-sm">Not set</p>
                   )}
                 </div>
               </div>
               <div class="row">
                 <div class="col-sm-3 pt-1 d-flex justify-content-center">
-                  {user && user.contact.github ? (
-                    <FontAwesomeIcon icon={faGithub} />
-                  ) : (
-                    <React.Fragment />
-                  )}
+                  <FontAwesomeIcon icon={faGithub} />
                 </div>
                 <div class="col-sm-9 text-secondary">
                   {user && user.contact.github ? (
                     <p class="text-muted font-size-sm">{user.contact.github}</p>
                   ) : (
-                    <React.Fragment />
+                    <p class="text-muted font-size-sm">Not set</p>
                   )}
                 </div>
               </div>
               <div class="row">
                 <div class="col-sm-3 pt-1 d-flex justify-content-center">
-                  {user && user.contact.phone ? (
-                    <FontAwesomeIcon icon={faPhone} />
+                  <FontAwesomeIcon icon={faLinkedin} />
+                </div>
+                <div class="col-sm-9 text-secondary">
+                  {user && user.contact.linkedin ? (
+                    <p class="text-muted font-size-sm">
+                      {user.contact.linkedin}
+                    </p>
                   ) : (
-                    <React.Fragment />
+                    <p class="text-muted font-size-sm">Not set</p>
                   )}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-3 pt-1 d-flex justify-content-center">
+                  <FontAwesomeIcon icon={faPhone} />
                 </div>
                 <div class="col-sm-9 text-secondary">
                   {user && user.contact.phone ? (
                     <p class="text-muted font-size-sm">{user.contact.phone}</p>
                   ) : (
-                    <React.Fragment />
+                    <p class="text-muted font-size-sm">Not set</p>
                   )}
                 </div>
               </div>
               <div class="row">
                 <div class="col-sm-3 pt-1 d-flex justify-content-center">
-                  {user && user.contact.others ? (
-                    <FontAwesomeIcon icon={faAddressCard} />
-                  ) : (
-                    <React.Fragment />
-                  )}
+                  <FontAwesomeIcon icon={faAddressCard} />
                 </div>
                 <div class="col-sm-9 text-secondary">
                   {user && user.contact.others ? (
                     <p class="text-muted font-size-sm">{user.contact.others}</p>
                   ) : (
-                    <React.Fragment />
+                    <p class="text-muted font-size-sm">Not set</p>
                   )}
                 </div>
               </div>
