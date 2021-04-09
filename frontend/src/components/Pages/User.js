@@ -130,14 +130,6 @@ export const User = (props) => {
                     {user && user.email}
                   </div>
                 </div>
-
-                <div class="row">
-                  <div class="col-sm-3">
-                    <h6 class="mb-0">Mobile</h6>
-                  </div>
-                  <div class="col-sm-9 text-secondary">(320) 380-4539</div>
-                </div>
-
                 <div class="row">
                   <div class="col-sm-3">
                     <h6 class="mb-0">Address</h6>
