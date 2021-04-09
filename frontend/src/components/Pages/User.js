@@ -246,12 +246,10 @@ export const User = (props) => {
                   <div class="col-sm-9 py-1 text-secondary">
                     {user ? (
                       edit === true ? (
-                        <input
-                          className="form-control form-control-sm"
-                          type="text"
-                          name="email"
-                          value={user.email}
-                        />
+                        <p>
+                          {user.email}
+                          <span class="text-danger">*</span>
+                        </p>
                       ) : (
                         user.email
                       )
@@ -370,6 +368,7 @@ export const User = (props) => {
                           className="form-control form-control-sm"
                           type="text"
                           name="description"
+                          value={user.description}
                         />
                       ) : (
                         user.description
