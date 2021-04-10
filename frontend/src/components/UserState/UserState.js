@@ -24,7 +24,8 @@ const UserState = (props) => {
   const [state, dispatch] = useReducer(UserReducer, initialState);
 
   useEffect(() => {
-    if (window.localStorage.token) {
+    storageUpdater();
+    if (localStorage.token) {
       loadUser();
     }
   }, [state.token]);
@@ -63,7 +64,16 @@ const UserState = (props) => {
       dispatch({ type: LOGIN_FAIL, payload: error.error });
     }
   };
-
+  const update = async (formData) => {
+    if (localStorage.token) {
+      setAuthToken(localStorage.token);
+    }
+    try {
+      await axios.put("http://localhost:3003/api/login", formData);
+    } catch (error) {
+      dispatch({ type: LOGIN_FAIL, payload: error.error });
+    }
+  };
   const loadUser = async () => {
     if (localStorage.token) {
       setAuthToken(localStorage.token);
@@ -83,6 +93,19 @@ const UserState = (props) => {
       delete axios.defaults.headers.common["Authorization"];
     }
   };
+  const storageUpdater = () => {
+    const hours = 1;
+    let now = new Date().getTime();
+    const setupTime = localStorage.getItem("setupTime");
+    if (setupTime == null) {
+      localStorage.setItem("setupTime", now);
+    } else {
+      if (now - setupTime > hours * 60 * 60 * 1000) {
+        localStorage.removeItem("token");
+        localStorage.setItem("setupTime", now);
+      }
+    }
+  };
 
   return (
     <UserContext.Provider
@@ -94,6 +117,7 @@ const UserState = (props) => {
         register,
         login,
         logout,
+        update
       }}
     >
       {props.children}

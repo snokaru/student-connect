@@ -8,23 +8,17 @@ import {
 import { faPhone, faAddressCard } from "@fortawesome/free-solid-svg-icons";
 import UserContext from "../UserState/userContext";
 import { useHistory } from "react-router-dom";
+import ReactImageFallback from "react-image-fallback";
+
 import "./User.css";
 export const User = (props) => {
   const userContext = useContext(UserContext);
-  const { user } = userContext;
+  const { user, update } = userContext;
+
   let history = useHistory();
   const [edit, setEdit] = useState(false);
-  const onEdit = () => {
-    switch (edit) {
-      case true:
-        setEdit(false);
-        break;
-      case false:
-        setEdit(true);
-        break;
-      default:
-    }
-  };
+  const [updatedUser, setUpdatedUser] = useState(user);
+
   useEffect(() => {
     if (!user) {
       history.push("/");
@@ -44,6 +38,36 @@ export const User = (props) => {
 
     return [day, month, year].join("-");
   };
+  const onEdit = () => {
+    switch (edit) {
+      case true:
+        setEdit(false);
+        break;
+      case false:
+        setEdit(true);
+        break;
+      default:
+    }
+  };
+  const onChange = (e) => {
+    let aux = updatedUser;
+    Object.keys(aux).forEach((key) => {
+      if (key === e.target.name) {
+        aux[key] = e.target.value;
+      }
+      Object.keys(aux[key]).forEach((key2) => {
+        if (key2 === e.target.name) {
+          aux[key][key2] = e.target.value;
+        }
+      });
+    });
+    setUpdatedUser(aux);
+  };
+  const onSubmit = (e) => {
+    update(updatedUser);
+    setEdit(false);
+    console.log(updatedUser);
+  };
   return (
     <div className="container">
       <div className="main-body">
@@ -53,9 +77,29 @@ export const User = (props) => {
               <div className="card-body">
                 <div className="d-flex flex-column align-items-center text-center">
                   <div className="mt-3">
+                    <div class="d-block mb-3">
+                      <ReactImageFallback
+                        src={
+                          user && `http://localhost:3003/${user.profilePicture}`
+                        }
+                        fallbackImage="http://localhost:3003/public/img/default.jpg"
+                        alt="Profile Picture"
+                        width="100"
+                        height="100"
+                      />
+                    </div>
+                    {edit === true ? (
+                      <React.Fragment>
+                        <label class="form-label" for="profile-picture"></label>
+                        <input
+                          onChange={onChange}
+                          type="file"
+                          class="form-control-file form-control-sm"
+                          id="profile-picture"
+                        ></input>
+                      </React.Fragment>
+                    ) : null}
                     <h4>{user && user.name}</h4>
-                    <p className="text-secondary mb-1">tag-uri</p>
-                    <p className="text-muted font-size-sm m-0">imagine</p>
                     {edit === false ? (
                       <button
                         onClick={onEdit}
@@ -67,7 +111,11 @@ export const User = (props) => {
                     ) : (
                       <div className="row">
                         <div className="col-sm-6 py-1 d-flex justify-content-center">
-                          <button type="button" className="btn btn-success">
+                          <button
+                            onClick={onSubmit}
+                            type="button"
+                            className="btn btn-success"
+                          >
                             Save
                           </button>
                         </div>
@@ -95,10 +143,11 @@ export const User = (props) => {
                   {user ? (
                     edit === true ? (
                       <input
+                        onChange={onChange}
                         className="form-control form-control-sm"
                         type="text"
                         name="facebook"
-                        value={user.contact.facebook}
+                        defaultValue={user.contact.facebook}
                       />
                     ) : user.contact.facebook ? (
                       <p className="text-muted font-size-sm m-0">
@@ -120,10 +169,11 @@ export const User = (props) => {
                   {user ? (
                     edit === true ? (
                       <input
+                        onChange={onChange}
                         className="form-control form-control-sm"
                         type="text"
                         name="github"
-                        value={user.contact.github}
+                        defaultValue={user.contact.github}
                       />
                     ) : user.contact.github ? (
                       <p className="text-muted font-size-sm m-0">
@@ -146,9 +196,10 @@ export const User = (props) => {
                     edit === true ? (
                       <input
                         className="form-control form-control-sm"
+                        onChange={onChange}
                         type="text"
                         name="linkedin"
-                        value={user.contact.linkedin}
+                        defaultValue={user.contact.linkedin}
                       />
                     ) : user.contact.linkedin ? (
                       <p className="text-muted font-size-sm m-0 m-0">
@@ -171,9 +222,10 @@ export const User = (props) => {
                     edit === true ? (
                       <input
                         className="form-control form-control-sm"
+                        onChange={onChange}
                         type="text"
                         name="phone"
-                        value={user.contact.phone}
+                        defaultValue={user.contact.phone}
                       />
                     ) : user.contact.phone ? (
                       <p className="text-muted font-size-sm m-0">
@@ -195,10 +247,11 @@ export const User = (props) => {
                   {user ? (
                     edit === true ? (
                       <input
+                        onChange={onChange}
                         className="form-control form-control-sm-sm form-control form-control-sm"
                         type="text"
                         name="others"
-                        value={user.contact.others}
+                        defaultValue={user.contact.others}
                       />
                     ) : user.contact.others ? (
                       <p className="text-muted font-size-sm m-0">
@@ -219,16 +272,36 @@ export const User = (props) => {
               <div className="card-body">
                 <div className="row">
                   <div className="col-sm-3 py-1">
+                    <h6 className="mb-0">Email</h6>
+                  </div>
+                  <div className="col-sm-9 py-1 text-secondary">
+                    {user ? (
+                      edit === true ? (
+                        <>
+                          {user.email}
+                          <span className="text-danger">*</span>
+                        </>
+                      ) : (
+                        user.email
+                      )
+                    ) : (
+                      <React.Fragment />
+                    )}
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-sm-3 py-1">
                     <h6 className="mb-0">Full Name</h6>
                   </div>
                   <div className="col-sm-9 py-1 text-secondary">
                     {user ? (
                       edit === true ? (
                         <input
+                          onChange={onChange}
                           className="form-control form-control-sm"
                           type="text"
                           name="name"
-                          value={user.name}
+                          defaultValue={user.name}
                         />
                       ) : (
                         user.name
@@ -241,35 +314,17 @@ export const User = (props) => {
 
                 <div className="row">
                   <div className="col-sm-3 py-1">
-                    <h6 className="mb-0">Email</h6>
-                  </div>
-                  <div className="col-sm-9 py-1 text-secondary">
-                    {user ? (
-                      edit === true ? (
-                        <p>
-                          {user.email}
-                          <span className="text-danger">*</span>
-                        </p>
-                      ) : (
-                        user.email
-                      )
-                    ) : (
-                      <React.Fragment />
-                    )}
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="col-sm-3 py-1">
                     <h6 className="mb-0">Address</h6>
                   </div>
                   <div className="col-sm-9 py-1 text-secondary">
                     {user ? (
                       edit === true ? (
                         <input
+                          onChange={onChange}
                           className="form-control form-control-sm"
                           type="text"
                           name="address"
-                          value={user.address}
+                          defaultValue={user.address}
                         />
                       ) : (
                         user.address
@@ -298,17 +353,19 @@ export const User = (props) => {
                       edit === true ? (
                         user.type === "student" ? (
                           <input
+                            onChange={onChange}
                             className="form-control form-control-sm"
                             type="text"
                             name="school"
-                            value={user.student.school}
+                            defaultValue={user.student.school}
                           />
                         ) : (
                           <input
+                            onChange={onChange}
                             className="form-control form-control-sm"
                             type="text"
                             name="activity"
-                            value={user.company.activity}
+                            defaultValue={user.company.activity}
                           />
                         )
                       ) : user.type === "student" ? (
@@ -334,17 +391,19 @@ export const User = (props) => {
                       edit === true ? (
                         user.type === "student" ? (
                           <input
+                            onChange={onChange}
                             className="form-control form-control-sm"
                             type="date"
                             name="birthDate"
-                            value={user.student.birthDate}
+                            defaultValue={user.student.birthDate}
                           />
                         ) : (
                           <input
+                            onChange={onChange}
                             className="form-control form-control-sm"
                             type="date"
                             name="creationDate"
-                            value={user.company.creationDate}
+                            defaultValue={user.company.creationDate}
                           />
                         )
                       ) : user.type === "student" ? (
@@ -365,10 +424,11 @@ export const User = (props) => {
                     {user ? (
                       edit === true ? (
                         <input
+                          onChange={onChange}
                           className="form-control form-control-sm"
                           type="text"
                           name="description"
-                          value={user.description}
+                          defaultValue={user.description}
                         />
                       ) : (
                         user.description
