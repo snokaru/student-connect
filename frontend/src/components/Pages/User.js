@@ -8,10 +8,14 @@ import {
 import { faPhone, faAddressCard } from "@fortawesome/free-solid-svg-icons";
 import UserContext from "../UserState/userContext";
 import { useHistory } from "react-router-dom";
+import ReactImageFallback from "react-image-fallback";
+
 import "./User.css";
 export const User = (props) => {
   const userContext = useContext(UserContext);
   const { user } = userContext;
+  console.log(user);
+  console.log(`localhost:3003/${user && user.profilePicture}`);
   let history = useHistory();
   const [edit, setEdit] = useState(false);
   const onEdit = () => {
@@ -53,9 +57,16 @@ export const User = (props) => {
               <div className="card-body">
                 <div className="d-flex flex-column align-items-center text-center">
                   <div className="mt-3">
+                    <div class="d-block mb-3">
+                      <ReactImageFallback src={user && `http://localhost:3003/${user.profilePicture}`} fallbackImage="http://localhost:3003/public/img/default.jpg" alt="Profile Picture" width="100" height="100" />
+                    </div>
+                    {edit === true ? (
+                      <React.Fragment>
+                        <label class="form-label" for="profile-picture"></label>
+                        <input type="file" class="form-control-file form-control-sm" id="profile-picture"></input> 
+                      </React.Fragment>
+                    ) : null }
                     <h4>{user && user.name}</h4>
-                    <p className="text-secondary mb-1">tag-uri</p>
-                    <p className="text-muted font-size-sm m-0">imagine</p>
                     {edit === false ? (
                       <button
                         onClick={onEdit}
@@ -219,6 +230,25 @@ export const User = (props) => {
               <div className="card-body">
                 <div className="row">
                   <div className="col-sm-3 py-1">
+                    <h6 className="mb-0">Email</h6>
+                  </div>
+                  <div className="col-sm-9 py-1 text-secondary">
+                    {user ? (
+                      edit === true ? (
+                        <>
+                          {user.email}
+                          <span className="text-danger">*</span>
+                        </>
+                      ) : (
+                        user.email
+                      )
+                    ) : (
+                      <React.Fragment />
+                    )}
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-sm-3 py-1">
                     <h6 className="mb-0">Full Name</h6>
                   </div>
                   <div className="col-sm-9 py-1 text-secondary">
@@ -239,25 +269,6 @@ export const User = (props) => {
                   </div>
                 </div>
 
-                <div className="row">
-                  <div className="col-sm-3 py-1">
-                    <h6 className="mb-0">Email</h6>
-                  </div>
-                  <div className="col-sm-9 py-1 text-secondary">
-                    {user ? (
-                      edit === true ? (
-                        <p>
-                          {user.email}
-                          <span className="text-danger">*</span>
-                        </p>
-                      ) : (
-                        user.email
-                      )
-                    ) : (
-                      <React.Fragment />
-                    )}
-                  </div>
-                </div>
                 <div className="row">
                   <div className="col-sm-3 py-1">
                     <h6 className="mb-0">Address</h6>
