@@ -9,6 +9,7 @@ import User from "./components/Pages/User";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import FullPost from "./components/Pages/FullPost";
 
 const App = () => {
   return (
@@ -28,6 +29,9 @@ const App = () => {
             </Route>
             <Route exact path="/users">
               <User />
+            </Route>
+            <Route exact path="/FullPost">
+              <FullPost />
             </Route>
           </Switch>
         </Router>
