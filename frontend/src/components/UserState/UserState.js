@@ -24,7 +24,8 @@ const UserState = (props) => {
   const [state, dispatch] = useReducer(UserReducer, initialState);
 
   useEffect(() => {
-    if (window.localStorage.token) {
+    storageUpdater();
+    if (localStorage.token) {
       loadUser();
     }
   }, [state.token]);
@@ -81,6 +82,19 @@ const UserState = (props) => {
       axios.defaults.headers.common["Authorization"] = token;
     } else {
       delete axios.defaults.headers.common["Authorization"];
+    }
+  };
+  const storageUpdater = () => {
+    const hours = 1;
+    let now = new Date().getTime();
+    const setupTime = localStorage.getItem("setupTime");
+    if (setupTime == null) {
+      localStorage.setItem("setupTime", now);
+    } else {
+      if (now - setupTime > hours * 60 * 60 * 1000) {
+        localStorage.removeItem("token");
+        localStorage.setItem("setupTime", now);
+      }
     }
   };
 
