@@ -64,7 +64,16 @@ const UserState = (props) => {
       dispatch({ type: LOGIN_FAIL, payload: error.error });
     }
   };
-
+  const update = async (formData) => {
+    if (localStorage.token) {
+      setAuthToken(localStorage.token);
+    }
+    try {
+      await axios.put("http://localhost:3003/api/login", formData);
+    } catch (error) {
+      dispatch({ type: LOGIN_FAIL, payload: error.error });
+    }
+  };
   const loadUser = async () => {
     if (localStorage.token) {
       setAuthToken(localStorage.token);
@@ -108,6 +117,7 @@ const UserState = (props) => {
         register,
         login,
         logout,
+        update
       }}
     >
       {props.children}
