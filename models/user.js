@@ -46,6 +46,10 @@ const userSchema = new mongoose.Schema({
       default: "",
     },
   },
+  profilePicture: {
+    type: String,
+    default: "public/img/default.jpg",
+  }
 });
 
 userSchema.plugin(uniqueValidator);
