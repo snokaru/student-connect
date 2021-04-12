@@ -4,7 +4,7 @@ import "./FullPost.css";
 const FullPost = (props) => {
     return (
         <React.Fragment>
-            <div className="container shadow p-5 my-3 bg-primary text-white rounded-lg shadow-sm p-3">
+            <div className="container shadow p-5 my-3 bg-white text-black rounded-lg shadow-sm p-3">
                 <div class="row">
                     <div class="col-sm-4 border-right">
                         <img
@@ -25,7 +25,7 @@ const FullPost = (props) => {
                 </div>
             </div>
 
-            <div class="container p-5 my-3 bg-primary text-white rounded-lg shadow ">
+            <div class="container p-5 my-3 bg-white text-black rounded-lg shadow ">
                 <div class="row justify-content-space-around ">
                     <div class="col-sm-7 justify-content-between align-self-center">
                         <div class="item">
@@ -57,7 +57,7 @@ const FullPost = (props) => {
                 </div>
             </div>
 
-            <div className="container shadow p-5 my-3 bg-primary text-white rounded-lg shadow-sm p-3">
+            <div className="container shadow p-5 my-3 bg-white text-black rounded-lg shadow-sm p-3">
                 <div class="row">
 
                     <div class="item  border-bottom">
