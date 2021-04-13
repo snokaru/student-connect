@@ -71,6 +71,10 @@ const userUpdater = async (request, response, next) => {
       address === undefined ? searchedUser.address : address;
     searchedUser.description =
       description === undefined ? searchedUser.description : description;
+    searchedUser.contact.linkedin =
+      contact?.linkedin === undefined
+        ? searchedUser.contact?.linkedin
+        : contact?.linkedin;
     searchedUser.contact.facebook =
       contact?.facebook === undefined
         ? searchedUser.contact?.facebook
