@@ -9,6 +9,7 @@ import { faPhone, faAddressCard } from "@fortawesome/free-solid-svg-icons";
 import UserContext from "../UserState/userContext";
 import { useHistory } from "react-router-dom";
 import ReactImageFallback from "react-image-fallback";
+import { serialize } from "object-to-formdata";
 
 import "./User.css";
 import { STATES } from "mongoose";
@@ -68,9 +69,16 @@ export const User = (props) => {
     setUpdatedUser(aux);
   };
   const onSubmit = (e) => {
-    const formData = new FormData();
+    const formData = serialize(updatedUser);
+    /*
     for (let key in updatedUser) {
-      formData.append(key, updatedUser[key]);
+      if (key == "profilePicture")
+        console.log(updatedUser[key]);
+      formData.append(key, typeof updatedUser[key] == "string" ? updatedUser[key] : JSON.stringify(updatedUser[key]));
+    }
+    */
+    for (var pair of formData.entries()) {
+      console.log(pair[0]+ ', ' + pair[1]); 
     }
     update(formData);
     setEdit(false);
