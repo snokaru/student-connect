@@ -68,11 +68,7 @@ export const User = (props) => {
     setUpdatedUser(aux);
   };
   const onSubmit = (e) => {
-    const formData = new FormData();
-    for (let key in updatedUser) {
-      formData.append(key, updatedUser[key]);
-    }
-    update(formData);
+    update(updatedUser);
     setEdit(false);
     console.log(updatedUser);
   };
@@ -88,7 +84,10 @@ export const User = (props) => {
                     <div class="d-block mb-3">
                       <ReactImageFallback
                         src={
-                          user && `http://localhost:3003/${user.profilePicture}?${Date.now() /* Hack to rerender image after submit */}`
+                          user &&
+                          `http://localhost:3003/${user.profilePicture}?${
+                            Date.now() /* Hack to rerender image after submit */
+                          }`
                         }
                         fallbackImage="http://localhost:3003/public/img/default.jpg"
                         alt="Profile Picture"

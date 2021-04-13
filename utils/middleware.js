@@ -78,10 +78,10 @@ const userUpdater = async (request, response, next) => {
       contact?.github === undefined
         ? searchedUser.contact?.github
         : contact?.github;
-    searchedUser.contact.github =
-      contact?.github === undefined
-        ? searchedUser.contact?.github
-        : contact?.github;
+    searchedUser.contact.linkedin =
+      contact?.linkedin === undefined
+        ? searchedUser.contact?.linkedin
+        : contact?.linkedin;
     searchedUser.contact.phone =
       contact?.phone === undefined
         ? searchedUser.contact?.phone
