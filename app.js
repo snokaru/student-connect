@@ -1,7 +1,8 @@
 const express = require("express");
-const fileUpload = require("express-fileupload");
 const cors = require("cors");
+const fileUpload = require("express-fileupload");
 const mongoose = require("mongoose");
+const os = require("os");
 
 const logger = require("./utils/logger");
 const config = require("./utils/config");
@@ -18,12 +19,15 @@ mongoose
   .then(() => logger.info("Connected to MongoDB"));
 
 app.use(cors());
+
 app.use(fileUpload({
   createParentPath: true,
   safeFileName: true,
   useTempFiles: true,
   tempFileDir: "tmp/",
+  parseNested: true
 }));
+
 app.use(express.json());
 
 app.use('/public', express.static('public'));

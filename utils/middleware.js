@@ -23,6 +23,7 @@ const tokenExtractor = (req, res, next) => {
 
 const userUpdater = async (request, response, next) => {
   logger.info("In user updater!");
+  logger.info(request.body);
 
   const {
     name,
@@ -41,7 +42,7 @@ const userUpdater = async (request, response, next) => {
     let searchedUser = await User.findById(request.user.id);
 
     // Handling New Profile Picture Upload
-    if (request.files) {
+    if (request?.files?.profilePicture) {
       let newProfilePicture = request.files.profilePicture;
       let acceptedFileFormats = ["jpg", "jpeg", "png"];
       let fileFormat = newProfilePicture.name.split(".")[1];
