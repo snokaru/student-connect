@@ -69,7 +69,9 @@ const UserState = (props) => {
       setAuthToken(localStorage.token);
     }
     try {
-      await axios.put("http://localhost:3003/api/login", formData);
+      // Update user after logging info
+      const res = await axios.put("http://localhost:3003/api/login", formData);
+      dispatch({ type: USER_LOADED, payload: res.data}) 
     } catch (error) {
       dispatch({ type: LOGIN_FAIL, payload: error.error });
     }

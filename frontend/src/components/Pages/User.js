@@ -11,6 +11,7 @@ import { useHistory } from "react-router-dom";
 import ReactImageFallback from "react-image-fallback";
 
 import "./User.css";
+import { STATES } from "mongoose";
 export const User = (props) => {
   const userContext = useContext(UserContext);
   const { user, update } = userContext;
@@ -55,6 +56,9 @@ export const User = (props) => {
       if (key === e.target.name) {
         aux[key] = e.target.value;
       }
+      if (key === "profilePicture") {
+        aux[key] = (e.target.files && e.target.files[0]) || aux[key];
+      }
       Object.keys(aux[key]).forEach((key2) => {
         if (key2 === e.target.name) {
           aux[key][key2] = e.target.value;
@@ -64,7 +68,11 @@ export const User = (props) => {
     setUpdatedUser(aux);
   };
   const onSubmit = (e) => {
-    update(updatedUser);
+    const formData = new FormData();
+    for (let key in updatedUser) {
+      formData.append(key, updatedUser[key]);
+    }
+    update(formData);
     setEdit(false);
     console.log(updatedUser);
   };
@@ -80,7 +88,7 @@ export const User = (props) => {
                     <div class="d-block mb-3">
                       <ReactImageFallback
                         src={
-                          user && `http://localhost:3003/${user.profilePicture}`
+                          user && `http://localhost:3003/${user.profilePicture}?${Date.now() /* Hack to rerender image after submit */}`
                         }
                         fallbackImage="http://localhost:3003/public/img/default.jpg"
                         alt="Profile Picture"
@@ -95,6 +103,7 @@ export const User = (props) => {
                           onChange={onChange}
                           type="file"
                           class="form-control-file form-control-sm"
+                          name="profilePicture"
                           id="profile-picture"
                         ></input>
                       </React.Fragment>
