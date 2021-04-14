@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faFacebookF,
@@ -6,26 +6,13 @@ import {
   faLinkedin,
 } from "@fortawesome/free-brands-svg-icons";
 import { faPhone, faAddressCard } from "@fortawesome/free-solid-svg-icons";
-import UserContext from "../UserState/userContext";
-import { useHistory } from "react-router-dom";
 import ReactImageFallback from "react-image-fallback";
 import { serialize } from "object-to-formdata";
+import useUser from "../../hooks/useUser";
 
 import "./User.css";
-import { STATES } from "mongoose";
 export const User = (props) => {
-  const userContext = useContext(UserContext);
-  const { user, update } = userContext;
-
-  let history = useHistory();
-  const [edit, setEdit] = useState(false);
-  const [updatedUser, setUpdatedUser] = useState(user);
-
-  useEffect(() => {
-    if (!user) {
-      history.push("/");
-    }
-  }, [user, history]);
+  const { user, update, updatedUser, setUpdatedUser, isCurrentUser, edit, setEdit } = useUser();
   const formatDate = (date) => {
     if (!date) {
       return "Not set";
@@ -70,19 +57,9 @@ export const User = (props) => {
   };
   const onSubmit = (e) => {
     const formData = serialize(updatedUser);
-    /*
-    for (let key in updatedUser) {
-      if (key == "profilePicture")
-        console.log(updatedUser[key]);
-      formData.append(key, typeof updatedUser[key] == "string" ? updatedUser[key] : JSON.stringify(updatedUser[key]));
-    }
-    */
-    for (var pair of formData.entries()) {
-      console.log(pair[0]+ ', ' + pair[1]); 
-    }
+    console.log("Entering Update!");
     update(formData);
     setEdit(false);
-    console.log(updatedUser);
   };
   return (
     <div className="container">
@@ -93,7 +70,7 @@ export const User = (props) => {
               <div className="card-body">
                 <div className="d-flex flex-column align-items-center text-center">
                   <div className="mt-3">
-                    <div class="d-block mb-3">
+                    <div className="d-block mb-3">
                       <ReactImageFallback
                         src={
                           user &&
@@ -109,18 +86,18 @@ export const User = (props) => {
                     </div>
                     {edit === true ? (
                       <React.Fragment>
-                        <label class="form-label" for="profile-picture"></label>
+                        <label className="form-label" htmlFor="profile-picture"></label>
                         <input
                           onChange={onChange}
                           type="file"
-                          class="form-control-file form-control-sm"
+                          className="form-control-file form-control-sm"
                           name="profilePicture"
                           id="profile-picture"
                         ></input>
                       </React.Fragment>
                     ) : null}
                     <h4>{user && user.name}</h4>
-                    {edit === false ? (
+                    {edit === false && isCurrentUser && (
                       <button
                         onClick={onEdit}
                         type="button"
@@ -128,7 +105,8 @@ export const User = (props) => {
                       >
                         Edit Profile
                       </button>
-                    ) : (
+                    )} 
+                    {edit === true && isCurrentUser && (
                       <div className="row">
                         <div className="col-sm-6 py-1 d-flex justify-content-center">
                           <button

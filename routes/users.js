@@ -81,10 +81,10 @@ usersRouter.get("/:id", async (request, response, next) => {
 
   try {
     const searchedUser = await User.findById(id);
-    res.json(searchedUser);
+    response.json(searchedUser);
   } catch (error) {
     logger.error(error.message);
-    res.status(500).send({ error: "No such user found!" });
+    response.status(500).send({ error: "No such user found!" });
   }
 });
 
