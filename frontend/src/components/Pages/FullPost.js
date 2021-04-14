@@ -58,6 +58,17 @@ const FullPost = (props) => {
             </div>
 
             <div className="container shadow p-5 my-3 bg-white text-black rounded-lg shadow-sm p-3">
+                <form>
+                    <div className="form-group">
+                        <label>
+                            <h1>Adauga un comentariu</h1></label>
+                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="Comentariu" placeholder="Comentariu"></input>
+                        <small id="emailHelp" class="form-text text-muted">Te rugam sa ai un limbaj adecvat</small>
+                    </div>
+                </form>
+            </div>
+
+            <div className="container shadow p-5 my-3 bg-white text-black rounded-lg shadow-sm p-3">
                 <div class="row">
 
                     <div class="item  border-bottom">
@@ -88,4 +99,4 @@ const FullPost = (props) => {
     )
 }
 
-export default FullPost
+export default FullPost;
