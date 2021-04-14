@@ -2,7 +2,8 @@ import React, { useReducer, useEffect } from "react";
 import UserContext from "./userContext";
 import UserReducer from "./userReducer";
 import { useHistory } from "react-router-dom";
-import axios from "axios";
+import authService from "../../services/auth";
+
 import {
   REGISTER_SUCCES,
   REGISTER_FAIL,
@@ -11,6 +12,7 @@ import {
   CLEAR_ERRORS,
   USER_LOADED,
   LOGOUT,
+  USER_UPDATED,
 } from "../../types";
 
 const UserState = (props) => {
@@ -22,22 +24,22 @@ const UserState = (props) => {
     user: null,
     error: null,
   };
+
   const [state, dispatch] = useReducer(UserReducer, initialState);
 
   useEffect(() => {
-    storageUpdater();
     if (localStorage.token) {
-      loadUser();
+      console.log("Reloading user!");
+      authService.updateToken(localStorage.token);
+      load();
     }
-  }, [state.token]);
+  }, []);
 
   const register = async (formData) => {
-    console.log("inregistrare");
     try {
-      const res = await axios.post("http://localhost:3003/api/users", formData);
-      dispatch({ type: REGISTER_SUCCES, payload: res.data.token });
-      await localStorage.setItem("token", res.data.token);
-      loadUser();
+      const token = await authService.register(formData);
+      dispatch({ type: REGISTER_SUCCES, payload: token });
+      load();
     } catch (error) {
       dispatch({ type: REGISTER_FAIL, payload: error.error });
     }
@@ -45,69 +47,36 @@ const UserState = (props) => {
 
   const login = async (formData) => {
     try {
-      const res = await axios.post("http://localhost:3003/api/login", formData);
-      dispatch({ type: LOGIN_SUCCES, payload: res.data.token });
-      await localStorage.setItem("token", res.data.token);
-      loadUser();
-      console.log("logare");
-    } catch (error) {
-      dispatch({ type: LOGIN_FAIL, payload: error.error });
-    }
-  };
-  const logout = async () => {
-    delete axios.defaults.headers.common["token"];
-    await localStorage.removeItem("token");
-    try {
-      dispatch({ type: LOGOUT });
-      history.push("/");
-      console.log("delogare");
-    } catch (error) {
-      console.log(error);
-      dispatch({ type: LOGIN_FAIL, payload: error.error });
-    }
-  };
-  const update = async (formData) => {
-    if (localStorage.token) {
-      setAuthToken(localStorage.token);
-    }
-    try {
-      // Update user after logging info
-      const res = await axios.put("http://localhost:3003/api/login", formData);
-      dispatch({ type: USER_LOADED, payload: res.data}) 
-    } catch (error) {
-      dispatch({ type: LOGIN_FAIL, payload: error.error });
-    }
-  };
-  const loadUser = async () => {
-    if (localStorage.token) {
-      setAuthToken(localStorage.token);
-    }
-    try {
-      const res = await axios.get("http://localhost:3003/api/login");
-      dispatch({ type: USER_LOADED, payload: res.data });
+      const token = await authService.login(formData);
+      dispatch({ type: LOGIN_SUCCES, payload: token });
+      load();
     } catch (error) {
       dispatch({ type: LOGIN_FAIL, payload: error.error });
     }
   };
 
-  const setAuthToken = (token) => {
-    if (token) {
-      axios.defaults.headers.common["Authorization"] = token;
-    } else {
-      delete axios.defaults.headers.common["Authorization"];
+  const logout = async () => {
+      await authService.logout();
+      dispatch({ type: LOGOUT });
+      history.push("/");
+  };
+
+  const update = async (formData) => {
+    try {
+      const updatedUser = await authService.update(formData);
+      dispatch({ type: USER_LOADED, payload: updatedUser });
+    } catch (error) {
+      dispatch({ type: LOGIN_FAIL, payload: error.error });
     }
   };
-  const storageUpdater = () => {
-    const hours = 1;
-    let now = new Date().getTime();
-    const setupTime = localStorage.getItem("setupTime");
-    if (setupTime == null) {
-      localStorage.setItem("setupTime", now);
-    } else {
-      if (now - setupTime > hours * 60 * 60 * 1000) {
-        localStorage.removeItem("token");
-        localStorage.setItem("setupTime", now);
-      }
+  const load = async () => {
+    try {
+      const loadedUser = await authService.load();
+      dispatch({ type: USER_LOADED, payload: loadedUser });
+    } catch (error) {
+      console.log(error);
+      logout();
+      dispatch({ type: LOGIN_FAIL, payload: error.error });
     }
   };
 
