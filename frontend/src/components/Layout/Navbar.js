@@ -20,7 +20,7 @@ export const Navbar = () => {
               <NavLink
                 className="nav-link"
                 exact
-                to="/users"
+                to={`/users/${user.id}`}
                 activeClassName="active"
               >
                 Profile
