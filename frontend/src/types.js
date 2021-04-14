@@ -10,3 +10,7 @@ export const REMOVE_ALERT = "REMOVE_ALERT";
 export const CLEAR_ERRORS = "CLEAR_ERRORS";
 export const USER_LOADED = "USER_LOADED";
 export const LOGOUT = "LOGOUT";
+export const POSTS_LOADED = "POSTS_LOADED";
+export const SET_FILTERS = "SET_FILTERS";
+export const CLEAR_FILTERS = "CLEAR_FILTERS";
+export const ADD_POST = "ADD_POST";

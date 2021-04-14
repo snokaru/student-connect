@@ -5,7 +5,7 @@ import UserState from "./components/UserState/UserState";
 import Home from "./components/Pages/Home";
 import NavBar from "./components/Layout/Navbar";
 import User from "./components/Pages/User";
-
+import PostState from "./components/PostState/PostState";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -14,7 +14,8 @@ import FullPost from "./components/Pages/FullPost";
 const App = () => {
   return (
     <React.Fragment>
-        <Router>
+      <Router>
+        <PostState>
           <UserState>
             <NavBar />
             <Switch>
@@ -30,12 +31,13 @@ const App = () => {
               <Route exact path="/users/:id">
                 <User />
               </Route>
-              <Route exact path="/FullPost">
+              <Route exact path="/post">
                 <FullPost />
               </Route>
             </Switch>
           </UserState>
-        </Router>
+        </PostState>
+      </Router>
     </React.Fragment>
   );
 };

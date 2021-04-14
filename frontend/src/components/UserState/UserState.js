@@ -56,9 +56,9 @@ const UserState = (props) => {
   };
 
   const logout = async () => {
-      await authService.logout();
-      dispatch({ type: LOGOUT });
-      history.push("/");
+    await authService.logout();
+    dispatch({ type: LOGOUT });
+    history.push("/");
   };
 
   const update = async (formData) => {
@@ -90,7 +90,7 @@ const UserState = (props) => {
         register,
         login,
         logout,
-        update
+        update,
       }}
     >
       {props.children}
