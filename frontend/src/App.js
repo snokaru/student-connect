@@ -14,28 +14,28 @@ import FullPost from "./components/Pages/FullPost";
 const App = () => {
   return (
     <React.Fragment>
-      <UserState>
         <Router>
-          <NavBar />
-          <Switch>
-            <Route exact path="/login">
-              <LoginForm />
-            </Route>
-            <Route exact path="/register">
-              <RegisterForm />
-            </Route>
-            <Route exact path="/">
-              <Home />
-            </Route>
-            <Route exact path="/users/:id">
-              <User />
-            </Route>
-            <Route exact path="/FullPost">
-              <FullPost />
-            </Route>
-          </Switch>
+          <UserState>
+            <NavBar />
+            <Switch>
+              <Route exact path="/login">
+                <LoginForm />
+              </Route>
+              <Route exact path="/register">
+                <RegisterForm />
+              </Route>
+              <Route exact path="/">
+                <Home />
+              </Route>
+              <Route exact path="/users/:id">
+                <User />
+              </Route>
+              <Route exact path="/FullPost">
+                <FullPost />
+              </Route>
+            </Switch>
+          </UserState>
         </Router>
-      </UserState>
     </React.Fragment>
   );
 };

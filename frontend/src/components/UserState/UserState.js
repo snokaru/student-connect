@@ -15,6 +15,7 @@ import {
 
 const UserState = (props) => {
   let history = useHistory();
+
   const initialState = {
     token: localStorage.token,
     isAuthenticated: false,
@@ -61,6 +62,7 @@ const UserState = (props) => {
       history.push("/");
       console.log("delogare");
     } catch (error) {
+      console.log(error);
       dispatch({ type: LOGIN_FAIL, payload: error.error });
     }
   };
