@@ -20,19 +20,21 @@ mongoose
 
 app.use(cors());
 
-app.use(fileUpload({
-  createParentPath: true,
-  safeFileName: true,
-  useTempFiles: true,
-  tempFileDir: "tmp/",
-  parseNested: true
-}));
+app.use(
+  fileUpload({
+    createParentPath: true,
+    safeFileName: true,
+    useTempFiles: true,
+    tempFileDir: "tmp/",
+    parseNested: true,
+  })
+);
 
 app.use(express.json());
 
-app.use('/public', express.static('public'));
+app.use("/public", express.static("public"));
 
 app.use("/api/login", require("./routes/login"));
 app.use("/api/users", require("./routes/users"));
-
+app.use("/api/posts", require("./routes/posts"));
 module.exports = app;
