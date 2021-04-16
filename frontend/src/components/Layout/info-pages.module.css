@@ -14,7 +14,6 @@
 .rmSpinner {
     top: 50%;
     left: 50%;
-    margin-left: -4em;
     margin-top: 16em;
     animation: Logo-Spinner infinite 2s linear;
 }
