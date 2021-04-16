@@ -168,20 +168,21 @@ const filterExtractor = async (req, res, next) => {
 };
 
 /*
-* Assuming that a req.model with the given model class has been saved in previous functions
+* Assuming that a req.model with the given model class and optionally a req.populate has been saved in previous functions
 * this function applies provided filters, sorting and pagination on the given model and returns
 * it as JSON or errors out
 */
 const modelResolver = async (req, res) => {
-
   try {
    const requestedData = await req.model.paginate(req.filter, {
      page: req.page,
      limit: req.limit,
      sort: req.sort,
-   }); 
+     populate: req.populate,
+   });   
    res.json(requestedData);
   } catch (e) {
+    console.log(e);
     res.status(400).send({
       "error": "bad request"
     });

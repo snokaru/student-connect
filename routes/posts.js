@@ -51,13 +51,14 @@ middleware.filterExtractor,
 middleware.sortingExtractor,
 async (req, res, next) => {
   req.model = Post;
+  req.populate = ["user"];
   next();
 },
 middleware.modelResolver);
 
 postsRouter.get("/:id", async (req, res) => {
   try {
-    const post = await Post.findById(req.params.id);
+    const post = await Post.findById(req.params.id).populate("user");
     res.json(post);
   } catch (e) {
     res.status(404).json({ "error": "no such post found" });

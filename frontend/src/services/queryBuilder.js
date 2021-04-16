@@ -7,7 +7,7 @@ const query = new QueryBuilder().filter('email' 'abcd@gmail.com').filter(...).pa
 
 class QueryBuilder {
     constructor(resourceRoute) {
-        this.baseUrl = `${BASE_URL}/${resourceRoute}?`;
+        this.baseUrl = `${BASE_URL}${resourceRoute}?`;
         return this;
     }
 

@@ -38,6 +38,15 @@ const postSchema = new mongoose.Schema({
   ],
 });
 
+postSchema.set("toJSON", {
+  transform: (document, returnedObject) => {
+    returnedObject.id = returnedObject._id.toString();
+
+    delete returnedObject._id;
+    delete returnedObject.__v;
+  },
+});
+
 postSchema.plugin(mongoosePaginate);
 
 const Post = mongoose.model("Post", postSchema);

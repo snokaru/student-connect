@@ -5,13 +5,15 @@ import "react-tiny-fab/dist/styles.css";
 import PostContext from "../PostState/postContext";
 import postService from "../../services/post";
 import { BASE_URL } from "../../utils/config";
-  const Home = () => {
+
+const Home = () => {
   const postContext = useContext(PostContext);
   //const { posts, filteredPosts } = postContext;
   let [posts, setPosts] = useState([]);
   useEffect(() => { 
       const fetchData = async () => {
-        const receivedPosts = postService.exec();
+        const receivedPosts = await postService.exec();
+        console.log(receivedPosts);
         setPosts(receivedPosts);
       }
       fetchData();
@@ -20,6 +22,7 @@ import { BASE_URL } from "../../utils/config";
     <div className="container d-flex flex-column mx-auto">
       {
         posts.map((post) => {
+          console.log(post)
           return <Job name={post.title} company={post.user.name} when={post.createdAt}
             companyPicture={`${BASE_URL}/${post.user.profilePicture}`}
             description={post.description}
