@@ -1,8 +1,8 @@
 // Hook meant to be used to retrieve user based on react-router-dom params
-import axios from "axios";
 import { useParams } from "react-router-dom";
 import { useContext, useState, useEffect } from "react";
 import UserContext from "../components/UserState/userContext";
+import userService from "../services/users";
 
 
 export default function useUser () {
@@ -16,7 +16,7 @@ export default function useUser () {
     useEffect(() => {
         const fetchUser = async () => {
             try {
-                const response = await axios.get(`http://localhost:3003/api/users/${id}`); 
+                const response = await userService.getUser(id);
                 setUser(response.data);
                 setUpdatedUser(response.data);
             } catch (e) {
