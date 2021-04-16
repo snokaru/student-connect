@@ -1,4 +1,6 @@
 const mongoose = require("mongoose");
+const mongoosePaginate = require("mongoose-paginate-v2");
+
 const postSchema = new mongoose.Schema({
   title: {
     type: String,
@@ -14,11 +16,11 @@ const postSchema = new mongoose.Schema({
   },
   description: {
     type: String,
-    default: "",
+    required: true,
   },
   programmingLang: {
     type: String,
-    required: true,
+    default: "",
   },
   workHours: {
     type: String,
@@ -35,5 +37,9 @@ const postSchema = new mongoose.Schema({
     },
   ],
 });
+
+postSchema.plugin(mongoosePaginate);
+
 const Post = mongoose.model("Post", postSchema);
+
 module.exports = Post;

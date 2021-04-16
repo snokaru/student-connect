@@ -2,15 +2,17 @@ const postsRouter = require("express").Router();
 const { check, validationResult } = require("express-validator");
 const Post = require("../models/post");
 const middleware = require("../utils/middleware");
+const logger = require("../utils/logger");
+
 postsRouter.post(
   "/",
+  middleware.tokenExtractor,
   check("title").not().isEmpty(),
   check("programmingLang").not().isEmpty(),
   check("workPlace").not().isEmpty(),
   async (req, res) => {
     const {
       title,
-      user,
       description,
       programmingLang,
       workHours,
@@ -24,7 +26,7 @@ postsRouter.post(
     try {
       let post = new Post({
         title,
-        user,
+        user: req.user.id,
         description,
         programmingLang,
         workHours,
@@ -41,5 +43,25 @@ postsRouter.post(
     }
   }
 );
+
+postsRouter.get("/",
+middleware.limitExtractor,
+middleware.pageExtractor,
+middleware.filterExtractor,
+middleware.sortingExtractor,
+async (req, res, next) => {
+  req.model = Post;
+  next();
+},
+middleware.modelResolver);
+
+postsRouter.get("/:id", async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.id);
+    res.json(post);
+  } catch (e) {
+    res.status(404).json({ "error": "no such post found" });
+  }
+});
 
 module.exports = postsRouter;
