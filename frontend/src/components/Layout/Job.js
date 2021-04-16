@@ -18,7 +18,7 @@ const Job = (props) => {
               <span className="text-muted">{props.when}</span>
             </p>
           </div>
-          <p className="card-title text-primary d-inline">{props.nume}</p>
+          <p className="card-title text-primary d-inline">{props.name}</p>
           <p className="card-text">{props.description}</p>
           <div>
             <p className="card-subtitle text-muted mb-1">{props.type}</p>
