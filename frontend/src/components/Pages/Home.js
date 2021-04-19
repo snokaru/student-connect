@@ -31,6 +31,7 @@ const Home = () => {
         //console.log(post);
         return (
           <Job
+            key={post.id}
             className="mx-auto w-50"
             name={post.title}
             company={post.user.name}
