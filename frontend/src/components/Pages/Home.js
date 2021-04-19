@@ -36,6 +36,7 @@ const Home = () => {
             description={post.description}
             type={post.workHours} 
             location={post.workPlace}
+            user={post.user}
             />
         })
       }

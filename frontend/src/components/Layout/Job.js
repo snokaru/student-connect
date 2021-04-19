@@ -1,6 +1,7 @@
 import React from "react";
 import ReactImageFallback from "react-image-fallback";
 import { BASE_URL } from "../../utils/config";
+import { Link } from "react-router-dom";
 
 const Job = (props) => {
   return (
@@ -16,7 +17,7 @@ const Job = (props) => {
               height="50"
             />
             <p className="card-text m-0 ml-3 d-flex flex-column">
-              <span>{props.company}</span>
+              <span><Link to={`/users/${props.user.id}`}>{props.company}</Link></span>
               <span className="text-muted">{props.when}</span>
             </p>
           </div>
