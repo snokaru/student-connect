@@ -8,6 +8,7 @@ import {
 import { faPhone, faAddressCard } from "@fortawesome/free-solid-svg-icons";
 import ReactImageFallback from "react-image-fallback";
 import { serialize } from "object-to-formdata";
+import { BASE_URL } from "../../utils/config";
 import useUser from "../../hooks/useUser";
 
 import "./User.css";
@@ -74,7 +75,7 @@ export const User = (props) => {
                       <ReactImageFallback
                         src={
                           user &&
-                          `http://localhost:3003/${user.profilePicture}?${
+                          `${BASE_URL}/${user.profilePicture}?${
                             Date.now() /* Hack to rerender image after submit */
                           }`
                         }

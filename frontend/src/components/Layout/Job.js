@@ -1,4 +1,6 @@
 import React from "react";
+import ReactImageFallback from "react-image-fallback";
+import { BASE_URL } from "../../utils/config";
 
 const Job = (props) => {
   return (
@@ -6,13 +8,13 @@ const Job = (props) => {
       <div className="card m-3 w-50 mx-auto">
         <div className="card-body d-flex flex-column justify-content-between">
           <div className="card-title d-flex align-items-center">
-            <img
+            <ReactImageFallback
               src={props.companyPicture}
-              className="d-inline"
+              fallbackImage={`${BASE_URL}/public/img/default.jpg`}
+              alt="profile"
               width="50"
               height="50"
-              alt="img"
-            ></img>
+            />
             <p className="card-text m-0 ml-3 d-flex flex-column">
               <span>{props.company}</span>
               <span className="text-muted">{props.when}</span>

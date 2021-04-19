@@ -4,6 +4,7 @@ import { Fab } from "react-tiny-fab";
 import "react-tiny-fab/dist/styles.css";
 import PostContext from "../PostState/postContext";
 import postService from "../../services/post";
+import ReactImageFallback from "react-image-fallback";
 import { BASE_URL } from "../../utils/config";
 
 const Home = () => {
@@ -12,9 +13,16 @@ const Home = () => {
   let [posts, setPosts] = useState([]);
   useEffect(() => { 
       const fetchData = async () => {
-        const receivedPosts = await postService.exec();
-        console.log(receivedPosts);
-        setPosts(receivedPosts);
+        console.log("Fetching data...")
+        try {
+          console.log("waiting for posts...");
+          const receivedPosts = await postService.makeQuery().exec();
+          console.log("received posts");
+          console.log(receivedPosts);
+          setPosts(receivedPosts);
+        } catch (e) {
+          console.log(e);
+        }
       }
       fetchData();
   }, []);
