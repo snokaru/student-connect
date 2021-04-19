@@ -27,8 +27,10 @@ class QueryBuilder {
     }
 
     async exec() {
+        console.log("querying: " + this.baseUrl)
         const response = await axios.get(this.baseUrl);
-        return response.data.docs;
+        console.log("data arrived!");
+        return response.data;
     }
 }
 

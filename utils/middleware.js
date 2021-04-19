@@ -7,7 +7,6 @@ const logger = require("../utils/logger");
 const jwt = require("jsonwebtoken");
 
 const User = require("../models/user");
-const { response } = require("express");
 
 const tokenExtractor = (req, res, next) => {
   const token = req.header("Authorization");
@@ -161,9 +160,14 @@ const sortingExtractor = async (req, res, next) => {
 const filterExtractor = async (req, res, next) => {
   req.filter = {}
   for (let field in req.query) {
-    if (!["limit", "sort_by", "page"].includes(field))
+    if (!["limit", "sort_by", "page", "fuzzy"].includes(field))
       req.filter[field] = req.query[field];
   }
+  next();
+};
+
+const fuzzySearchExtractor = async (req, res, next) => {
+  req.fuzzy = req.query.fuzzy;
   next();
 };
 
@@ -174,13 +178,16 @@ const filterExtractor = async (req, res, next) => {
 */
 const modelResolver = async (req, res) => {
   try {
-   const requestedData = await req.model.paginate(req.filter, {
-     page: req.page,
-     limit: req.limit,
-     sort: req.sort,
-     populate: req.populate,
-   });   
-   res.json(requestedData);
+    let query;
+    if (req.fuzzy) {
+      // tried to implement fuzzy searching but does not work properly yet
+      query = req.model.fuzzySearch({query: req.fuzzy, minSize: 4});
+    } else {
+      query = req.model.find(req.filter);
+    }
+    query.populate(req.populate).sort(req.sort).limit(req.limit).skip(req.limit * (req.page - 1));
+    const requestedData = await query.exec();
+    res.json(requestedData);
   } catch (e) {
     console.log(e);
     res.status(400).send({
@@ -197,4 +204,5 @@ module.exports = {
   sortingExtractor,
   filterExtractor,
   modelResolver,
+  fuzzySearchExtractor,
 };

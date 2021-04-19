@@ -49,6 +49,7 @@ middleware.limitExtractor,
 middleware.pageExtractor,
 middleware.filterExtractor,
 middleware.sortingExtractor,
+middleware.fuzzySearchExtractor,
 async (req, res, next) => {
   req.model = Post;
   req.populate = ["user"];

@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const mongoosePaginate = require("mongoose-paginate-v2");
+const mongooseFuzzySearching = require("mongoose-fuzzy-searching");
 
 const postSchema = new mongoose.Schema({
   title: {
@@ -47,7 +47,9 @@ postSchema.set("toJSON", {
   },
 });
 
-postSchema.plugin(mongoosePaginate);
+postSchema.plugin(mongooseFuzzySearching, {
+  fields: ["programmingLang", "description", "title", "workPlace", "workHours"],
+})
 
 const Post = mongoose.model("Post", postSchema);
 
