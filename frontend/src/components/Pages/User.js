@@ -10,10 +10,11 @@ import ReactImageFallback from "react-image-fallback";
 import { serialize } from "object-to-formdata";
 import { BASE_URL } from "../../utils/config";
 import useUser from "../../hooks/useUser";
+import Job from "../Layout/Job";
 
 import "./User.css";
 export const User = (props) => {
-  const { user, update, updatedUser, setUpdatedUser, isCurrentUser, edit, setEdit } = useUser();
+  const { user, update, updatedUser, setUpdatedUser, isCurrentUser, edit, setEdit, posts, setPosts } = useUser();
   const formatDate = (date) => {
     if (!date) {
       return "Not set";
@@ -438,6 +439,20 @@ export const User = (props) => {
                   </div>
                 </div>
               </div>
+            </div>
+            <h4 className="text-center">Offers</h4>
+            <div>
+            { posts.map(post => 
+            <Job 
+              name={post.title} 
+              company={post.user.name} 
+              when={post.createdAt}
+              companyPicture={`${BASE_URL}/${post.user.profilePicture}`}
+              description={post.description}
+              type={post.workHours} 
+              location={post.workPlace}
+              user={post.user} />
+            )}
             </div>
           </div>
         </div>

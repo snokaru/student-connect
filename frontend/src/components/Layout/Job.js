@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const Job = (props) => {
   return (
     <React.Fragment>
-      <div className="card m-3 w-50 mx-auto">
+      <div className={`card m-3 mx-auto ${props.className}`}>
         <div className="card-body d-flex flex-column justify-content-between">
           <div className="card-title d-flex align-items-center">
             <ReactImageFallback

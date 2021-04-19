@@ -31,7 +31,9 @@ const Home = () => {
       {
         posts.map((post) => {
           console.log(post)
-          return <Job name={post.title} company={post.user.name} when={post.createdAt}
+          return <Job 
+            className="mx-auto w-50"
+            name={post.title} company={post.user.name} when={post.createdAt}
             companyPicture={`${BASE_URL}/${post.user.profilePicture}`}
             description={post.description}
             type={post.workHours} 
