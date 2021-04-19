@@ -18,13 +18,25 @@ const PostState = (props) => {
     error: null,
   };
   const [state, dispatch] = useReducer(PostReducer, initialState);
-  //useEffect(() => {},[]);
+  useEffect(() => {
+    const fetchData = async () => {
+      console.log("Fetching data...");
+      try {
+        console.log("waiting for posts...");
+        const receivedPosts = await postService.makeQuery().exec();
+        dispatch({ type: POSTS_LOADED, payload: receivedPosts });
+        console.log("received posts");
+      } catch (error) {
+        dispatch({ type: POST_ERROR, payload: error.error });
+      }
+    };
+    fetchData();
+  }, []);
   const createPost = async (formData) => {
     try {
       const post = await postService.createPost(formData);
-      let updatedPosts = [...state.posts, post];
-      console.log(updatedPosts);
-      dispatch({ type: ADD_POST, payload: updatedPosts });
+      dispatch({ type: ADD_POST, payload: post });
+      console.log(post);
     } catch (error) {
       dispatch({ type: POST_ERROR, payload: error.error });
     }

@@ -33,7 +33,8 @@ postsRouter.post(
         workPlace,
       });
       await post.save();
-      Post.findOne({ title })
+      const id = post.id;
+      Post.findById(id)
         .populate("user")
         .then((post) => {
           res.json(post);
@@ -44,25 +45,27 @@ postsRouter.post(
   }
 );
 
-postsRouter.get("/",
-middleware.limitExtractor,
-middleware.pageExtractor,
-middleware.filterExtractor,
-middleware.sortingExtractor,
-middleware.fuzzySearchExtractor,
-async (req, res, next) => {
-  req.model = Post;
-  req.populate = ["user"];
-  next();
-},
-middleware.modelResolver);
+postsRouter.get(
+  "/",
+  middleware.limitExtractor,
+  middleware.pageExtractor,
+  middleware.filterExtractor,
+  middleware.sortingExtractor,
+  middleware.fuzzySearchExtractor,
+  async (req, res, next) => {
+    req.model = Post;
+    req.populate = ["user"];
+    next();
+  },
+  middleware.modelResolver
+);
 
 postsRouter.get("/:id", async (req, res) => {
   try {
     const post = await Post.findById(req.params.id).populate("user");
     res.json(post);
   } catch (e) {
-    res.status(404).json({ "error": "no such post found" });
+    res.status(404).json({ error: "no such post found" });
   }
 });
 

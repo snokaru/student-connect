@@ -8,8 +8,8 @@ import { BASE_URL } from "../../utils/config";
 import { Link } from "react-router-dom";
 const Home = () => {
   const postContext = useContext(PostContext);
-  //const { posts, filteredPosts } = postContext;
-  let [posts, setPosts] = useState([]);
+  const { posts, filteredPosts } = postContext;
+  /*let [posts, setPosts] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
       console.log("Fetching data...");
@@ -24,7 +24,7 @@ const Home = () => {
       }
     };
     fetchData();
-  }, []);
+  }, []);*/
   return (
     <div className="container d-flex flex-column mx-auto">
       {posts.map((post) => {

@@ -4,6 +4,23 @@ import { BASE_URL } from "../../utils/config";
 import { Link } from "react-router-dom";
 
 const Job = (props) => {
+  const formatDate = (date) => {
+    if (!date) {
+      return "Not set";
+    }
+    var d = new Date(date),
+      month = "" + (d.getMonth() + 1),
+      day = "" + d.getDate(),
+      year = d.getFullYear(),
+      hours = "" + d.getHours(),
+      minutes = "" + d.getMinutes();
+
+    if (month.length < 2) month = "0" + month;
+    if (day.length < 2) day = "0" + day;
+    if (hours.length < 2) hours = "0" + hours;
+    if (minutes.length < 2) minutes = "0" + minutes;
+    return [day, month, year].join("-") + " " + [hours, minutes].join(":");
+  };
   return (
     <React.Fragment>
       <div className={`card m-3 mx-auto ${props.className}`}>
@@ -17,8 +34,10 @@ const Job = (props) => {
               height="50"
             />
             <p className="card-text m-0 ml-3 d-flex flex-column">
-              <span><Link to={`/users/${props.user.id}`}>{props.company}</Link></span>
-              <span className="text-muted">{props.when}</span>
+              <span>
+                <Link to={`/users/${props.user.id}`}>{props.company}</Link>
+              </span>
+              <span className="text-muted">{formatDate(props.when)}</span>
             </p>
           </div>
           <p className="card-title text-primary d-inline">{props.name}</p>

@@ -5,9 +5,11 @@ import {
   ADD_POST,
   POST_ERROR,
 } from "../../types";
-export default function (action, state) {
+export default function (state, action) {
   switch (action.type) {
     case ADD_POST:
+      return { ...state, posts: [...state.posts, action.payload] };
+    case POSTS_LOADED:
       return { ...state, posts: action.payload };
     case POST_ERROR:
       return { ...state, error: action.payload };
