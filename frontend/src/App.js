@@ -1,6 +1,7 @@
 import React from "react";
 import LoginForm from "./components/LoginForm";
 import RegisterForm from "./components/RegisterForm";
+import PostForm from "./components/PostForm";
 import UserState from "./components/UserState/UserState";
 import Home from "./components/Pages/Home";
 import NavBar from "./components/Layout/Navbar";
@@ -34,6 +35,9 @@ const App = () => {
               </Route>
               <Route exact path="/post">
                 <FullPost />
+              </Route>
+              <Route exact path="/createpost">
+                <PostForm />
               </Route>
               <Route exact path="/spinner">
                 <Spinner />

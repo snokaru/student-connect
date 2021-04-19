@@ -14,7 +14,17 @@ import Job from "../Layout/Job";
 
 import "./User.css";
 export const User = (props) => {
-  const { user, update, updatedUser, setUpdatedUser, isCurrentUser, edit, setEdit, posts, setPosts } = useUser();
+  const {
+    user,
+    update,
+    updatedUser,
+    setUpdatedUser,
+    isCurrentUser,
+    edit,
+    setEdit,
+    posts,
+    setPosts,
+  } = useUser();
   const formatDate = (date) => {
     if (!date) {
       return "Not set";
@@ -88,7 +98,10 @@ export const User = (props) => {
                     </div>
                     {edit === true ? (
                       <React.Fragment>
-                        <label className="form-label" htmlFor="profile-picture"></label>
+                        <label
+                          className="form-label"
+                          htmlFor="profile-picture"
+                        ></label>
                         <input
                           onChange={onChange}
                           type="file"
@@ -107,7 +120,7 @@ export const User = (props) => {
                       >
                         Edit Profile
                       </button>
-                    )} 
+                    )}
                     {edit === true && isCurrentUser && (
                       <div className="row">
                         <div className="col-sm-6 py-1 d-flex justify-content-center">
@@ -423,11 +436,12 @@ export const User = (props) => {
                   <div className="col-sm-9 py-1 text-secondary">
                     {user ? (
                       edit === true ? (
-                        <input
+                        <textarea
                           onChange={onChange}
                           className="form-control form-control-sm"
                           type="text"
                           name="description"
+                          row="4"
                           defaultValue={user.description}
                         />
                       ) : (
@@ -442,17 +456,18 @@ export const User = (props) => {
             </div>
             <h4 className="text-center">Offers</h4>
             <div>
-            { posts.map(post => 
-            <Job 
-              name={post.title} 
-              company={post.user.name} 
-              when={post.createdAt}
-              companyPicture={`${BASE_URL}/${post.user.profilePicture}`}
-              description={post.description}
-              type={post.workHours} 
-              location={post.workPlace}
-              user={post.user} />
-            )}
+              {posts.map((post) => (
+                <Job
+                  name={post.title}
+                  company={post.user.name}
+                  when={post.createdAt}
+                  companyPicture={`${BASE_URL}/${post.user.profilePicture}`}
+                  description={post.description}
+                  type={post.workHours}
+                  location={post.workPlace}
+                  user={post.user}
+                />
+              ))}
             </div>
           </div>
         </div>
