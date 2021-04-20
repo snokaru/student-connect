@@ -1,8 +1,25 @@
 import React, { useEffect, useState } from "react";
 import "./FullPost.css";
 import postService from "../../services/post";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 const FullPost = (props) => {
+  const formatDate = (date) => {
+    if (!date) {
+      return "Not set";
+    }
+    var d = new Date(date),
+      month = "" + (d.getMonth() + 1),
+      day = "" + d.getDate(),
+      year = d.getFullYear(),
+      hours = "" + d.getHours(),
+      minutes = "" + d.getMinutes();
+
+    if (month.length < 2) month = "0" + month;
+    if (day.length < 2) day = "0" + day;
+    if (hours.length < 2) hours = "0" + hours;
+    if (minutes.length < 2) minutes = "0" + minutes;
+    return [day, month, year].join("-") + " " + [hours, minutes].join(":");
+  };
   const [post, setPost] = useState();
   const { id } = useParams();
   useEffect(() => {
@@ -33,9 +50,14 @@ const FullPost = (props) => {
           </div>
           <div class="col-sm-8">
             <h1>{post?.title ? post.title : ""}</h1>
-            <h3>{post?.user.name ? post.user.name : ""}</h3>
-            <p>{post?.workPlace ? post.workPlace : ""}</p>
-            <p>{post?.workHours ? post.workHours : ""}</p>
+            <Link to={`/users/${post?.user?.id}`}>
+              <h3>{post?.user.name ? post.user.name : ""}</h3>
+            </Link>
+            <p>Location: {post?.workPlace ? post.workPlace : ""}</p>
+            <p>Type: {post?.workHours ? post.workHours : ""}</p>
+            <p>
+              Created at: {post?.createdAt ? formatDate(post.createdAt) : ""}
+            </p>
           </div>
         </div>
       </div>
