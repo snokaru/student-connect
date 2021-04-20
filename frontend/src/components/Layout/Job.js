@@ -35,12 +35,14 @@ const Job = (props) => {
             />
             <p className="card-text m-0 ml-3 d-flex flex-column">
               <span>
-                <Link to={`/users/${props.user.id}`}>{props.company}</Link>
+                <Link to={`/users/${props.user.id}`}>{props.userName}</Link>
               </span>
               <span className="text-muted">{formatDate(props.when)}</span>
             </p>
           </div>
-          <p className="card-title text-primary d-inline">{props.name}</p>
+          <Link to={`/post/${props.id}`}>
+            <p className="card-title text-primary d-inline">{props.title}</p>
+          </Link>
           <p className="card-text">{props.description}</p>
           <div>
             <p className="card-subtitle text-muted mb-1">{props.type}</p>

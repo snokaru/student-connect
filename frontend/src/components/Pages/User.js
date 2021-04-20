@@ -458,8 +458,10 @@ export const User = (props) => {
             <div>
               {posts.map((post) => (
                 <Job
-                  name={post.title}
-                  company={post.user.name}
+                  key={post.id}
+                  id={post.id}
+                  title={post.title}
+                  userName={post.user.name}
                   when={post.createdAt}
                   companyPicture={`${BASE_URL}/${post.user.profilePicture}`}
                   description={post.description}

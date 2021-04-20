@@ -32,9 +32,10 @@ const Home = () => {
         return (
           <Job
             key={post.id}
+            id={post.id}
             className="mx-auto w-50"
-            name={post.title}
-            company={post.user.name}
+            title={post.title}
+            userName={post.user.name}
             when={post.createdAt}
             companyPicture={`${BASE_URL}/${post.user.profilePicture}`}
             description={post.description}
