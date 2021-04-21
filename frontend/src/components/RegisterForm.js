@@ -135,7 +135,7 @@ const RegisterForm = (props) => {
         <h1 class="mb-4 text-primary">Register now</h1>
         <form onSubmit={onSubmit}>
           <div className="form-group">
-            <label className="control-label" for="type">
+            <label className="control-label" htmlFor="type">
               Type<span class="text-primary">*</span>:
             </label>
             <div class="ml-4">
@@ -160,14 +160,14 @@ const RegisterForm = (props) => {
                 name="type"
                 value="Company"
               />
-              <label class="radio-inline" for="exampleRadios1">
+              <label class="radio-inline" htmlFor="exampleRadios1">
                 Company
               </label>
             </div>
           </div>
           <div className="form-row">
             <div className="form-group col-md-6">
-              <label className="control-label" for="name">
+              <label className="control-label" htmlFor="name">
                 Full Name<span class="text-primary">*</span>:
               </label>
               <input
@@ -181,7 +181,7 @@ const RegisterForm = (props) => {
               />
             </div>
             <div className="form-group col-md-6">
-              <label className="control-label" for="email">
+              <label className="control-label" htmlFor="email">
                 Email<span class="text-primary">*</span>:
               </label>
               <input
@@ -197,7 +197,7 @@ const RegisterForm = (props) => {
           </div>
 
           <div className="form-group">
-            <label className="control-label" for="Address">
+            <label className="control-label" htmlFor="Address">
               Address:
             </label>
             <div>
@@ -208,7 +208,7 @@ const RegisterForm = (props) => {
                 name="address"
                 value={address}
                 placeholder="Address"
-                autocomplete="street-address"
+                autoComplete="street-address"
               />
             </div>
           </div>
@@ -225,11 +225,12 @@ const RegisterForm = (props) => {
                 value={password}
                 required
                 placeholder="Password"
+               
               />
             </div>
           </div>
           <div className="form-group">
-            <label className="control-label" for="password">
+            <label className="control-label" htmlFor="password">
               Description:
             </label>
             <div>
