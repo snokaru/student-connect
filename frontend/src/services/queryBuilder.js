@@ -26,6 +26,11 @@ class QueryBuilder {
         return this;
     }
 
+    find(searchedValue) {
+        this.baseUrl += `&fuzzy=${searchedValue}`;
+        return this;
+    }
+
     async exec() {
         
         const response = await axios.get(this.baseUrl);
