@@ -5,6 +5,7 @@ import { faPhone, faAddressCard } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import postService from "../../services/post";
 import { useParams, Link } from "react-router-dom";
+import { BASE_URL } from "../../utils/config";
 const FullPost = (props) => {
   const formatDate = (date) => {
     if (!date) {
@@ -29,7 +30,7 @@ const FullPost = (props) => {
     const fetchPost = async (id) => {
       try {
         const aux = await postService.getPost(id);
-        console.log(aux);
+        console.log(aux.user.profilePicture);
         setPost(aux);
       } catch (error) {
         console.log(error);
@@ -44,7 +45,7 @@ const FullPost = (props) => {
         <div class="row">
           <div class="col-sm-4 border-right">
             <img
-              src="https://media-exp1.licdn.com/dms/image/C4D0BAQFgRYqaa_6VCA/company-logo_200_200/0/1614621724734?e=1625702400&v=beta&t=9l7X89Suc7Gll9z_Haw8Tcke0yhbEI6I_b3PEHfHSE8"
+              src={`${BASE_URL}/${post?.user?.profilePicture}`}
               className="d-inline"
               width="200"
               height="200"
