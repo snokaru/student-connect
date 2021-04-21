@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "./FullPost.css";
+import { faFacebookF, faLinkedin } from "@fortawesome/free-brands-svg-icons";
+import { faPhone, faAddressCard } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import postService from "../../services/post";
 import { useParams, Link } from "react-router-dom";
 const FullPost = (props) => {
@@ -64,35 +67,55 @@ const FullPost = (props) => {
 
       <div class="container p-5 my-3 bg-white text-black rounded-lg shadow ">
         <div class="row justify-content-space-around ">
-          <div class="col-sm-7 justify-content-between align-self-center">
+          <div class="col-sm-6 justify-content-between align-self-center">
             <div class="item">
               <h3>Descriere</h3>
               <p>{post?.description ? post.description : ""}</p>
             </div>
           </div>
 
-          <div class="col-md-3 offset-1 a border-left ">
+          <div class="col-md-4 offset-1 a border-left ">
             <div class="item">
               <h3>Aplica acum</h3>
               <p>Date de contact</p>
-              <ul>
-                <li class="align-self-center">
+              <div className="row">
+                <div className="col-sm-2 py-1 d-flex justify-content-center align-items-center">
+                  <FontAwesomeIcon icon={faFacebookF} />
+                </div>
+                <div className="col-sm-10 py-1 text-secondary">
                   {post?.user?.contact?.facebook
                     ? post.user.contact.facebook
                     : ""}
-                </li>
-                <li class="align-self-center">
+                </div>
+              </div>
+
+              <div className="row">
+                <div className="col-sm-2 py-1 d-flex justify-content-center align-items-center">
+                  <FontAwesomeIcon icon={faLinkedin} />
+                </div>
+                <div className="col-sm-10 py-1 text-secondary">
                   {post?.user?.contact?.linkedin
                     ? post.user.contact.linkedin
                     : ""}
-                </li>
-                <li class="align-self-center">
+                </div>
+              </div>
+              <div className="row">
+                <div className="col-sm-2 py-1 d-flex justify-content-center align-items-center">
+                  <FontAwesomeIcon icon={faPhone} />
+                </div>
+                <div className="col-sm-10 py-1 text-secondary">
                   {post?.user?.contact?.phone ? post.user.contact.phone : ""}
-                </li>
-                <li class="align-self-center">
+                </div>
+              </div>
+
+              <div className="row">
+                <div className="col-sm-2 py-1 d-flex justify-content-center align-items-center">
+                  <FontAwesomeIcon icon={faAddressCard} />
+                </div>
+                <div className="col-sm-10 py-1 text-secondary">
                   {post?.user?.contact?.others ? post.user.contact.others : ""}
-                </li>
-              </ul>
+                </div>
+              </div>
             </div>
           </div>
         </div>
