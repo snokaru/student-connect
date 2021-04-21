@@ -1,10 +1,10 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import Job from "../Layout/Job";
 import { Fab } from "react-tiny-fab";
 import "react-tiny-fab/dist/styles.css";
 import PostContext from "../PostState/postContext";
 import UserContext from "../UserState/userContext";
-import postService from "../../services/post";
+
 import { BASE_URL } from "../../utils/config";
 import { Link } from "react-router-dom";
 const Home = () => {
@@ -12,22 +12,7 @@ const Home = () => {
   const userContext = useContext(UserContext);
   const { posts, filteredPosts } = postContext;
   const { isAuthenticated } = userContext;
-  /*let [posts, setPosts] = useState([]);
-  useEffect(() => {
-    const fetchData = async () => {
-      console.log("Fetching data...");
-      try {
-        console.log("waiting for posts...");
-        const receivedPosts = await postService.makeQuery().exec();
-        console.log("received posts");
-        //console.log(receivedPosts);
-        setPosts(receivedPosts);
-      } catch (e) {
-        console.log(e);
-      }
-    };
-    fetchData();
-  }, []);*/
+
   return (
     <div className="container d-flex flex-column mx-auto">
       {posts.map((post) => {
