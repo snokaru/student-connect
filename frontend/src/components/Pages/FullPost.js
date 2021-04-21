@@ -37,7 +37,7 @@ const FullPost = (props) => {
       }
     };
     fetchPost(id);
-  });
+  }, [id]);
   return (
     <React.Fragment>
       <div className="container shadow p-5 my-3 bg-white text-black rounded-lg shadow-sm p-3">
