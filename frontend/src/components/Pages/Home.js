@@ -3,12 +3,15 @@ import Job from "../Layout/Job";
 import { Fab } from "react-tiny-fab";
 import "react-tiny-fab/dist/styles.css";
 import PostContext from "../PostState/postContext";
+import UserContext from "../UserState/userContext";
 import postService from "../../services/post";
 import { BASE_URL } from "../../utils/config";
 import { Link } from "react-router-dom";
 const Home = () => {
   const postContext = useContext(PostContext);
+  const userContext = useContext(UserContext);
   const { posts, filteredPosts } = postContext;
+  const { isAuthenticated } = userContext;
   /*let [posts, setPosts] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
@@ -46,12 +49,16 @@ const Home = () => {
         );
       })}
       <Link to="/createpost">
-        <Fab
-          mainButtonStyles={{ backgroundColor: "#007bff" }}
-          alwaysShowTitle={true}
-          icon={"+"}
-          onClick={() => console.log("button")}
-        ></Fab>
+        {isAuthenticated ? (
+          <Fab
+            mainButtonStyles={{ backgroundColor: "#007bff" }}
+            alwaysShowTitle={true}
+            icon={"+"}
+            onClick={() => console.log("button")}
+          ></Fab>
+        ) : (
+          <React.Fragment />
+        )}
       </Link>
     </div>
   );
