@@ -66,7 +66,7 @@ usersRouter.post(
       }
       //Token
       const payload = { user: { id: user.id } };
-      const token = jwt.sign(payload, config.JWT_SECRET, { expiresIn: "1h" });
+      const token = jwt.sign(payload, config.JWT_SECRET, { expiresIn: config.JWT_EXPIRE_TIME });
 
       res.json({ token: token });
     } catch (error) {

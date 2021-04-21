@@ -4,7 +4,7 @@
   "description": "Collective Project Proposed By IBM, West University of Timisoara, 2nd Year, Winter Semester",
   "main": "server.js",
   "scripts": {
-    "server": "nodemon server.js",
+    "server": "NODE_ENV=DEV nodemon server.js",
     "start": "concurrently \"npm run server\" \"npm run frontend\"",
     "frontend": "npm start --prefix frontend",
     "test": "echo \"Error: no test specified\" && exit 1"
