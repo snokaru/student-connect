@@ -208,6 +208,7 @@ const RegisterForm = (props) => {
                 name="address"
                 value={address}
                 placeholder="Address"
+                autocomplete="street-address"
               />
             </div>
           </div>
