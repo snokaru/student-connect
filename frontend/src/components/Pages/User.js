@@ -461,7 +461,6 @@ export const User = (props) => {
                   key={post.id}
                   id={post.id}
                   title={post.title}
-                  userName={post.user.name}
                   when={post.createdAt}
                   companyPicture={`${BASE_URL}/${post.user.profilePicture}`}
                   description={post.description}

@@ -33,7 +33,6 @@ const Home = () => {
             id={post.id}
             className="mx-auto w-50"
             title={post.title}
-            userName={post.user.name}
             when={post.createdAt}
             companyPicture={`${BASE_URL}/${post.user.profilePicture}`}
             description={post.description}
