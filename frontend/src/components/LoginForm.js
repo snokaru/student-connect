@@ -1,6 +1,8 @@
 import React, { useEffect, useContext, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import UserContext from "./UserState/userContext";
+import Footer1 from "./Layout/Footer1";
+
 
 const LoginForm = (props) => {
   let history = useHistory();
@@ -26,7 +28,7 @@ const LoginForm = (props) => {
   };
   return (
     <React.Fragment>
-      <div className="w-25 my-4 p-4 card container">
+      <div className="w-25 my-4 p-3 card container">
         <h1 className="text-primary ">Log In</h1>
         <form onSubmit={onSubmit}>
           <div className="form-group">
@@ -67,6 +69,8 @@ const LoginForm = (props) => {
           </p>
         </form>
       </div>
+      <Footer1/>
+
     </React.Fragment>
   );
 };

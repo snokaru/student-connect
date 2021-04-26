@@ -48,7 +48,7 @@ const Job = (props) => {
               </p>
             </div>
             <div className="ml-auto p-1">
-              {user.id === props.user.id ? (
+              {user?.id === props.user.id ? (
                 <span>
                   <button type="button" class="btn btn-outline-primary">
                     <FontAwesomeIcon icon={faTrash} />

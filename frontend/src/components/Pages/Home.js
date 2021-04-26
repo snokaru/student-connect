@@ -4,27 +4,24 @@ import { Fab } from "react-tiny-fab";
 import "react-tiny-fab/dist/styles.css";
 import PostContext from "../PostState/postContext";
 import UserContext from "../UserState/userContext";
-import Spinner from "../Layout/Spinner";
+import Footer from "../Layout/Footer";
 
 import { BASE_URL } from "../../utils/config";
 import { Link } from "react-router-dom";
-
-
-
+import SearchBar from "../Layout/SearchBar";
 const Home = () => {
   const postContext = useContext(PostContext);
   const userContext = useContext(UserContext);
   const { posts, filteredPosts } = postContext;
   const { isAuthenticated } = userContext;
 
-  //const renderJobs = () =>{
-    // return posts ? <Spinner /> : undefined;
-  //};
-
-
-
   return (
+  <div>
+    <SearchBar></SearchBar>
+
+ 
     <div className="container d-flex flex-column mx-auto">
+
       {posts.map((post) => {
         //console.log(post);
         return (
@@ -54,6 +51,8 @@ const Home = () => {
           <React.Fragment />
         )}
       </Link>
+    </div>
+     <Footer></Footer>
     </div>
   );
 };

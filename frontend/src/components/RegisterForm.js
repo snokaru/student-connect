@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect, useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
+import Footer from "./Layout/Footer";
 import UserContext from "./UserState/userContext";
 
 const RegisterForm = (props) => {
@@ -254,6 +255,8 @@ const RegisterForm = (props) => {
           </p>
         </form>
       </div>
+
+      <Footer/>
     </Fragment>
   );
 };

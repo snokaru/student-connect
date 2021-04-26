@@ -13,6 +13,7 @@ import useUser from "../../hooks/useUser";
 import Job from "../Layout/Job";
 
 import "./User.css";
+import Footer from "../Layout/Footer";
 export const User = (props) => {
   const {
     user,
@@ -74,6 +75,7 @@ export const User = (props) => {
     setEdit(false);
   };
   return (
+    <div>
     <div className="container">
       <div className="main-body">
         <div className="row gutters-sm">
@@ -473,6 +475,9 @@ export const User = (props) => {
           </div>
         </div>
       </div>
+     
+    </div>
+    <Footer/>
     </div>
   );
 };
