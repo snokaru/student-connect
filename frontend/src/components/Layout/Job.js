@@ -5,9 +5,15 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import UserContext from "../UserState/userContext";
+import PostContext from "../PostState/postContext";
 const Job = (props) => {
   const userContext = useContext(UserContext);
+  const postContext = useContext(PostContext);
   const { user } = userContext;
+  const { deletePost } = postContext;
+  const del = () => {
+    deletePost(props.id);
+  };
   const formatDate = (date) => {
     if (!date) {
       return "Not set";
@@ -50,7 +56,11 @@ const Job = (props) => {
             <div className="ml-auto p-1">
               {user?.id === props.user.id ? (
                 <span>
-                  <button type="button" class="btn btn-outline-primary">
+                  <button
+                    onClick={del}
+                    type="button"
+                    className="btn btn-outline-primary"
+                  >
                     <FontAwesomeIcon icon={faTrash} />
                   </button>
                 </span>

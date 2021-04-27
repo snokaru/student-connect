@@ -23,9 +23,12 @@ const getPost = async (id) => {
   const res = await axios.get(`${BASE_URL}${BASE_RESOURCE_ROUTE}/${id}`);
   return res.data;
 };
-
+const deletePost = async (id) => {
+  await axios.delete(`${BASE_URL}${BASE_RESOURCE_ROUTE}/${id}`);
+};
 export default {
   makeQuery,
   createPost,
   getPost,
+  deletePost,
 };
