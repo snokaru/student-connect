@@ -17,9 +17,9 @@ export const SearchBar = () => {
                <button class="col-2">
                 Filtre
             </button>
-               <input className="col-7" type="text" placeholder="Cauta.." name="search">
+               <input className="col-6" type="text" placeholder="Cauta.." name="search">
             </input>
-            <button class="col-1" type="submit"><i class="fa fa-search"><FontAwesomeIcon icon={faSearch} /></i></button>
+            <button class="col-2" type="submit"><i class="fa fa-search"><FontAwesomeIcon icon={faSearch} /></i></button>
                </div>
         
            </form>
