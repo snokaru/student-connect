@@ -76,8 +76,8 @@ export const User = (props) => {
     setEdit(false);
   };
   return (
+ 
     <div className={classes.body}>
-    <div>
     <div className="container">
       <div className="main-body">
         <div className="row gutters-sm">
@@ -480,7 +480,6 @@ export const User = (props) => {
      
     </div>
     <div className={classes.footer}><Footer/></div>
-    </div>
     </div>
   );
 };
