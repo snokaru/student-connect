@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Footer from "./Layout/Footer";
 import UserContext from "./UserState/userContext";
+import classes from "../components/Layout/footer.module.css";
 
 const RegisterForm = (props) => {
   let history = useHistory();
@@ -132,6 +133,7 @@ const RegisterForm = (props) => {
   }
   return (
     <Fragment>
+      <div className={classes.body}>
       <div className="w-50 mx-auto my-4 p-4 card container">
         <h1 class="mb-4 text-primary">Register now</h1>
         <form onSubmit={onSubmit}>
@@ -256,7 +258,8 @@ const RegisterForm = (props) => {
         </form>
       </div>
 
-      <Footer/>
+      <div className={classes.footer}><Footer/></div>
+      </div>
     </Fragment>
   );
 };

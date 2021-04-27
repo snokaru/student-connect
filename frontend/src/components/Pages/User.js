@@ -11,6 +11,7 @@ import { serialize } from "object-to-formdata";
 import { BASE_URL } from "../../utils/config";
 import useUser from "../../hooks/useUser";
 import Job from "../Layout/Job";
+import classes from "../Layout/footer.module.css";
 
 import "./User.css";
 import Footer from "../Layout/Footer";
@@ -75,6 +76,7 @@ export const User = (props) => {
     setEdit(false);
   };
   return (
+    <div className={classes.body}>
     <div>
     <div className="container">
       <div className="main-body">
@@ -477,7 +479,8 @@ export const User = (props) => {
       </div>
      
     </div>
-    <Footer/>
+    <div className={classes.footer}><Footer/></div>
+    </div>
     </div>
   );
 };

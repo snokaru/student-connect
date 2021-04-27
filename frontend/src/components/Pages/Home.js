@@ -5,6 +5,7 @@ import "react-tiny-fab/dist/styles.css";
 import PostContext from "../PostState/postContext";
 import UserContext from "../UserState/userContext";
 import Footer from "../Layout/Footer";
+import classes from "../Layout/footer.module.css";
 
 import { BASE_URL } from "../../utils/config";
 import { Link } from "react-router-dom";
@@ -16,7 +17,7 @@ const Home = () => {
   const { isAuthenticated } = userContext;
 
   return (
-  <div>
+  <div className={classes.body}>
     <SearchBar></SearchBar>
 
  
@@ -52,7 +53,8 @@ const Home = () => {
         )}
       </Link>
     </div>
-     <Footer></Footer>
+    <div className={classes.footer}><Footer></Footer></div>
+
     </div>
   );
 };
