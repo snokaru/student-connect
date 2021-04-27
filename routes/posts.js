@@ -64,9 +64,16 @@ postsRouter.get("/:id", async (req, res) => {
   try {
     const post = await Post.findById(req.params.id).populate("user");
     res.json(post);
-  } catch (e) {
+  } catch (error) {
     res.status(404).json({ error: "no such post found" });
   }
 });
-
+postsRouter.delete("/:id", async (req, res) => {
+  try {
+    await Post.findByIdAndRemove(req.params.id);
+    res.status(204).end();
+  } catch (error) {
+    res.status(404).json({ error: "cant delete post" });
+  }
+});
 module.exports = postsRouter;

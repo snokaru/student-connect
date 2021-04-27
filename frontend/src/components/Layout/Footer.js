@@ -2,12 +2,12 @@ import React from 'react'
 
 export const Footer = () => {
     return (
-   <div class="cotainer-sm bg-primary ">
-    <div class="footer-clean bg-primary">
+   <div className="cotainer-sm bg-primary ">
+    <div className="footer-clean bg-primary">
     <footer>
-        <div class="container text-white">
-            <div class="row justify-content-center">
-                <div class="col-sm-4 col-md-3 item">
+        <div className="container text-white">
+            <div className="row justify-content-center">
+                <div className="col-sm-4 col-md-3 item">
                     <h3>Services</h3>
                     <ul>
                         <li>Web design</li>
@@ -15,7 +15,7 @@ export const Footer = () => {
                         <li>Hosting</li>
                     </ul>
                 </div>
-                <div class="col-sm-4 col-md-3 item">
+                <div className="col-sm-4 col-md-3 item">
                     <h3>About</h3>
                     <ul>
                         <li>Company</li>
@@ -23,7 +23,7 @@ export const Footer = () => {
                         <li>Legacy</li>
                     </ul>
                 </div>
-                <div class="col-sm-4 col-md-3 item">
+                <div className="col-sm-4 col-md-3 item">
                     <h3>Careers</h3>
                     <ul>
                         <li>Job openings</li>
@@ -31,8 +31,8 @@ export const Footer = () => {
                         <li>Benefits</li>
                     </ul>
                 </div>
-                <div class="col-lg-3 item social">
-                    <p class="copyright">Student Connect © 2021</p>
+                <div className="col-lg-3 item social">
+                    <p className="copyright">Student Connect © 2021</p>
                 </div>
             </div>
         </div>

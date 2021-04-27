@@ -6,6 +6,7 @@ import {
   POSTS_LOADED,
   SET_FILTERS,
   CLEAR_FILTERS,
+  DELETE_POST,
   ADD_POST,
   POST_ERROR,
 } from "../../types";
@@ -20,12 +21,9 @@ const PostState = (props) => {
   const [state, dispatch] = useReducer(PostReducer, initialState);
   useEffect(() => {
     const fetchData = async () => {
-      console.log("Fetching data...");
       try {
-        console.log("waiting for posts...");
         const receivedPosts = await postService.makeQuery().exec();
         dispatch({ type: POSTS_LOADED, payload: receivedPosts });
-        console.log("received posts");
       } catch (error) {
         dispatch({ type: POST_ERROR, payload: error.error });
       }
@@ -36,7 +34,15 @@ const PostState = (props) => {
     try {
       const post = await postService.createPost(formData);
       dispatch({ type: ADD_POST, payload: post });
-      console.log(post);
+    } catch (error) {
+      dispatch({ type: POST_ERROR, payload: error.error });
+    }
+  };
+  const deletePost = async (id) => {
+    try {
+      await postService.deletePost(id);
+      console.log("delete post");
+      dispatch({ type: DELETE_POST, payload: id });
     } catch (error) {
       dispatch({ type: POST_ERROR, payload: error.error });
     }
@@ -49,6 +55,7 @@ const PostState = (props) => {
         posts: state.posts,
         filteredPosts: state.filteredPosts,
         createPost,
+        deletePost,
       }}
     >
       {props.children}
