@@ -26,9 +26,22 @@ const getPost = async (id) => {
 const deletePost = async (id) => {
   await axios.delete(`${BASE_URL}${BASE_RESOURCE_ROUTE}/${id}`);
 };
+const addComment = async (id, formData,action) => {
+  let config = {
+    headers: {
+      action: action,
+    }
+  }
+  const res = await axios.put(
+    `${BASE_URL}${BASE_RESOURCE_ROUTE}/${id}`,
+    formData,config
+  );
+  return res.data;
+};
 export default {
   makeQuery,
   createPost,
   getPost,
   deletePost,
+  addComment,
 };

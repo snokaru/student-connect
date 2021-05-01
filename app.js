@@ -2,7 +2,6 @@ const express = require("express");
 const cors = require("cors");
 const fileUpload = require("express-fileupload");
 const mongoose = require("mongoose");
-const os = require("os");
 
 const logger = require("./utils/logger");
 const config = require("./utils/config");
@@ -37,4 +36,5 @@ app.use("/public", express.static("public"));
 app.use("/api/login", require("./routes/login"));
 app.use("/api/users", require("./routes/users"));
 app.use("/api/posts", require("./routes/posts"));
+app.use("/api/comments", require("./routes/comments"));
 module.exports = app;

@@ -54,7 +54,10 @@ postsRouter.get(
   middleware.fuzzySearchExtractor,
   async (req, res, next) => {
     req.model = Post;
-    req.populate = ["user"];
+    req.populate = [
+      { path: "user" },
+      { path: "comments", populate: { path: "user" } },
+    ];
     next();
   },
   middleware.modelResolver
@@ -62,7 +65,29 @@ postsRouter.get(
 
 postsRouter.get("/:id", async (req, res) => {
   try {
-    const post = await Post.findById(req.params.id).populate("user");
+    const post = await Post.findById(req.params.id).populate([
+      { path: "user" },
+      { path: "comments", populate: { path: "user" } },
+    ]);
+    res.json(post);
+  } catch (error) {
+    res.status(404).json({ error: "no such post found" });
+  }
+});
+postsRouter.put("/:id", async (req, res) => {
+  const { commId } = req.body;
+  const action = req.header("action");
+  try {
+    const post = await Post.findOneAndUpdate(
+      { _id: req.params.id },
+      action === "add"
+        ? { $push: { comments: commId } }
+        : { $pull: { comments: commId } },
+      { new: true }
+    ).populate([
+      { path: "user" },
+      { path: "comments", populate: { path: "user" } },
+    ]);
     res.json(post);
   } catch (error) {
     res.status(404).json({ error: "no such post found" });
