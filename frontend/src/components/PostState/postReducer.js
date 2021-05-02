@@ -16,17 +16,18 @@ export default function (state, action) {
     case POST_ERROR:
       return { ...state, error: action.payload };
     case DELETE_POST:
-      const newPosts = state.posts.filter((post) => post.id !== action.payload);
       return {
         ...state,
-        posts: newPosts,
+        posts: state.posts.filter((post) => post.id !== action.payload),
       };
     case MODIFY_POST:
       return {
         ...state,
-        posts: state.posts.map((post) => {
-          return post.id === action.payload.id ? action.payload : post;
-        }),
+        posts: [
+          ...state.posts.map((post) => {
+            return post.id === action.payload.id ? action.payload : post;
+          }),
+        ],
       };
     default:
       return state;

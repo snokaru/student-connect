@@ -30,23 +30,23 @@ const FullPost = (props) => {
   const postContext = useContext(PostContext);
   const { user, isAuthenticated } = userContext;
   const { manageComment } = postContext;
-  const [post, setPost] = useState();
   const [comment, setComment] = useState({ user: user?.id, body: "" });
+  const [post, setPost] = useState();
   const { body } = comment;
   const { id } = useParams();
   const onChange = (e) => {
-    setComment({ ...comment, [e.target.name]: e.target.value });
+    setComment({ ...comment, [e.target.name]: e.target.value, user: user?.id });
   };
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
-    manageComment(id, comment, "add");
+    await manageComment(id, comment, "add");
     fetchPost(id);
   };
   const fetchPost = async (id) => {
     try {
       const aux = await postService.getPost(id);
-      console.log(aux.user.profilePicture);
-      setPost(aux);
+      setPost({ ...aux });
+      console.log("fetching post", aux);
     } catch (error) {
       console.log(error);
       setPost(null);
@@ -166,8 +166,11 @@ const FullPost = (props) => {
       ) : (
         <React.Fragment />
       )}
-      {post?.comments?.map((comment) => (
-        <div className="container shadow p-5 my-3 bg-white text-black rounded-lg shadow-sm p-3">
+      {post?.comments?.map((comment, index) => (
+        <div
+          key={index}
+          className="container shadow p-5 my-3 bg-white text-black rounded-lg shadow-sm p-3"
+        >
           <div className="row">
             <div className="p-1">
               <h4>{comment?.user?.name}</h4>
