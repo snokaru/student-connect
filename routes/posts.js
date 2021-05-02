@@ -1,6 +1,7 @@
 const postsRouter = require("express").Router();
 const { check, validationResult } = require("express-validator");
 const Post = require("../models/post");
+const Comment = require("../models/comment");
 const middleware = require("../utils/middleware");
 const logger = require("../utils/logger");
 
@@ -74,23 +75,40 @@ postsRouter.get("/:id", async (req, res) => {
     res.status(404).json({ error: "no such post found" });
   }
 });
-postsRouter.put("/:id", async (req, res) => {
-  const { commId } = req.body;
-  const action = req.header("action");
+postsRouter.put("/:id/comment", async (req, res) => {
   try {
-    const post = await Post.findOneAndUpdate(
-      { _id: req.params.id },
-      action === "add"
-        ? { $push: { comments: commId } }
-        : { $pull: { comments: commId } },
-      { new: true }
-    ).populate([
-      { path: "user" },
-      { path: "comments", populate: { path: "user" } },
-    ]);
+    const action = req.header("action");
+    let comment = null;
+    let post = null;
+    switch (action) {
+      case "add":
+        const { user, body } = req.body;
+        comment = new Comment({ user, body });
+        await comment.save();
+        let commId = comment.id;
+        post = await Post.findOneAndUpdate(
+          { _id: req.params.id },
+          { $push: { comments: commId } },
+          { new: true }
+        ).populate([
+          { path: "user" },
+          { path: "comments", populate: { path: "user" } },
+        ]);
+      case "delete":
+        const { id } = req.body;
+        await Comment.findByIdAndRemove(id);
+        post = await Post.findOneAndUpdate(
+          { _id: req.params.id },
+          { $pull: { comments: id } },
+          { new: true }
+        ).populate([
+          { path: "user" },
+          { path: "comments", populate: { path: "user" } },
+        ]);
+    }
     res.json(post);
   } catch (error) {
-    res.status(404).json({ error: "no such post found" });
+    res.status(404).json({ error: "post or comment not found" });
   }
 });
 postsRouter.delete("/:id", async (req, res) => {

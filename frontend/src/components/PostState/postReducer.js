@@ -5,6 +5,7 @@ import {
   ADD_POST,
   POST_ERROR,
   DELETE_POST,
+  MODIFY_POST,
 } from "../../types";
 export default function (state, action) {
   switch (action.type) {
@@ -15,11 +16,17 @@ export default function (state, action) {
     case POST_ERROR:
       return { ...state, error: action.payload };
     case DELETE_POST:
-      console.log("in reducer");
       const newPosts = state.posts.filter((post) => post.id !== action.payload);
       return {
         ...state,
         posts: newPosts,
+      };
+    case MODIFY_POST:
+      return {
+        ...state,
+        posts: state.posts.map((post) => {
+          return post.id === action.payload.id ? action.payload : post;
+        }),
       };
     default:
       return state;

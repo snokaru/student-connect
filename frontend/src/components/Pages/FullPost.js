@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import "./FullPost.css";
 import { faFacebookF, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 import { faPhone, faAddressCard } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import postService from "../../services/post";
 import { useParams, Link } from "react-router-dom";
 import { BASE_URL } from "../../utils/config";
+import postService from "../../services/post";
+import UserContext from "../UserState/userContext";
+import PostContext from "../PostState/postContext";
 const FullPost = (props) => {
   const formatDate = (date) => {
     if (!date) {
@@ -24,19 +26,33 @@ const FullPost = (props) => {
     if (minutes.length < 2) minutes = "0" + minutes;
     return [day, month, year].join("-") + " " + [hours, minutes].join(":");
   };
+  const userContext = useContext(UserContext);
+  const postContext = useContext(PostContext);
+  const { user, isAuthenticated } = userContext;
+  const { manageComment } = postContext;
   const [post, setPost] = useState();
+  const [comment, setComment] = useState({ user: user?.id, body: "" });
+  const { body } = comment;
   const { id } = useParams();
+  const onChange = (e) => {
+    setComment({ ...comment, [e.target.name]: e.target.value });
+  };
+  const onSubmit = (e) => {
+    e.preventDefault();
+    manageComment(id, comment, "add");
+    fetchPost(id);
+  };
+  const fetchPost = async (id) => {
+    try {
+      const aux = await postService.getPost(id);
+      console.log(aux.user.profilePicture);
+      setPost(aux);
+    } catch (error) {
+      console.log(error);
+      setPost(null);
+    }
+  };
   useEffect(() => {
-    const fetchPost = async (id) => {
-      try {
-        const aux = await postService.getPost(id);
-        console.log(aux.user.profilePicture);
-        setPost(aux);
-      } catch (error) {
-        console.log(error);
-        setPost(null);
-      }
-    };
     fetchPost(id);
   }, [id]);
   return (
@@ -121,94 +137,46 @@ const FullPost = (props) => {
           </div>
         </div>
       </div>
-
-      <div className="container shadow p-5 my-3 bg-white text-black rounded-lg shadow-sm p-3">
-        <form>
-          <div className="form-group">
-            <label>
-              <h1>Adauga un comentariu</h1>
-            </label>
-            <input
-              type="email"
-              class="form-control"
-              id="exampleInputEmail1"
-              aria-describedby="Comentariu"
-              placeholder="Comentariu"
-            ></input>
-            <small id="emailHelp" class="form-text text-muted">
-              Te rugam sa ai un limbaj adecvat
-            </small>
-          </div>
-        </form>
-      </div>
-
-      <div className="container shadow p-5 my-3 bg-white text-black rounded-lg shadow-sm p-3">
-        <div class="row">
-          <div class="item  border-bottom">
-            <h3>Nume Comentator</h3>
-            <p>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s, when an unknown printer took a galley of
-              type and scrambled it to make a type specimen book. It has
-              survived not only five centuries, but also the leap into
-              electronic typesetting, remaining essentially unchanged. It was
-              popularised in the 1960s with the release of Letraset sheets
-              containing Lorem Ipsum passages, and more recently with desktop
-              publishing software like Aldus PageMaker including versions of
-              Lorem Ipsum.
-            </p>
-          </div>
-
-          <div class="item border-bottom">
-            <h3>Nume Comentator</h3>
-            <p>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s, when an unknown printer took a galley of
-              type and scrambled it to make a type specimen book. It has
-              survived not only five centuries, but also the leap into
-              electronic typesetting, remaining essentially unchanged. It was
-              popularised in the 1960s with the release of Letraset sheets
-              containing Lorem Ipsum passages, and more recently with desktop
-              publishing software like Aldus PageMaker including versions of
-              Lorem Ipsum.
-            </p>
-          </div>
-
-          <div class="item border-bottom">
-            <h3>Nume Comentator</h3>
-            <p>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s, when an unknown printer took a galley of
-              type and scrambled it to make a type specimen book. It has
-              survived not only five centuries, but also the leap into
-              electronic typesetting, remaining essentially unchanged. It was
-              popularised in the 1960s with the release of Letraset sheets
-              containing Lorem Ipsum passages, and more recently with desktop
-              publishing software like Aldus PageMaker including versions of
-              Lorem Ipsum.
-            </p>
-          </div>
-
-          <div class="item  border-bottom">
-            <h3>Nume Comentator</h3>
-            <p>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s, when an unknown printer took a galley of
-              type and scrambled it to make a type specimen book. It has
-              survived not only five centuries, but also the leap into
-              electronic typesetting, remaining essentially unchanged. It was
-              popularised in the 1960s with the release of Letraset sheets
-              containing Lorem Ipsum passages, and more recently with desktop
-              publishing software like Aldus PageMaker including versions of
-              Lorem Ipsum.
-            </p>
+      {isAuthenticated ? (
+        <div className="container shadow p-5 my-3 bg-white text-black rounded-lg shadow-sm p-3">
+          <form onSubmit={onSubmit}>
+            <div className="form-group">
+              <label>
+                <h1>Adauga un comentariu</h1>
+              </label>
+              <input
+                onChange={onChange}
+                type="text"
+                class="form-control"
+                required
+                name="body"
+                value={body}
+                aria-describedby="Comentariu"
+                placeholder="Comentariu"
+              ></input>
+              <small id="emailHelp" class="form-text text-muted">
+                Te rugam sa ai un limbaj adecvat
+              </small>
+              <div>
+                <input type="submit" class="btn btn-primary" value="Trimite" />
+              </div>
+            </div>
+          </form>
+        </div>
+      ) : (
+        <React.Fragment />
+      )}
+      {post?.comments?.map((comment) => (
+        <div className="container shadow p-5 my-3 bg-white text-black rounded-lg shadow-sm p-3">
+          <div className="row">
+            <div className="p-1">
+              <h4>{comment?.user?.name}</h4>
+              <p>{comment.body}</p>
+            </div>
+            <div className="ml-auto p-1">{formatDate(comment?.createdAt)}</div>
           </div>
         </div>
-      </div>
+      ))}
     </React.Fragment>
   );
 };

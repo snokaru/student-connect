@@ -26,15 +26,16 @@ const getPost = async (id) => {
 const deletePost = async (id) => {
   await axios.delete(`${BASE_URL}${BASE_RESOURCE_ROUTE}/${id}`);
 };
-const manageComment = async (id, formData,action) => {
+const manageComment = async (id, formData, action) => {
   let config = {
     headers: {
       action: action,
-    }
-  }
+    },
+  };
   const res = await axios.put(
-    `${BASE_URL}${BASE_RESOURCE_ROUTE}/${id}`,
-    formData,config
+    `${BASE_URL}${BASE_RESOURCE_ROUTE}/${id}/comment`,
+    formData,
+    config
   );
   return res.data;
 };

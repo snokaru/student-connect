@@ -16,3 +16,4 @@ export const CLEAR_FILTERS = "CLEAR_FILTERS";
 export const ADD_POST = "ADD_POST";
 export const POST_ERROR = "POST_ERROR";
 export const DELETE_POST = "DELETE_POST";
+export const MODIFY_POST = "MODIFY_POST";

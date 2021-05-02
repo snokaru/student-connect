@@ -9,6 +9,7 @@ import {
   DELETE_POST,
   ADD_POST,
   POST_ERROR,
+  MODIFY_POST,
 } from "../../types";
 const PostState = (props) => {
   const initialState = {
@@ -41,8 +42,15 @@ const PostState = (props) => {
   const deletePost = async (id) => {
     try {
       await postService.deletePost(id);
-      console.log("delete post");
       dispatch({ type: DELETE_POST, payload: id });
+    } catch (error) {
+      dispatch({ type: POST_ERROR, payload: error.error });
+    }
+  };
+  const manageComment = async (id, formData, action) => {
+    try {
+      const post = await postService.manageComment(id, formData, action);
+      dispatch({ type: MODIFY_POST, payload: post });
     } catch (error) {
       dispatch({ type: POST_ERROR, payload: error.error });
     }
@@ -56,6 +64,7 @@ const PostState = (props) => {
         filteredPosts: state.filteredPosts,
         createPost,
         deletePost,
+        manageComment
       }}
     >
       {props.children}
