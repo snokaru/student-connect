@@ -3,6 +3,7 @@ import "./searchbar.css";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
+import FiltreModal from "./FiltreModal";
 
 export const SearchBar = () => {
   const [searchFilter, setSearchFilter] = useState();
@@ -12,7 +13,7 @@ export const SearchBar = () => {
       <div className="container-sm ">
         <form className="example">
           <div className="row justify-content-md-center">
-            <button className="col-2">Filtre</button>
+            <button className="col-2" type="button"><FiltreModal/></button>
             <input
               className="col-7"
               type="text"

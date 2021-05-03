@@ -2,7 +2,7 @@ import { BASE_URL } from "../utils/config";
 import axios from "axios";
 
 const updateToken = async (token) => {
-    if (token == null) {
+    if (token === null) {
         console.log("REMOVING TOKEN")
     }
     if (token) {

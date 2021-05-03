@@ -1,6 +1,6 @@
 import React from 'react';
 import { Col } from 'react-bootstrap';
-import Logo from '../../visuals/Logo.png'
+import Logo from '../../visuals/Logo2.png';
 import Footer from './Footer';
 import Style from './info-pages.module.css';
 import classes from "./footer.module.css";

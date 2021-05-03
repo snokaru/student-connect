@@ -1,39 +1,40 @@
-import React from 'react'
+import React, { Fragment, useState} from 'react'
+import { Button } from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
+
 
 export const FiltreModal = () => {
-    return (
-        <div>
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  Launch demo modal
-     </button>
-        <div class="modal" tabindex="-1">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">Modal title</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              <div class="row">
-                  <div class="col">
 
-                  </div>
-                  <div class="col">
+  const [show, setShow] = useState(false);
 
-                  </div>
-                  <div class="col">
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  return (
 
-                  </div> 
 
-              </div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      </div>
-    )
+    <>
+    <div variant="primary" onClick={handleShow}>
+      Filtre
+    </div>
+
+    <Modal show={show} onHide={handleClose}>
+      <Modal.Header closeButton>
+        <Modal.Title>Modal heading</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        Filtre Col1
+      </Modal.Body>
+      <Modal.Footer>
+        <Button variant="secondary" onClick={handleClose}>
+          Close
+        </Button>
+        <Button variant="primary" onClick={handleClose}>
+          Save Changes
+        </Button>
+      </Modal.Footer>
+    </Modal>
+  </>
+  )
 }
+
+export default FiltreModal;
