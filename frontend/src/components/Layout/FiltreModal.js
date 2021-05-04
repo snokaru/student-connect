@@ -28,15 +28,51 @@ export const FiltreModal = () => {
               <h1>Oras</h1>
               <p>
                 <input type="radio" id="test1" name="radio-group"></input>
-                <label for="test1">Apple</label>
+                <label for="test1">Timisoara</label>
               </p>
               <p>
                 <input type="radio" id="test2" name="radio-group"></input>
-                <label for="test2">Peach</label>
+                <label for="test2">Bucuresti</label>
               </p>
               <p>
                 <input type="radio" id="test3" name="radio-group"></input>
-                <label for="test3">Orange</label>
+                <label for="test3">Cluj</label>
+              </p>
+              <p>
+                <input type="radio" id="test31" name="radio-group"></input>
+                <label for="test31">Iasi</label>
+              </p>
+              <p>
+                <input type="radio" id="test32" name="radio-group"></input>
+                <label for="test32">Bacau</label>
+              </p>
+              <p>
+                <input type="radio" id="test33" name="radio-group"></input>
+                <label for="test33">Constanta</label>
+              </p>
+              <p>
+                <input type="radio" id="test34" name="radio-group"></input>
+                <label for="test34">Craiova</label>
+              </p>
+              <p>
+                <input type="radio" id="test35" name="radio-group"></input>
+                <label for="test35">Brașov</label>
+              </p>
+              <p>
+                <input type="radio" id="test36" name="radio-group"></input>
+                <label for="test36">Brașov</label>
+              </p>
+              <p>
+                <input type="radio" id="test37" name="radio-group"></input>
+                <label for="test37">Galați</label>
+              </p>
+              <p>
+                <input type="radio" id="test38" name="radio-group"></input>
+                <label for="test38">Galați</label>
+              </p>
+              <p>
+                <input type="radio" id="test39" name="radio-group"></input>
+                <label for="test39">Ploiești</label>
               </p>
             </div>
             <div class="col-3">
