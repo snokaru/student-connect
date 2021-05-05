@@ -15,6 +15,7 @@ import Searchbar from './components/Layout/SearchBar';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import FullPost from "./components/Pages/FullPost";
 import { FiltreModal } from "./components/Layout/FiltreModal";
+import Welcome from "./components/Pages/Welcome";
 
 
 const App = () => {
@@ -46,8 +47,8 @@ const App = () => {
               <Route exact path="/spinner">
                 <Spinner />
               </Route>
-              <Route exact path="/modal">
-              <FiltreModal/>
+              <Route exact path="/welcome">
+              <Welcome/>
               </Route>
             </Switch>
           </UserState>

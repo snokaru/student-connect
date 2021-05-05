@@ -10,6 +10,10 @@ export const FiltreModal = () => {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const onClick = () =>{
+    
+  }
   return (
 
 
