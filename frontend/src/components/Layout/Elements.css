@@ -48,3 +48,9 @@
     -webkit-transform: scale(1);
     transform: scale(1);
 }
+
+.anyClass {
+    height:250px;
+    width:120px;
+    overflow-y: scroll;
+  }

@@ -20,12 +20,13 @@ export const FiltreModal = () => {
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
+          <Modal.Title>Filtre Cautare</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <div class="row text-center">
+          <div class="row ">
             <div class="col-3">
               <h1>Oras</h1>
+              <div class="anyClass">
               <p>
                 <input type="radio" id="test1" name="radio-group"></input>
                 <label for="test1">Timisoara</label>
@@ -68,47 +69,48 @@ export const FiltreModal = () => {
               </p>
               <p>
                 <input type="radio" id="test38" name="radio-group"></input>
-                <label for="test38">Galați</label>
+                <label for="test38">Alba Iulia</label>
               </p>
               <p>
                 <input type="radio" id="test39" name="radio-group"></input>
                 <label for="test39">Ploiești</label>
               </p>
+             </div>
             </div>
-            <div class="col-3">
-              <h1>Exp</h1>
+            <div class="col-5">
+              <h1>Experienta</h1>
               <p>
                 <input type="radio" id="test4" name="radio-group" ></input>
-                <label for="test4">Apple</label>
+                <label for="test4">Senior</label>
               </p>
               <p>
                 <input type="radio" id="test5" name="radio-group"></input>
-                <label for="test5">Peach</label>
+                <label for="test5">Junior</label>
               </p>
               <p>
                 <input type="radio" id="test6" name="radio-group"></input>
-                <label for="test6">Orange</label>
+                <label for="test6">Fara Experienta</label>
               </p>
             </div>
-            <div class="col-3">
+            <div class="col-1">
               <h1>Tip</h1>
               <p>
                 <input type="radio" id="test7" name="radio-group"></input>
-                <label for="test7">Apple</label>
+                <label for="test7">Hibrid</label>
               </p>
               <p>
                 <input type="radio" id="test8" name="radio-group"></input>
-                <label for="test8">Peach</label>
+                <label for="test8">Remote</label>
               </p>
               <p>
                 <input type="radio" id="test9" name="radio-group"></input>
-                <label for="test9">Orange</label>
+                <label for="test9">La birou</label>
               </p>
             </div>
           </div>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
+          <Button variant="danger" onClick={handleClose}>
             Close
         </Button>
           <Button variant="primary" onClick={handleClose}>

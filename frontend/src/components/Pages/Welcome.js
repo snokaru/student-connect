@@ -1,9 +1,11 @@
 import React from 'react'
 
-export const About = () => {
+export const Welcome = () => {
     return (
         <div>
             
         </div>
     )
 }
+
+export default Welcome;
