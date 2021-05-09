@@ -26,7 +26,7 @@ class QueryBuilder {
         return this;
     }
 
-    find(searchedValue) {
+    search(searchedValue) {
         this.baseUrl += `&fuzzy=${searchedValue}`;
         return this;
     }

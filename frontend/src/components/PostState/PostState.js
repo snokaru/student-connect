@@ -4,8 +4,10 @@ import PostReducer from "./postReducer";
 import postService from "../../services/post";
 import {
   POSTS_LOADED,
-  SET_FILTERS,
+  ADD_FILTER,
+  REMOVE_FILTER,
   CLEAR_FILTERS,
+  SET_SEARCH,
   DELETE_POST,
   ADD_POST,
   POST_ERROR,
@@ -16,21 +18,33 @@ const PostState = (props) => {
     currentPost: null,
     filters: [],
     posts: [],
-    filteredPosts: [],
+    search: null,
     error: null,
   };
   const [state, dispatch] = useReducer(PostReducer, initialState);
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const receivedPosts = await postService.makeQuery().exec();
-        dispatch({ type: POSTS_LOADED, payload: receivedPosts });
-      } catch (error) {
-        dispatch({ type: POST_ERROR, payload: error.error });
+  const fetchData = async () => {
+    console.log("IN FETCH DATA")
+    try {
+      const query = postService.makeQuery();
+      if (state.search) {
+        query.search(state.search);
       }
-    };
+      for (let filter of state.filters) {
+        query.filter(filter.field, filter.value)
+      }
+      console.log(query.baseUrl)
+      const posts = await query.exec();
+      console.log(posts);
+      dispatch({ type: POSTS_LOADED, payload: posts });
+    } catch (error) {
+      console.log("IT ERRORED>>>" + error)
+      dispatch({ type: POST_ERROR, payload: error.error });
+    }
+  };
+  useEffect(() => {
+    console.log("REFETCHING")
     fetchData();
-  }, []);
+  }, [state.search]);
   const createPost = async (formData) => {
     try {
       const post = await postService.createPost(formData);
@@ -55,16 +69,19 @@ const PostState = (props) => {
       dispatch({ type: POST_ERROR, payload: error.error });
     }
   };
+
+  const setSearch = async (searchText) => {
+    console.log("SETTING SEARCH FIELD! SHOULD TRIGGER RERENDER");
+    dispatch({ type: SET_SEARCH, payload: searchText })
+  }
   return (
     <PostContext.Provider
       value={{
-        currentPost: state.currentPost,
-        filters: state.filters,
-        posts: state.posts,
-        filteredPosts: state.filteredPosts,
+        ...state,
         createPost,
         deletePost,
-        manageComment
+        manageComment,
+        setSearch,
       }}
     >
       {props.children}

@@ -1,6 +1,8 @@
 import {
   POSTS_LOADED,
-  SET_FILTERS,
+  SET_SEARCH,
+  ADD_FILTER,
+  REMOVE_FILTER,
   CLEAR_FILTERS,
   ADD_POST,
   POST_ERROR,
@@ -29,6 +31,11 @@ export default function (state, action) {
           }),
         ],
       };
+    case SET_SEARCH: 
+      return {
+        ...state,
+        search: action.payload,
+      }
     default:
       return state;
   }
