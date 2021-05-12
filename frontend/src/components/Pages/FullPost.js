@@ -167,15 +167,16 @@ const FullPost = (props) => {
               <label>
                 <h1>Adauga un comentariu</h1>
               </label>
-              <input
+              <textarea
                 onChange={onChange}
                 type="text"
                 className="form-control"
                 required
+                row="4"
                 name="body"
                 value={body}
                 placeholder="Comentariu"
-              ></input>
+              ></textarea>
               <small id="emailHelp" className="form-text text-muted">
                 Te rugam sa ai un limbaj adecvat
               </small>
@@ -195,11 +196,13 @@ const FullPost = (props) => {
       {post?.comments?.map((comment) => (
         <div
           key={comment.id}
-          className="container shadow p-5 my-3 bg-white text-black rounded-lg shadow-sm p-3"
+          className="container shadow p-4 my-3 bg-white text-black rounded-lg shadow-sm p-3"
         >
           <div className="row">
             <div className="p-1">
-              <h5>{comment?.user?.name}</h5>
+              <Link to={`/users/${comment?.user?.id}`}>
+                <h5>{comment?.user?.name}</h5>
+              </Link>
               <p>
                 {formatDate(comment?.createdAt)}
                 {comment?.updated ? ` (modificat la ${comment?.updated})` : ""}
@@ -210,7 +213,7 @@ const FullPost = (props) => {
                 <span>
                   <button
                     onClick={() => {
-                      setEdit({ id: comment?.id, bool: true });
+                      setEdit({ id: comment?.id, bool: edit.bool?false:true });
                       setupdatedComment({
                         user: user?.id,
                         body: comment?.body,
@@ -238,20 +241,22 @@ const FullPost = (props) => {
             ) : null}
           </div>
           <div className="row" style={{ backgroundColor: "#efeff0" }}>
-            <div className="p-1">
+            <div className="m-1">
               {edit.bool && edit.id === comment.id ? (
                 <form onSubmit={onSubmit2}>
                   <div className="form-group">
-                    <input
+                    <textarea
                       onChange={onChange2}
                       type="text"
-                      className="form-control"
+                      row="1"
+                      cols="160"
+                      className="form-control my-1"
                       name="body"
                       defaultValue={comment.body}
-                    ></input>
+                    ></textarea>
                     <input
                       type="submit"
-                      className="btn btn-primary"
+                      className="btn btn-primary my-1"
                       value="Modifica"
                     />
                   </div>
