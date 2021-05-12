@@ -11,9 +11,7 @@ const Job = (props) => {
   const postContext = useContext(PostContext);
   const { user } = userContext;
   const { deletePost } = postContext;
-  const del = () => {
-    deletePost(props.id);
-  };
+
   const formatDate = (date) => {
     if (!date) {
       return "Not set";
@@ -57,9 +55,9 @@ const Job = (props) => {
               {user?.id === props.user.id ? (
                 <span>
                   <button
-                    onClick={del}
+                    onClick={() => deletePost(props.id)}
                     type="button"
-                    className="btn btn-outline-primary"
+                    className="btn btn-outline-danger"
                   >
                     <FontAwesomeIcon icon={faTrash} />
                   </button>

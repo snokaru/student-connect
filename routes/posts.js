@@ -12,13 +12,8 @@ postsRouter.post(
   check("programmingLang").not().isEmpty(),
   check("workPlace").not().isEmpty(),
   async (req, res) => {
-    const {
-      title,
-      description,
-      programmingLang,
-      workHours,
-      workPlace,
-    } = req.body;
+    const { title, description, programmingLang, workHours, workPlace } =
+      req.body;
 
     const validationErrors = validationResult(req);
     if (!validationErrors.isEmpty()) {
@@ -80,12 +75,16 @@ postsRouter.put("/:id/comment", async (req, res) => {
     const action = req.header("action");
     let comment = null;
     let post = null;
+    let user,
+      body,
+      id = null;
     switch (action) {
       case "add":
-        const { user, body } = req.body;
+        user = req.body.user;
+        body = req.body.body;
         comment = new Comment({ user, body });
         await comment.save();
-        let commId = comment.id;
+        const commId = comment.id;
         post = await Post.findOneAndUpdate(
           { _id: req.params.id },
           { $push: { comments: commId } },
@@ -95,13 +94,23 @@ postsRouter.put("/:id/comment", async (req, res) => {
           { path: "comments", populate: { path: "user" } },
         ]);
       case "delete":
-        const { id } = req.body;
+        id = req.body;
         await Comment.findByIdAndRemove(id);
         post = await Post.findOneAndUpdate(
           { _id: req.params.id },
           { $pull: { comments: id } },
           { new: true }
         ).populate([
+          { path: "user" },
+          { path: "comments", populate: { path: "user" } },
+        ]);
+      case "modify":
+        id = req.body.id;
+        user = req.body.user;
+        body = req.body.body;
+        const updated=req.body.updated
+        await Comment.findByIdAndUpdate(id, { user: user, body: body, updated:updated });
+        post = await Post.findById(req.params.id).populate([
           { path: "user" },
           { path: "comments", populate: { path: "user" } },
         ]);
@@ -119,4 +128,5 @@ postsRouter.delete("/:id", async (req, res) => {
     res.status(404).json({ error: "cant delete post" });
   }
 });
+
 module.exports = postsRouter;
