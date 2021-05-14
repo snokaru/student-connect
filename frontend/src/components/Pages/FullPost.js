@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
+import socketIOClient from "socket.io-client";
 import "./FullPost.css";
 import { faFacebookF, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 import {
@@ -76,6 +77,11 @@ const FullPost = (props) => {
     }
   };
   useEffect(() => {
+    const socket = socketIOClient("http://localhost:3005");
+    socket.on("RefreshPage", () => {
+      fetchPost(id);
+      console.log("emis de frontend");
+    });
     fetchPost(id);
   }, [id]);
   return (

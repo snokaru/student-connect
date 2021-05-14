@@ -2,12 +2,20 @@ const express = require("express");
 const cors = require("cors");
 const fileUpload = require("express-fileupload");
 const mongoose = require("mongoose");
-
 const logger = require("./utils/logger");
 const config = require("./utils/config");
 
 const app = express();
 
+const server = require("http").createServer(app);
+const io = require("socket.io")(server);
+io.on("connection", (socket) => {
+  socket.on("CommentaryWatch", () => {
+    console.log("emis de backend");
+    socket.emit("RefreshPage");
+  });
+});
+server.listen(3005);
 mongoose
   .connect(config.MONGODB_URI, {
     useNewUrlParser: true,
@@ -18,7 +26,6 @@ mongoose
   .then(() => logger.info("Connected to MongoDB"));
 
 app.use(cors());
-
 app.use(
   fileUpload({
     createParentPath: true,
