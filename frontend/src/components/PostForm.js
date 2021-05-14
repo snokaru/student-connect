@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
 import PostContext from "./PostState/postContext";
+import { locations, languages } from "../placeholders";
 const PostForm = () => {
   let history = useHistory();
   const postContext = useContext(PostContext);
@@ -71,30 +72,25 @@ const PostForm = () => {
                 onChange={onChange}
                 name="programmingLang"
               >
-                <option>C/C++</option>
-                <option>Python</option>
-                <option>Java</option>
-                <option>Javascript</option>
-                <option>C#</option>
-                <option>Swift</option>
-                <option>Golang</option>
-                <option>Typescript</option>
-                <option>PHP</option>
-                <option>SQL</option>
-                <option>Ruby</option>
+                {languages.map((language) => (
+                  <option>{language}</option>
+                ))}
               </select>
             </div>
           </div>
           <div className="form-group">
             <label className="control-label">Work place</label>
-            <input
-              onChange={onChange}
-              type="text"
-              className="form-control"
-              name="workPlace"
-              required
-              placeholder="Work place"
-            />
+            <div>
+              <select
+                className="form-control"
+                onChange={onChange}
+                name="workPlace"
+              >
+                {locations.map((location) => (
+                  <option>{location}</option>
+                ))}
+              </select>
+            </div>
           </div>
           <div>
             <input type="submit" className="btn btn-primary" value="Submit" />

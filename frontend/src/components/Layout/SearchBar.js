@@ -10,21 +10,28 @@ export const SearchBar = () => {
   const [searchForm, setSearchForm] = useState("");
   const { setSearch } = useContext(PostContext);
 
-  const submitForm = e => {
-    console.log("Submitting...")
+  const submitForm = (e) => {
+    console.log("Submitting...");
     e.preventDefault();
-    setSearch(searchForm)
-  }
-
+    setSearch(searchForm);
+  };
+  const clear = () => {
+    setSearch("");
+    setSearchForm("");
+  };
   return (
     <React.Fragment>
       <div className="container-sm ">
         <form className="example" onSubmit={submitForm}>
           <div className="row justify-content-md-center">
-            <button className="col-2" type="button"><FiltreModal/></button>
+            <button className="col-2" type="button">
+              <FiltreModal />
+            </button>
             <input
               value={searchForm}
-              onChange={e => setSearchForm(e.target.value)}
+              onChange={(e) => {
+                e.target.value === "" ? clear() : setSearchForm(e.target.value);
+              }}
               className="col-7"
               type="text"
               placeholder="Cauta.."

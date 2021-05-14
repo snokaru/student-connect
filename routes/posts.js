@@ -3,7 +3,6 @@ const { check, validationResult } = require("express-validator");
 const Post = require("../models/post");
 const Comment = require("../models/comment");
 const middleware = require("../utils/middleware");
-const logger = require("../utils/logger");
 
 postsRouter.post(
   "/",
@@ -94,7 +93,8 @@ postsRouter.put("/:id/comment", async (req, res) => {
           { path: "comments", populate: { path: "user" } },
         ]);
       case "delete":
-        id = req.body;
+        id = req.body.id;
+
         await Comment.findByIdAndRemove(id);
         post = await Post.findOneAndUpdate(
           { _id: req.params.id },
@@ -108,8 +108,12 @@ postsRouter.put("/:id/comment", async (req, res) => {
         id = req.body.id;
         user = req.body.user;
         body = req.body.body;
-        const updated=req.body.updated
-        await Comment.findByIdAndUpdate(id, { user: user, body: body, updated:updated });
+        const updated = req.body.updated;
+        await Comment.findByIdAndUpdate(id, {
+          user: user,
+          body: body,
+          updated: updated,
+        });
         post = await Post.findById(req.params.id).populate([
           { path: "user" },
           { path: "comments", populate: { path: "user" } },

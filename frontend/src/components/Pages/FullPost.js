@@ -107,7 +107,7 @@ const FullPost = (props) => {
 
       <div className="container p-5 my-3 bg-white text-black rounded-lg shadow ">
         <div className="row justify-content-space-around ">
-          <div className="col-sm-6 justify-content-between align-self-center">
+          <div className="col-sm-6 justify-content-between align-self-left">
             <div className="item">
               <h3>Descriere</h3>
               <p>{post?.description ? post.description : ""}</p>
@@ -213,7 +213,10 @@ const FullPost = (props) => {
                 <span>
                   <button
                     onClick={() => {
-                      setEdit({ id: comment?.id, bool: edit.bool?false:true });
+                      setEdit({
+                        id: comment?.id,
+                        bool: edit.bool ? false : true,
+                      });
                       setupdatedComment({
                         user: user?.id,
                         body: comment?.body,
