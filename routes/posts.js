@@ -3,7 +3,6 @@ const { check, validationResult } = require("express-validator");
 const Post = require("../models/post");
 const Comment = require("../models/comment");
 const middleware = require("../utils/middleware");
-const socket = require("socket.io");
 postsRouter.post(
   "/",
   middleware.tokenExtractor,
@@ -119,7 +118,6 @@ postsRouter.put("/:id/comment", async (req, res) => {
           { path: "comments", populate: { path: "user" } },
         ]);
     }
-    socket.emit("CommentaryWatch");
     res.json(post);
   } catch (error) {
     res.status(404).json({ error: "post or comment not found" });

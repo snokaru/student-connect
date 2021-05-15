@@ -78,9 +78,9 @@ const FullPost = (props) => {
   };
   useEffect(() => {
     const socket = socketIOClient("http://localhost:3005");
-    socket.on("RefreshPage", () => {
+    socket.on("RefreshPage", (msg) => {
       fetchPost(id);
-      console.log("emis de frontend");
+      console.log(msg);
     });
     fetchPost(id);
   }, [id]);
