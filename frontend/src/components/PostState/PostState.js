@@ -23,26 +23,26 @@ const PostState = (props) => {
   };
   const [state, dispatch] = useReducer(PostReducer, initialState);
   const fetchData = async () => {
-    console.log("IN FETCH DATA")
+    console.log("IN FETCH DATA");
     try {
       const query = postService.makeQuery();
       if (state.search) {
         query.search(state.search);
       }
       for (let filter of state.filters) {
-        query.filter(filter.field, filter.value)
+        query.filter(filter.field, filter.value);
       }
-      console.log(query.baseUrl)
+      console.log(query.baseUrl);
       const posts = await query.exec();
       console.log(posts);
       dispatch({ type: POSTS_LOADED, payload: posts });
     } catch (error) {
-      console.log("IT ERRORED>>>" + error)
-      dispatch({ type: POST_ERROR, payload: error.error });
+      console.log("IT ERRORED>>>" + error);
+      dispatch({ type: POST_ERROR, payload: error.response.data.msg });
     }
   };
   useEffect(() => {
-    console.log("REFETCHING")
+    console.log("REFETCHING");
     fetchData();
   }, [state.search]);
   const createPost = async (formData) => {
@@ -50,7 +50,7 @@ const PostState = (props) => {
       const post = await postService.createPost(formData);
       dispatch({ type: ADD_POST, payload: post });
     } catch (error) {
-      dispatch({ type: POST_ERROR, payload: error.error });
+      dispatch({ type: POST_ERROR, payload: error.response.data.msg });
     }
   };
   const deletePost = async (id) => {
@@ -58,7 +58,7 @@ const PostState = (props) => {
       await postService.deletePost(id);
       dispatch({ type: DELETE_POST, payload: id });
     } catch (error) {
-      dispatch({ type: POST_ERROR, payload: error.error });
+      dispatch({ type: POST_ERROR, payload: error.response.data.msg });
     }
   };
   const manageComment = async (id, formData, action) => {
@@ -66,14 +66,14 @@ const PostState = (props) => {
       const post = await postService.manageComment(id, formData, action);
       dispatch({ type: MODIFY_POST, payload: post });
     } catch (error) {
-      dispatch({ type: POST_ERROR, payload: error.error });
+      dispatch({ type: POST_ERROR, payload: error.response.data.msg });
     }
   };
 
   const setSearch = async (searchText) => {
     console.log("SETTING SEARCH FIELD! SHOULD TRIGGER RERENDER");
-    dispatch({ type: SET_SEARCH, payload: searchText })
-  }
+    dispatch({ type: SET_SEARCH, payload: searchText });
+  };
   return (
     <PostContext.Provider
       value={{

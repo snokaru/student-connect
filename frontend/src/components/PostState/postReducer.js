@@ -12,9 +12,9 @@ import {
 export default function (state, action) {
   switch (action.type) {
     case ADD_POST:
-      return { ...state, posts: [...state.posts, action.payload] };
+      return { ...state, posts: [action.payload, ...state.posts] };
     case POSTS_LOADED:
-      return { ...state, posts: action.payload };
+      return { ...state, posts: action.payload.reverse() };
     case POST_ERROR:
       return { ...state, error: action.payload };
     case DELETE_POST:
@@ -31,11 +31,11 @@ export default function (state, action) {
           }),
         ],
       };
-    case SET_SEARCH: 
+    case SET_SEARCH:
       return {
         ...state,
         search: action.payload,
-      }
+      };
     default:
       return state;
   }

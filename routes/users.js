@@ -66,12 +66,13 @@ usersRouter.post(
       }
       //Token
       const payload = { user: { id: user.id } };
-      const token = jwt.sign(payload, config.JWT_SECRET, { expiresIn: config.JWT_EXPIRE_TIME });
+      const token = jwt.sign(payload, config.JWT_SECRET, {
+        expiresIn: config.JWT_EXPIRE_TIME,
+      });
 
       res.json({ token: token });
     } catch (error) {
-      logger.error(error.message);
-      res.status(500).send({ error: "Error registering user!" });
+      return res.status(400).json({ msg: "User already exists!" });
     }
   }
 );
@@ -84,7 +85,7 @@ usersRouter.get("/:id", async (request, response, next) => {
     response.json(searchedUser);
   } catch (error) {
     logger.error(error.message);
-    response.status(500).send({ error: "No such user found!" });
+    response.status(500).json({ msg: "No such user found!" });
   }
 });
 
@@ -100,9 +101,7 @@ usersRouter.put(
     const requesterId = request.user.id;
 
     if (requestId !== requesterId)
-      response
-        .status(401)
-        .json({ error: "only make changes to your own user!" });
+      response.status(401).json({ msg: "only make changes to your own user!" });
 
     next();
   },

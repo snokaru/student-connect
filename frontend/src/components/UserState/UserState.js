@@ -41,7 +41,8 @@ const UserState = (props) => {
       dispatch({ type: REGISTER_SUCCES, payload: token });
       load();
     } catch (error) {
-      dispatch({ type: REGISTER_FAIL, payload: error.error });
+      
+      dispatch({ type: REGISTER_FAIL, payload: error.response.data.msg });
     }
   };
 
@@ -51,7 +52,8 @@ const UserState = (props) => {
       dispatch({ type: LOGIN_SUCCES, payload: token });
       load();
     } catch (error) {
-      dispatch({ type: LOGIN_FAIL, payload: error.error });
+     
+      dispatch({ type: LOGIN_FAIL, payload: error.response.data.msg });
     }
   };
 
@@ -66,7 +68,7 @@ const UserState = (props) => {
       const updatedUser = await authService.update(formData);
       dispatch({ type: USER_LOADED, payload: updatedUser });
     } catch (error) {
-      dispatch({ type: LOGIN_FAIL, payload: error.error });
+      dispatch({ type: LOGIN_FAIL, payload: error.response.data.msg });
     }
   };
   const load = async () => {
@@ -76,7 +78,7 @@ const UserState = (props) => {
     } catch (error) {
       console.log(error);
       logout();
-      dispatch({ type: LOGIN_FAIL, payload: error.error });
+      dispatch({ type: LOGIN_FAIL, payload: error.response.data.msg });
     }
   };
 

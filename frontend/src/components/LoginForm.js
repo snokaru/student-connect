@@ -4,11 +4,10 @@ import UserContext from "./UserState/userContext";
 import Footer1 from "./Layout/Footer";
 import classes from "../components/Layout/footer.module.css";
 
-
 const LoginForm = (props) => {
   let history = useHistory();
   const userContext = useContext(UserContext);
-  const { isAuthenticated, login } = userContext;
+  const { isAuthenticated, login, error } = userContext;
   useEffect(() => {
     if (isAuthenticated === true) {
       history.push("/");
@@ -30,50 +29,57 @@ const LoginForm = (props) => {
   return (
     <React.Fragment>
       <div className={classes.body}>
-      <div className="w-25 my-4 p-3 card container">
-        <h1 className="text-primary ">Log In</h1>
-        <form onSubmit={onSubmit}>
-          <div className="form-group">
-            <label className="control-label" htmlFor="email">
-              Email
-            </label>
-            <input
-              onChange={onChange}
-              type="email"
-              className="form-control"
-              name="email"
-              value={email}
-              required
-              placeholder="Email"
-            />
-          </div>
-          <div className="form-group">
-            <label className="control-label" htmlFor="password">
-              Password
-            </label>
-            <div>
+        <div className="w-25 my-4 p-3 card container">
+          <h1 className="text-primary ">Log In</h1>
+          <form onSubmit={onSubmit}>
+            <div className="form-group">
+              <label className="control-label" htmlFor="email">
+                Email
+              </label>
               <input
                 onChange={onChange}
-                type="password"
+                type="email"
                 className="form-control"
-                name="password"
-                value={password}
+                name="email"
+                value={email}
                 required
-                placeholder="Password"
+                placeholder="Email"
               />
             </div>
-          </div>
-          <div>
-            <input type="submit" class="btn btn-primary" value="Submit" />
-          </div>
-          <p className="mt-2 text-muted">
-            Need an account? <Link to="/register">Register</Link>
-          </p>
-        </form>
-      </div>
-     <div className={classes.footer}><Footer1/></div>
-      </div>
+            <div className="form-group">
+              <label className="control-label" htmlFor="password">
+                Password
+              </label>
+              <div>
+                <input
+                  onChange={onChange}
+                  type="password"
+                  className="form-control"
+                  name="password"
+                  value={password}
+                  required
+                  placeholder="Password"
+                />
+              </div>
+            </div>
+            <div>
+              <input type="submit" className="btn btn-primary" value="Submit" />
+            </div>
+            {error ? (
+              <p className="mt-2 alert alert-danger" role="alert">
+                {error}
+              </p>
+            ) : null}
 
+            <p className="mt-2 text-muted">
+              Need an account? <Link to="/register">Register</Link>
+            </p>
+          </form>
+        </div>
+        <div className={classes.footer}>
+          <Footer1 />
+        </div>
+      </div>
     </React.Fragment>
   );
 };

@@ -16,7 +16,7 @@ loginRouter.get("/", middleware.tokenExtractor, async (req, res) => {
     logger.info(user);
     res.json(user);
   } catch {
-    res.status(500).json({ error: "cannot find user" });
+    res.status(500).json({ msg: "Cannot find user" });
   }
 });
 
@@ -37,14 +37,14 @@ loginRouter.post(
       const passwordCorrect = await bcrypt.compare(password, user.password);
 
       if (!passwordCorrect) {
-        res.status(400).json({ error: "wrong password" });
+        return res.status(400).json({ msg: "Invalid password!" });
       }
 
       const payload = { user: { id: user.id } };
       const token = jwt.sign(payload, config.JWT_SECRET, { expiresIn: "1h" });
       res.json({ token: token });
     } else {
-      res.status(404).json({ error: "email does not exist" });
+      return res.status(400).json({ msg: "Invalid email!" });
     }
   }
 );

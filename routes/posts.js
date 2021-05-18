@@ -34,7 +34,7 @@ postsRouter.post(
           res.json(post);
         });
     } catch (error) {
-      res.status(500).send({ error: "Error posting!" });
+      res.status(500).send({ msg: "Error posting!" });
     }
   }
 );
@@ -65,7 +65,7 @@ postsRouter.get("/:id", async (req, res) => {
     ]);
     res.json(post);
   } catch (error) {
-    res.status(404).json({ error: "no such post found" });
+    res.status(404).json({ msg: "no such post found" });
   }
 });
 postsRouter.put("/:id/comment", async (req, res) => {
@@ -120,7 +120,7 @@ postsRouter.put("/:id/comment", async (req, res) => {
     }
     res.json(post);
   } catch (error) {
-    res.status(404).json({ error: "post or comment not found" });
+    res.status(404).json({ msg: "post or comment not found" });
   }
 });
 postsRouter.delete("/:id", async (req, res) => {
@@ -128,7 +128,7 @@ postsRouter.delete("/:id", async (req, res) => {
     await Post.findByIdAndRemove(req.params.id);
     res.status(204).end();
   } catch (error) {
-    res.status(404).json({ error: "cant delete post" });
+    res.status(404).json({ msg: "cant delete post" });
   }
 });
 

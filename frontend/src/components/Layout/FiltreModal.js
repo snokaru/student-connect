@@ -11,7 +11,8 @@ export const FiltreModal = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const onClick = () => {};
-  
+
+  const workplaces = [...new Set(posts?.map((post) => post.workPlace))];
   return (
     <>
       <div variant="primary" onClick={handleShow}>
@@ -27,10 +28,10 @@ export const FiltreModal = () => {
             <div className="col-3">
               <h1>Oras</h1>
               <div className="anyClass">
-                {posts.map((post) => (
+                {workplaces.map((workplace) => (
                   <p>
                     <input type="radio" id="test1" name="radio-group"></input>
-                    <label for="test1">{post.workPlace}</label>
+                    <label for="test1">{workplace}</label>
                   </p>
                 ))}
               </div>
