@@ -6,17 +6,49 @@ import { Modal } from "react-bootstrap";
 export const FiltreModal = () => {
   const [show, setShow] = useState(false);
   const postContext = useContext(PostContext);
-  const { posts } = postContext;
+  const { posts, setFilters } = postContext;
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const [city, setCity] = useState(null);
   const [type, setType] = useState(null);
+  const submitFilters = (e) => {
+    e.preventDefault();
+    handleClose();
+    let filters = [];
+    if (city) {
+      filters.push({
+        "displayField": "City",
+        "displayValue": city,
+        "field": "workPlace",
+        "value": city
+      });
+    }
+
+    if (type === "part-time") {
+      filters.push({
+        "displayField": "Type",
+        "displayValue": "Part-Time",
+        "field": "workHours[$lt]",
+        "value": 8
+      })
+    }
+    else if (type === "full-time") {
+      filters.push({
+        "displayField": "Type",
+        "displayValue": "Full-Time",
+        "field": "workHours[$gte]",
+        "value": 8
+      });
+    }
+
+    setFilters(filters);
+  }
 
   const workplaces = [...new Set(posts?.map((post) => post.workPlace))];
   return (
     <>
       <div variant="primary" onClick={handleShow}>
-        Filtre
+        Filters
       </div>
 
       <Modal show={show} onHide={handleClose}>
@@ -86,7 +118,7 @@ export const FiltreModal = () => {
           <Button variant="danger" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleClose}>
+          <Button variant="primary" onClick={submitFilters}>
             Save Changes
           </Button>
         </Modal.Footer>

@@ -1,7 +1,7 @@
 import {
   POSTS_LOADED,
   SET_SEARCH,
-  ADD_FILTER,
+  SET_FILTERS,
   REMOVE_FILTER,
   CLEAR_FILTERS,
   ADD_POST,
@@ -36,6 +36,11 @@ export default function (state, action) {
         ...state,
         search: action.payload,
       };
+    case SET_FILTERS:
+      return {
+        ...state,
+        filters: action.payload,
+      }
     default:
       return state;
   }

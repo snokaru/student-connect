@@ -44,7 +44,7 @@ const PostState = (props) => {
   useEffect(() => {
     console.log("REFETCHING");
     fetchData();
-  }, [state.search]);
+  }, [state.search, state.filters]);
   const createPost = async (formData) => {
     try {
       const post = await postService.createPost(formData);
@@ -85,6 +85,7 @@ const PostState = (props) => {
         deletePost,
         manageComment,
         setSearch,
+        setFilters,
       }}
     >
       {props.children}
