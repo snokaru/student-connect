@@ -41,7 +41,6 @@ const UserState = (props) => {
       dispatch({ type: REGISTER_SUCCES, payload: token });
       load();
     } catch (error) {
-      
       dispatch({ type: REGISTER_FAIL, payload: error.response.data.msg });
     }
   };

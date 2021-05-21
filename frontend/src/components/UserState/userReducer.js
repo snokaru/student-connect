@@ -10,8 +10,14 @@ import {
 
 export default function (state, action) {
   switch (action.type) {
-    case REGISTER_SUCCES: case LOGIN_SUCCES:
-      return { ...state, isAuthenticated: true, token: action.payload };
+    case REGISTER_SUCCES:
+    case LOGIN_SUCCES:
+      return {
+        ...state,
+        isAuthenticated: true,
+        token: action.payload,
+        error: null,
+      };
 
     case REGISTER_FAIL:
       return { ...state, itAuthenticated: false, token: null };
@@ -20,7 +26,12 @@ export default function (state, action) {
       return { ...state, error: action.payload };
 
     case USER_LOADED:
-      return { ...state, isAuthenticated: true, user: action.payload };
+      return {
+        ...state,
+        isAuthenticated: true,
+        user: action.payload,
+        error: null,
+      };
 
     case LOGOUT:
       return { ...state, token: null, user: null, isAuthenticated: false };
