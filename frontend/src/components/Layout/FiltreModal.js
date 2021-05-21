@@ -11,38 +11,50 @@ export const FiltreModal = () => {
   const handleShow = () => setShow(true);
   const [city, setCity] = useState(null);
   const [type, setType] = useState(null);
+  /*
+  const initialState = {
+    city: "",
+    type: "",
+  };
+  */
+
   const submitFilters = (e) => {
     e.preventDefault();
+
     handleClose();
     let filters = [];
     if (city) {
       filters.push({
-        "displayField": "City",
-        "displayValue": city,
-        "field": "workPlace",
-        "value": city
+        displayField: "City",
+        displayValue: city,
+        field: "workPlace",
+        value: city,
       });
     }
 
     if (type === "part-time") {
       filters.push({
-        "displayField": "Type",
-        "displayValue": "Part-Time",
-        "field": "workHours[$lt]",
-        "value": 8
-      })
-    }
-    else if (type === "full-time") {
+        displayField: "Type",
+        displayValue: "Part-Time",
+        field: "workHours[$lt]",
+        value: 8,
+      });
+    } else if (type === "full-time") {
       filters.push({
-        "displayField": "Type",
-        "displayValue": "Full-Time",
-        "field": "workHours[$gte]",
-        "value": 8
+        displayField: "Type",
+        displayValue: "Full-Time",
+        field: "workHours[$gte]",
+        value: 8,
       });
     }
-
-    setFilters(filters);
-  }
+    /*
+    const clearState = () => {
+      setState sau Filters({ ...initialState});
+      //setate filtrele pe null banuiesc....
+    };
+    */
+    setFilters(filters); //.then(clearState);
+  };
 
   const workplaces = [...new Set(posts?.map((post) => post.workPlace))];
   return (
