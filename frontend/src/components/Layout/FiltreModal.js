@@ -2,65 +2,115 @@ import React, { useContext, useState } from "react";
 import PostContext from "../PostState/postContext";
 import { Button } from "react-bootstrap";
 import { Modal } from "react-bootstrap";
-import "./Elements.css";
 
 export const FiltreModal = () => {
   const [show, setShow] = useState(false);
   const postContext = useContext(PostContext);
-  const { posts } = postContext;
+  const { posts, setFilters } = postContext;
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const onClick = () => {};
+  const [city, setCity] = useState(null);
+  const [type, setType] = useState(null);
+  const submitFilters = (e) => {
+    e.preventDefault();
+    handleClose();
+    let filters = [];
+    if (city) {
+      filters.push({
+        "displayField": "City",
+        "displayValue": city,
+        "field": "workPlace",
+        "value": city
+      });
+    }
+
+    if (type === "part-time") {
+      filters.push({
+        "displayField": "Type",
+        "displayValue": "Part-Time",
+        "field": "workHours[$lt]",
+        "value": 8
+      })
+    }
+    else if (type === "full-time") {
+      filters.push({
+        "displayField": "Type",
+        "displayValue": "Full-Time",
+        "field": "workHours[$gte]",
+        "value": 8
+      });
+    }
+
+    setFilters(filters);
+  }
 
   const workplaces = [...new Set(posts?.map((post) => post.workPlace))];
   return (
     <>
       <div variant="primary" onClick={handleShow}>
-        Filtre
+        Filters
       </div>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Filtre Cautare</Modal.Title>
+          <Modal.Title>Filters</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <div className="row ">
-            <div className="col-3">
-              <h1>Oras</h1>
-              <div className="anyClass">
-                {workplaces.map((workplace) => (
-                  <p>
-                    <input type="radio" id="test1" name="radio-group"></input>
-                    <label for="test1">{workplace}</label>
-                  </p>
-                ))}
+          <div className="container">
+            <div className="row">
+              <div className="col">
+                <h1 className="text-center">City</h1>
+                <div className="anyClass">
+                  {workplaces.map((workplace, key) => (
+                    <div className="form-check">
+                      <input
+                        className="form-check-input"
+                        value={workplace}
+                        onChange={(e) => setCity(e.target.value)}
+                        type="radio"
+                        id={`workplace${key}`}
+                        name="radio-group"
+                      ></input>
+                      <label
+                        className="form-check-label"
+                        for={`workplace${key}`}
+                      >
+                        {workplace}
+                      </label>
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
-            <div className="col-5">
-              <h1>Experienta</h1>
-              <p>
-                <input type="radio" id="test4" name="radio-group"></input>
-                <label for="test4">Senior</label>
-              </p>
-              <p>
-                <input type="radio" id="test5" name="radio-group"></input>
-                <label for="test5">Junior</label>
-              </p>
-              <p>
-                <input type="radio" id="test6" name="radio-group"></input>
-                <label for="test6">Fara Experienta</label>
-              </p>
-            </div>
-            <div className="col-1">
-              <h1>Tip</h1>
-              <p>
-                <input type="radio" id="test7" name="radio-group"></input>
-                <label for="test7">Part-time</label>
-              </p>
-              <p>
-                <input type="radio" id="test8" name="radio-group"></input>
-                <label for="test8">Full-time</label>
-              </p>
+
+              <div className="col">
+                <h1 className="text-center">Type</h1>
+                <div className="form-check">
+                  <input
+                    className="form-check-input"
+                    value="part-time"
+                    onChange={(e) => setType(e.target.value)}
+                    type="radio"
+                    id="part-time"
+                    name="job-type"
+                  ></input>
+                  <label className="form-check-label" for="part-time">
+                    Part-time
+                  </label>
+                </div>
+                <div className="form-check">
+                  <input
+                    className="form-check-input"
+                    value="full-time"
+                    onChange={(e) => setType(e.target.value)}
+                    type="radio"
+                    id="full-time"
+                    name="job-type"
+                  ></input>
+                  <label className="form-check-label" for="full-time">
+                    Full-time
+                  </label>
+                </div>
+              </div>
             </div>
           </div>
         </Modal.Body>
@@ -68,7 +118,7 @@ export const FiltreModal = () => {
           <Button variant="danger" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleClose}>
+          <Button variant="primary" onClick={submitFilters}>
             Save Changes
           </Button>
         </Modal.Footer>

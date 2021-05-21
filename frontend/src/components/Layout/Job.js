@@ -72,7 +72,7 @@ const Job = (props) => {
           </Link>
           <p className="card-text">{props.description}</p>
           <div>
-            <p className="card-subtitle text-muted mb-1">{props.type}</p>
+            <p className="card-subtitle text-muted mb-1">{(props.type === 8 ? "Full-Time" : "Part-Time") + ` (${props.type} hours)`}</p>
             <p className="card-subtitle text-muted">{props.location}</p>
           </div>
         </div>

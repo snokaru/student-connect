@@ -4,7 +4,7 @@ import PostReducer from "./postReducer";
 import postService from "../../services/post";
 import {
   POSTS_LOADED,
-  ADD_FILTER,
+  SET_FILTERS,
   REMOVE_FILTER,
   CLEAR_FILTERS,
   SET_SEARCH,
@@ -44,7 +44,7 @@ const PostState = (props) => {
   useEffect(() => {
     console.log("REFETCHING");
     fetchData();
-  }, [state.search]);
+  }, [state.search, state.filters]);
   const createPost = async (formData) => {
     try {
       const post = await postService.createPost(formData);
@@ -74,6 +74,9 @@ const PostState = (props) => {
     console.log("SETTING SEARCH FIELD! SHOULD TRIGGER RERENDER");
     dispatch({ type: SET_SEARCH, payload: searchText });
   };
+  const setFilters = (filters) => {
+    dispatch({ type: SET_FILTERS, payload: filters });
+  };
   return (
     <PostContext.Provider
       value={{
@@ -82,6 +85,7 @@ const PostState = (props) => {
         deletePost,
         manageComment,
         setSearch,
+        setFilters,
       }}
     >
       {props.children}
