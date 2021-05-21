@@ -7,7 +7,7 @@ import classes from "../components/Layout/footer.module.css";
 
 const RegisterForm = (props) => {
   let history = useHistory();
-  const { isAuthenticated, register } = useContext(UserContext);
+  const { isAuthenticated, register, error } = useContext(UserContext);
 
   useEffect(() => {
     if (isAuthenticated === true) {
@@ -253,6 +253,11 @@ const RegisterForm = (props) => {
             <div>
               <input type="submit" class="btn btn-primary" value="Submit" />
             </div>
+            {error ? (
+              <p className="mt-2 alert alert-danger" role="alert">
+                {error}
+              </p>
+            ) : null}
             <p class="text-muted my-2">
               You already have an account? <Link to="/login">Log In</Link>
             </p>

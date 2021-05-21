@@ -61,18 +61,15 @@ usersRouter.post(
           });
           await user.save();
           break;
-        default:
-          throw Error("Bad request!");
       }
-      //Token
       const payload = { user: { id: user.id } };
-      const token = jwt.sign(payload, config.JWT_SECRET, {
-        expiresIn: config.JWT_EXPIRE_TIME,
-      });
-
+      const token = jwt.sign(payload, config.JWT_SECRET, { expiresIn: "1h" });
       res.json({ token: token });
     } catch (error) {
-      return res.status(400).json({ msg: "User already exists!" });
+      console.log(error.message);
+      res
+        .status(400)
+        .json({ msg: "An account with this email already exists" });
     }
   }
 );
