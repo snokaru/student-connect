@@ -23,8 +23,7 @@ const postSchema = new mongoose.Schema({
     default: "",
   },
   workHours: {
-    type: String,
-    default: "",
+    type: Number,
   },
   workPlace: {
     type: String,
