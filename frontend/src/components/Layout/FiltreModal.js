@@ -11,12 +11,6 @@ export const FiltreModal = () => {
   const handleShow = () => setShow(true);
   const [city, setCity] = useState(null);
   const [type, setType] = useState(null);
-  /*
-  const initialState = {
-    city: "",
-    type: "",
-  };
-  */
 
   const submitFilters = (e) => {
     e.preventDefault();
@@ -47,13 +41,8 @@ export const FiltreModal = () => {
         value: 8,
       });
     }
-    /*
-    const clearState = () => {
-      setState sau Filters({ ...initialState});
-      //setate filtrele pe null banuiesc....
-    };
-    */
-    setFilters(filters); //.then(clearState);
+
+    setFilters(filters);
   };
 
   const workplaces = [...new Set(posts?.map((post) => post.workPlace))];
@@ -131,7 +120,7 @@ export const FiltreModal = () => {
             Close
           </Button>
           <Button variant="primary" onClick={submitFilters}>
-            Save Changes
+            Apply Filters
           </Button>
         </Modal.Footer>
       </Modal>

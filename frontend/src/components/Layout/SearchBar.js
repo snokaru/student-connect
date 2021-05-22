@@ -34,7 +34,7 @@ export const SearchBar = () => {
               }}
               className="col-7"
               type="text"
-              placeholder="Cauta.."
+              placeholder="Search..."
               name="search"
             ></input>
             <button className="col-1" type="submit">

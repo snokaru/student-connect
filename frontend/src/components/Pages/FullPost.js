@@ -115,15 +115,15 @@ const FullPost = (props) => {
         <div className="row justify-content-space-around ">
           <div className="col-sm-6 justify-content-between align-self-left">
             <div className="item">
-              <h3>Descriere</h3>
+              <h3>Description</h3>
               <p>{post?.description ? post.description : ""}</p>
             </div>
           </div>
 
           <div className="col-md-4 offset-1 a border-left ">
             <div className="item">
-              <h3>Aplica acum</h3>
-              <p>Date de contact</p>
+              <h3>Apply now</h3>
+              <p>Contact</p>
               <div className="row">
                 <div className="col-sm-2 py-1 d-flex justify-content-center align-items-center">
                   <FontAwesomeIcon icon={faFacebookF} />
@@ -170,9 +170,6 @@ const FullPost = (props) => {
         <div className="container shadow p-5 my-3 bg-white text-black rounded-lg shadow-sm p-3">
           <form onSubmit={onSubmit}>
             <div className="form-group">
-              <label>
-                <h1>Adauga un comentariu</h1>
-              </label>
               <textarea
                 onChange={onChange}
                 type="text"
@@ -181,17 +178,10 @@ const FullPost = (props) => {
                 row="4"
                 name="body"
                 value={body}
-                placeholder="Comentariu"
+                placeholder="Comment"
               ></textarea>
-              <small id="emailHelp" className="form-text text-muted">
-                Te rugam sa ai un limbaj adecvat
-              </small>
               <div>
-                <input
-                  type="submit"
-                  className="btn btn-primary"
-                  value="Trimite"
-                />
+                <input type="submit" className="btn btn-primary" value="Send" />
               </div>
             </div>
           </form>

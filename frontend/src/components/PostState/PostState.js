@@ -77,6 +77,7 @@ const PostState = (props) => {
   const setFilters = (filters) => {
     dispatch({ type: SET_FILTERS, payload: filters });
   };
+
   return (
     <PostContext.Provider
       value={{
