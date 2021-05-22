@@ -6,7 +6,7 @@ import PostContext from "../PostState/postContext";
 import UserContext from "../UserState/userContext";
 import Footer from "../Layout/Footer";
 import classes from "../Layout/footer.module.css";
-
+import CurrentFilters from "../Layout/CurrentFilters";
 import { BASE_URL } from "../../utils/config";
 import { Link } from "react-router-dom";
 import SearchBar from "../Layout/SearchBar";
@@ -17,44 +17,44 @@ const Home = () => {
   const { isAuthenticated } = userContext;
 
   return (
-  <div className={classes.body}>
-    <SearchBar></SearchBar>
+    <div className={classes.body}>
+      <div className="container d-flex flex-column mx-auto">
+        <SearchBar />
 
- 
-    <div className="container d-flex flex-column mx-auto">
-
-      {posts.map((post) => {
-        //console.log(post);
-        return (
-          <Job
-            key={post.id}
-            id={post.id}
-            className="mx-auto w-50"
-            title={post.title}
-            when={post.createdAt}
-            companyPicture={`${BASE_URL}/${post.user.profilePicture}`}
-            description={post.description}
-            type={post.workHours}
-            location={post.workPlace}
-            user={post.user}
-          />
-        );
-      })}
-      <Link to="/createpost">
-        {isAuthenticated ? (
-          <Fab
-            mainButtonStyles={{ backgroundColor: "#007bff" }}
-            alwaysShowTitle={true}
-            icon={"+"}
-            onClick={() => console.log("button")}
-          ></Fab>
-        ) : (
-          <React.Fragment />
-        )}
-      </Link>
-    </div>
-    <div className={classes.footer}><Footer></Footer></div>
-
+        <CurrentFilters />
+        {posts.map((post) => {
+          //console.log(post);
+          return (
+            <Job
+              key={post.id}
+              id={post.id}
+              className="mx-auto w-50"
+              title={post.title}
+              when={post.createdAt}
+              companyPicture={`${BASE_URL}/${post.user.profilePicture}`}
+              description={post.description}
+              type={post.workHours}
+              location={post.workPlace}
+              user={post.user}
+            />
+          );
+        })}
+        <Link to="/createpost">
+          {isAuthenticated ? (
+            <Fab
+              mainButtonStyles={{ backgroundColor: "#007bff" }}
+              alwaysShowTitle={true}
+              icon={"+"}
+              onClick={() => console.log("button")}
+            ></Fab>
+          ) : (
+            <React.Fragment />
+          )}
+        </Link>
+      </div>
+      <div className={classes.footer}>
+        <Footer></Footer>
+      </div>
     </div>
   );
 };

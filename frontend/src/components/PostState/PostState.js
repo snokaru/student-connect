@@ -78,6 +78,10 @@ const PostState = (props) => {
     dispatch({ type: SET_FILTERS, payload: filters });
   };
 
+  const removeFilter = (filterNumber) => {
+    dispatch({ type: REMOVE_FILTER, payload: filterNumber });
+  };
+
   return (
     <PostContext.Provider
       value={{
@@ -87,6 +91,7 @@ const PostState = (props) => {
         manageComment,
         setSearch,
         setFilters,
+        removeFilter,
       }}
     >
       {props.children}

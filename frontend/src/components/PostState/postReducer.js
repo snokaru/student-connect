@@ -40,7 +40,12 @@ export default function (state, action) {
       return {
         ...state,
         filters: action.payload,
-      }
+      };
+    case REMOVE_FILTER:
+      return {
+        ...state,
+        filters: state.filters.filter((f, key) => key !== action.payload),
+      };
     default:
       return state;
   }
