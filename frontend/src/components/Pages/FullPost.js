@@ -103,7 +103,11 @@ const FullPost = (props) => {
               <h3>{post?.user.name ? post.user.name : ""}</h3>
             </Link>
             <p>Location: {post?.workPlace ? post.workPlace : ""}</p>
-            <p>Type: {post?.workHours ? post.workHours : ""}</p>
+            <p>
+              Type:{" "}
+              {(props.type === 8 ? "Full-Time" : "Part-Time") +
+                ` (${props.type} hours)`}
+            </p>
             <p>
               Created at: {post?.createdAt ? formatDate(post.createdAt) : ""}
             </p>
