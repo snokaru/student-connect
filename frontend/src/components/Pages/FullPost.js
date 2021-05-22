@@ -205,7 +205,7 @@ const FullPost = (props) => {
               </Link>
               <p>
                 {formatDate(comment?.createdAt)}
-                {comment?.updated ? ` (modificat la ${comment?.updated})` : ""}
+                {comment?.updated ? ` (changed at ${comment?.updated})` : ""}
               </p>
             </div>
             {comment?.user?.id === user?.id ? (
@@ -260,7 +260,7 @@ const FullPost = (props) => {
                     <input
                       type="submit"
                       className="btn btn-primary my-1"
-                      value="Modifica"
+                      value="Modify"
                     />
                   </div>
                 </form>
