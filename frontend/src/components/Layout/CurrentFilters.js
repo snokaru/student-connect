@@ -5,22 +5,24 @@ const CurrentFilters = () => {
   const { filters, removeFilter } = useContext(PostContext);
 
   return (
-    <div className="align-self-center my-3">
+    <p className="align-self-center my-3">
       {filters.map((filter, key) => (
-        <div className="border d-inline rounded ">
-          <span className="p-2 ">
+        <div className="btn-group m-2">
+          <button 
+            className="bg-white border border-dark text-dark p-2"
+            style={{ cursor: "default" }}
+          >
             {filter.displayField + ": " + filter.displayValue}
-          </span>
-          <span
-            className="bg-danger text-white p-0"
-            style={{ cursor: "pointer" }}
+          </button>
+          <button
+            className="btn btn-danger p-2"
             onClick={() => removeFilter(key)}
           >
             X
-          </span>
+          </button>
         </div>
       ))}
-    </div>
+    </p>
   );
 };
 
