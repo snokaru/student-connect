@@ -22,11 +22,12 @@ export const Welcome = () => {
             <p>A platform for connecting students with companies.</p>
 
             <div class="row">
-            <NavLink className="nav-link" exact to="/" activeClassName="active">
+            <NavLink className="nav-link" exact to="/jobs" activeClassName="active">
             <div class="col-sm">
                 <div className={styles.button1}>See Our Job Postings!</div>
               </div>
           </NavLink>
+
           <NavLink className="nav-link" exact to="/register" activeClassName="active">
           <div class="col-sm">
                 <div className={styles.button1}>Join Us!</div>

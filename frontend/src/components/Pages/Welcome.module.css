@@ -1,7 +1,7 @@
 .rmSpinner {
-  top: 50%;
-  left: 50%;
-  margin-top: 10em;
+  top: 60%;
+  left: 40%;
+  margin-top: 6em;
 }
 
 .textBox {
@@ -28,8 +28,8 @@ transition: all 0.2s;
 
 }
 
-button1:hover{
-    color:#000000;
+.button11:hover{
+    color:white;
     background-color:blue;
     }
     

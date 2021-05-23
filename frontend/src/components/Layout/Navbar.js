@@ -9,8 +9,14 @@ export const Navbar = () => {
   return (
     <BootstrapNavbar className="navbar navbar-expand-lg navbar-dark bg-primary">
       <div className="navbar-nav mr-auto">
-        <NavItem className="nav-item">
+      <NavItem className="nav-item">
           <NavLink className="nav-link" exact to="/" activeClassName="active">
+            Home
+          </NavLink>
+        </NavItem>
+        
+        <NavItem className="nav-item">
+          <NavLink className="nav-link" exact to="/jobs" activeClassName="active">
             Jobs
           </NavLink>
         </NavItem>

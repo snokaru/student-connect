@@ -32,7 +32,7 @@ const App = () => {
               <Route exact path="/register">
                 <RegisterForm />
               </Route>
-              <Route exact path="/">
+              <Route exact path="/jobs">
                 <Home />
               </Route>
               <Route exact path="/users/:id">
@@ -47,7 +47,7 @@ const App = () => {
               <Route exact path="/spinner">
                 <Spinner />
               </Route>
-              <Route exact path="/welcome">
+              <Route exact path="/">
               <Welcome/>
               </Route>
             </Switch>
