@@ -10,7 +10,7 @@ const PostForm = () => {
     title: "",
     description: "",
     programmingLang: "C/C++",
-    workHours: "Full-Time",
+    workHours: null,
     workPlace: "",
   });
   const onChange = (e) => {
@@ -59,8 +59,9 @@ const PostForm = () => {
                 onChange={onChange}
                 name="workHours"
               >
-                <option>Full-Time</option>
-                <option>Part-Time</option>
+                <option value={8}>Full-Time(8 hours)</option>
+                <option value={4}>Part-Time(4 hours)</option>
+                <option value={6}>Part-Time(6 hours)</option>
               </select>
             </div>
           </div>
@@ -103,5 +104,4 @@ const PostForm = () => {
     </React.Fragment>
   );
 };
-
 export default PostForm;
