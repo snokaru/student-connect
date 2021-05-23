@@ -11,7 +11,7 @@ export const Navbar = () => {
       <div className="navbar-nav mr-auto">
         <NavItem className="nav-item">
           <NavLink className="nav-link" exact to="/" activeClassName="active">
-            Home
+            Jobs
           </NavLink>
         </NavItem>
         {user ? (
