@@ -10,8 +10,8 @@ const PostForm = () => {
     title: "",
     description: "",
     programmingLang: "C/C++",
-    workHours: null,
-    workPlace: "",
+    workHours: 8,
+    workPlace: locations[0],
   });
   const onChange = (e) => {
     setPost({ ...post, [e.target.name]: e.target.value });
@@ -21,6 +21,7 @@ const PostForm = () => {
     createPost(post);
     history.push("/");
   };
+  console.log(post);
   return (
     <React.Fragment>
       <div className="w-50 my-4 p-4 card container">
@@ -88,7 +89,7 @@ const PostForm = () => {
                 name="workPlace"
               >
                 {locations.map((location) => (
-                  <option>{location}</option>
+                  <option value={location}>{location}</option>
                 ))}
               </select>
             </div>
