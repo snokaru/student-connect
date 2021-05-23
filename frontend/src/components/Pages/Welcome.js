@@ -1,10 +1,19 @@
-import React from "react";
+import React,{useContext} from "react";
 import ReactImageFallback from "react-image-fallback";
 import Logo from "../../visuals/welcome.png";
 import styles from "./Welcome.module.css";
 import { NavLink } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import UserContext from "../UserState/userContext";
+
 
 export const Welcome = () => {
+  let history = useHistory();
+  const userContext = useContext(UserContext);
+  const { user } = userContext;
+  if(user){
+    history.push('/jobs');
+  }
   return (
     <div class="container">
       <div class="row">

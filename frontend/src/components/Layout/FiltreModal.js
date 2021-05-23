@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import PostContext from "../PostState/postContext";
 import { Button } from "react-bootstrap";
 import { Modal } from "react-bootstrap";
+import {locations} from "../../placeholders";
 
 export const FiltreModal = () => {
   const [show, setShow] = useState(false);
@@ -45,7 +46,7 @@ export const FiltreModal = () => {
     setFilters(filters);
   };
 
-  const workplaces = [...new Set(posts?.map((post) => post.workPlace))];
+  const workplaces = locations;
   return (
     <>
       <div variant="primary" onClick={handleShow}>
