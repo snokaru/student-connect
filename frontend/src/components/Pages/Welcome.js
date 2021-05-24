@@ -1,4 +1,4 @@
-import React,{useContext} from "react";
+import React, { useContext } from "react";
 import ReactImageFallback from "react-image-fallback";
 import Logo from "../../visuals/welcome.png";
 import styles from "./Welcome.module.css";
@@ -6,13 +6,12 @@ import { NavLink } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import UserContext from "../UserState/userContext";
 
-
 export const Welcome = () => {
   let history = useHistory();
   const userContext = useContext(UserContext);
   const { user } = userContext;
-  if(user){
-    history.push('/jobs');
+  if (user) {
+    history.push("/jobs");
   }
   return (
     <div class="container">
@@ -31,19 +30,26 @@ export const Welcome = () => {
             <p>A platform for connecting students with companies.</p>
 
             <div class="row">
-            <NavLink className={styles.button1} exact to="/jobs" activeClassName="active">
-            <div class="col-sm">
-
-                <div className="btn btn-outline-primary">See Our Job Postings!</div>
-                   
-          </NavLink>
-
-          <NavLink className={styles.button1} exact to="/register" activeClassName="active">
-          <div class="col-sm">
-                <div className="btn btn-outline-primary">Join Us!</div>     
-          </NavLink>
-              
-              
+              <div class="col-sm">
+                <NavLink
+                  className={styles.button1}
+                  exact
+                  to="/jobs"
+                  activeClassName="active"
+                >
+                  See Our Job Postings!
+                </NavLink>
+              </div>
+              <div class="col-sm">
+                <NavLink
+                  className={styles.button1}
+                  exact
+                  to="/register"
+                  activeClassName="active"
+                >
+                  Join Us!
+                </NavLink>
+              </div>
             </div>
           </div>
         </div>
