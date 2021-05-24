@@ -23,6 +23,7 @@ const UserState = (props) => {
     isAuthenticated: false,
     user: null,
     error: null,
+    loading: false,
   };
 
   const [state, dispatch] = useReducer(UserReducer, initialState);
@@ -41,7 +42,8 @@ const UserState = (props) => {
       dispatch({ type: REGISTER_SUCCES, payload: token });
       load();
     } catch (error) {
-      dispatch({ type: REGISTER_FAIL, payload: error.response.data.msg });
+      dispatch({ type: REGISTER_FAIL, payload: error.message });
+      setTimeout(() => dispatch({ type: CLEAR_ERRORS }), 3000);
     }
   };
 
@@ -51,8 +53,8 @@ const UserState = (props) => {
       dispatch({ type: LOGIN_SUCCES, payload: token });
       load();
     } catch (error) {
-     
-      dispatch({ type: LOGIN_FAIL, payload: error.response.data.msg });
+      dispatch({ type: LOGIN_FAIL, payload: error.message });
+      setTimeout(() => dispatch({ type: CLEAR_ERRORS }), 3000)
     }
   };
 
@@ -84,10 +86,7 @@ const UserState = (props) => {
   return (
     <UserContext.Provider
       value={{
-        user: state.user,
-        error: state.error,
-        token: state.token,
-        isAuthenticated: state.isAuthenticated,
+        ...state,
         register,
         login,
         logout,

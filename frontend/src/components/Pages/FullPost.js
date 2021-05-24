@@ -14,6 +14,7 @@ import { BASE_URL } from "../../utils/config";
 import postService from "../../services/post";
 import UserContext from "../UserState/userContext";
 import PostContext from "../PostState/postContext";
+import ReactImageFallback from "react-image-fallback";
 const FullPost = (props) => {
   const formatDate = (date) => {
     if (!date) {
@@ -43,6 +44,8 @@ const FullPost = (props) => {
   const [edit, setEdit] = useState({ id: null, bool: false });
   const { body } = comment;
   const { id } = useParams();
+
+  console.log(post);
   const onChange = (e) => {
     setComment({ ...comment, [e.target.name]: e.target.value, user: user?.id });
   };
@@ -89,13 +92,14 @@ const FullPost = (props) => {
       <div className="container shadow p-5 my-3 bg-white text-black rounded-lg shadow-sm p-3">
         <div className="row">
           <div className="col-sm-4 border-right">
-            <img
-              src={`${BASE_URL}/${post?.user?.profilePicture}`}
-              className="d-inline"
-              width="200"
-              height="200"
-              alt="img"
-            ></img>
+              <ReactImageFallback
+                className="d-inline"
+                src={`${BASE_URL}/${post?.user?.profilePicture}`}
+                fallbackImage={`${BASE_URL}/public/img/default.jpg`}
+                alt="profile"
+                width="200"
+                height="200"
+              />
           </div>
           <div className="col-sm-8">
             <h1>{post?.title ? post.title : ""}</h1>
@@ -105,8 +109,8 @@ const FullPost = (props) => {
             <p>Location: {post?.workPlace ? post.workPlace : ""}</p>
             <p>
               Type:{" "}
-              {(props.type === 8 ? "Full-Time" : "Part-Time") +
-                ` (${props.type} hours)`}
+              {(post?.workHours === 8 ? "Full-Time" : "Part-Time") +
+                ` (${post?.workHours} hours)`}
             </p>
             <p>
               Created at: {post?.createdAt ? formatDate(post.createdAt) : ""}
@@ -199,14 +203,24 @@ const FullPost = (props) => {
           className="container shadow p-4 my-3 bg-white text-black rounded-lg shadow-sm p-3"
         >
           <div className="row">
-            <div className="p-1">
-              <Link to={`/users/${comment?.user?.id}`}>
-                <h5>{comment?.user?.name}</h5>
-              </Link>
-              <p>
-                {formatDate(comment?.createdAt)}
-                {comment?.updated ? ` (changed at ${comment?.updated})` : ""}
-              </p>
+            <div className="d-flex flex-row p-1">
+              <ReactImageFallback
+                className="d-inline"
+                src={`${BASE_URL}/${comment?.user?.profilePicture}`}
+                fallbackImage={`${BASE_URL}/public/img/default.jpg`}
+                alt="profile"
+                width="50"
+                height="50"
+              />
+              <div className="d-flex flex-column mx-2">
+                <Link to={`/users/${comment?.user?.id}`}>
+                  <h5 className="d-inline">{comment?.user?.name}</h5>
+                </Link>
+                <p className="d-inline">
+                  {formatDate(comment?.createdAt)}
+                  {comment?.updated ? ` (changed at ${comment?.updated})` : ""}
+                </p>
+              </div>
             </div>
             {comment?.user?.id === user?.id ? (
               <div className="ml-auto p-1">

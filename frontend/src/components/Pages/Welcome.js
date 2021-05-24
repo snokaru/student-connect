@@ -33,14 +33,14 @@ export const Welcome = () => {
             <div class="row">
             <NavLink className={styles.button1} exact to="/jobs" activeClassName="active">
             <div class="col-sm">
-                <div >See Our Job Postings!</div>
-              </div>
+
+                <div className="btn btn-outline-primary">See Our Job Postings!</div>
+                   
           </NavLink>
 
           <NavLink className={styles.button1} exact to="/register" activeClassName="active">
           <div class="col-sm">
-                <div>Join Us!</div>
-              </div>
+                <div className="btn btn-outline-primary">Join Us!</div>     
           </NavLink>
               
               

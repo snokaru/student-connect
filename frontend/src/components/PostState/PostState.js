@@ -19,6 +19,7 @@ const PostState = (props) => {
     filters: [],
     posts: [],
     search: null,
+    loading: false,
     error: null,
   };
   const [state, dispatch] = useReducer(PostReducer, initialState);

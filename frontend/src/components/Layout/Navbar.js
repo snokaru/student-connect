@@ -9,6 +9,28 @@ export const Navbar = () => {
   return (
     <BootstrapNavbar className="navbar navbar-expand-lg navbar-dark bg-primary">
       <div className="navbar-nav mr-auto">
+        {!user && 
+          <NavItem className="nav-item">
+            <NavLink
+              className="nav-link"
+              exact
+              to="/"
+              activeClassName="active"
+            >
+              Home
+            </NavLink>
+          </NavItem>
+        }
+        <NavItem className="nav-item">
+          <NavLink
+            className="nav-link"
+            exact
+            to="/jobs"
+            activeClassName="active"
+          >
+            Jobs
+          </NavLink>
+        </NavItem>
         {user ? (
           <React.Fragment>
             <NavItem>
@@ -21,20 +43,9 @@ export const Navbar = () => {
                 Profile
               </NavLink>
             </NavItem>
-            <NavItem></NavItem>
           </React.Fragment>
         ) : (
           <React.Fragment>
-            <NavItem className="nav-item">
-              <NavLink
-                className="nav-link"
-                exact
-                to="/"
-                activeClassName="active"
-              >
-                Home
-              </NavLink>
-            </NavItem>
             <NavItem>
               <NavLink
                 className="nav-link"
@@ -57,16 +68,6 @@ export const Navbar = () => {
             </NavItem>
           </React.Fragment>
         )}
-        <NavItem className="nav-item">
-          <NavLink
-            className="nav-link"
-            exact
-            to="/jobs"
-            activeClassName="active"
-          >
-            Jobs
-          </NavLink>
-        </NavItem>
       </div>
       {user ? (
         <button
