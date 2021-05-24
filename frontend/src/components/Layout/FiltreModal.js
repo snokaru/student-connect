@@ -49,7 +49,7 @@ export const FiltreModal = () => {
   const workplaces = locations;
   return (
     <>
-      <div variant="primary" onClick={handleShow}>
+      <div onClick={handleShow}>
         Filters
       </div>
 

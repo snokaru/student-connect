@@ -20,7 +20,7 @@ export default function (state, action) {
       };
 
     case REGISTER_FAIL:
-      return { ...state, itAuthenticated: false, token: null };
+      return { ...state, isAuthenticated: false, token: null, error: action.payload };
 
     case LOGIN_FAIL:
       return { ...state, error: action.payload };
@@ -35,6 +35,12 @@ export default function (state, action) {
 
     case LOGOUT:
       return { ...state, token: null, user: null, isAuthenticated: false };
+
+    case CLEAR_ERRORS:
+      return {
+        ...state,
+        error: null,
+      }
 
     default:
       return state;

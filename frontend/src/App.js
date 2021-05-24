@@ -1,4 +1,7 @@
+
 import React from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
 import LoginForm from "./components/LoginForm";
 import RegisterForm from "./components/RegisterForm";
 import PostForm from "./components/PostForm";
@@ -7,16 +10,12 @@ import Home from "./components/Pages/Home";
 import NavBar from "./components/Layout/Navbar";
 import User from "./components/Pages/User";
 import PostState from "./components/PostState/PostState";
-import "bootstrap/dist/css/bootstrap.min.css";
 import Spinner from "./components/Layout/Spinner";
-import Footer from "./components/Layout/Footer";
-import Searchbar from './components/Layout/SearchBar';
-
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import FullPost from "./components/Pages/FullPost";
-import { FiltreModal } from "./components/Layout/FiltreModal";
 import Welcome from "./components/Pages/Welcome";
+import Errors from "./components/Layout/Errors";
 
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const App = () => {
   return (
@@ -25,6 +24,7 @@ const App = () => {
         <PostState>
           <UserState>
             <NavBar />
+            <Errors />
             <Switch>
               <Route exact path="/login">
                 <LoginForm />

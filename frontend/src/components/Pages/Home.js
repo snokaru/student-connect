@@ -18,7 +18,7 @@ const Home = () => {
 
   return (
     <div className={classes.body}>
-      <div className="container d-flex flex-column mx-auto">
+      <div className="container">
         <SearchBar />
 
         <CurrentFilters />
@@ -28,7 +28,7 @@ const Home = () => {
             <Job
               key={post.id}
               id={post.id}
-              className="mx-auto w-50"
+              className="mx-auto col-6"
               title={post.title}
               when={post.createdAt}
               companyPicture={`${BASE_URL}/${post.user.profilePicture}`}

@@ -180,7 +180,6 @@ const modelResolver = async (req, res) => {
   try {
     let query;
     if (req.fuzzy) {
-      // tried to implement fuzzy searching but does not work properly yet
       query = req.model.fuzzySearch({query: req.fuzzy, minSize: 4});
     } else {
       query = req.model.find(req.filter);

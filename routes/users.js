@@ -22,7 +22,6 @@ usersRouter.post(
   check("email").isEmail(),
   check("password").isLength({ min: 5 }),
   async (req, res) => {
-    //Validate data
     const validationErrors = validationResult(req);
     if (!validationErrors.isEmpty()) {
       return res.status(400).json({ errors: validationErrors.array() });

@@ -65,12 +65,6 @@ const LoginForm = (props) => {
             <div>
               <input type="submit" className="btn btn-primary" value="Submit" />
             </div>
-            {error ? (
-              <p className="mt-2 alert alert-danger" role="alert">
-                {error}
-              </p>
-            ) : null}
-
             <p className="mt-2 text-muted">
               Need an account? <Link to="/register">Register</Link>
             </p>

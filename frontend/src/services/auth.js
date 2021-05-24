@@ -26,6 +26,7 @@ const logout = async () => {
 
 const register = async (formData) => {
     const res = await axios.post(`${BASE_URL}/api/users`, formData);
+    console.log(res);
     updateToken(res.data.token);
     return res.data.token;
 };
