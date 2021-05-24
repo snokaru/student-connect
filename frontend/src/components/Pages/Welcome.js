@@ -31,16 +31,16 @@ export const Welcome = () => {
             <p>A platform for connecting students with companies.</p>
 
             <div class="row">
-            <NavLink className="nav-link" exact to="/jobs" activeClassName="active">
+            <NavLink className={styles.button1} exact to="/jobs" activeClassName="active">
             <div class="col-sm">
+
                 <div className="btn btn-outline-primary">See Our Job Postings!</div>
-              </div>
+                   
           </NavLink>
 
-          <NavLink className="nav-link" exact to="/register" activeClassName="active">
+          <NavLink className={styles.button1} exact to="/register" activeClassName="active">
           <div class="col-sm">
-                <div className="btn btn-outline-primary">Join Us!</div>
-              </div>
+                <div className="btn btn-outline-primary">Join Us!</div>     
           </NavLink>
               
               
