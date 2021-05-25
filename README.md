@@ -1,4 +1,4 @@
-# ibm-students-companies
+# StudentConnect
 
 Collective Project Proposed By IBM, West University of Timisoara, 2nd Year, Summer Semester.
 
