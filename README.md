@@ -1,5 +1,6 @@
 # StudentConnect
 
+A Web App for connecting students and companies.  
 Collective Project Proposed By IBM, West University of Timisoara, 2nd Year, Summer Semester.
 
 # Installation
