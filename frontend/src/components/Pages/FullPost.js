@@ -92,14 +92,14 @@ const FullPost = (props) => {
       <div className="container shadow p-5 my-3 bg-white text-black rounded-lg shadow-sm p-3">
         <div className="row">
           <div className="col-sm-4 border-right">
-              <ReactImageFallback
-                className="d-inline"
-                src={`${BASE_URL}/${post?.user?.profilePicture}`}
-                fallbackImage={`${BASE_URL}/public/img/default.jpg`}
-                alt="profile"
-                width="200"
-                height="200"
-              />
+            <ReactImageFallback
+              className="d-inline"
+              src={`${BASE_URL}/${post?.user?.profilePicture}`}
+              fallbackImage={`${BASE_URL}/public/img/default.jpg`}
+              alt="profile"
+              width="200"
+              height="200"
+            />
           </div>
           <div className="col-sm-8">
             <h1>{post?.title ? post.title : ""}</h1>
@@ -107,6 +107,7 @@ const FullPost = (props) => {
               <h3>{post?.user.name ? post.user.name : ""}</h3>
             </Link>
             <p>Location: {post?.workPlace ? post.workPlace : ""}</p>
+            <p>Programming language: {post?.programmingLang}</p>
             <p>
               Type:{" "}
               {(post?.workHours === 8 ? "Full-Time" : "Part-Time") +
