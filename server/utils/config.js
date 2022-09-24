@@ -6,8 +6,8 @@ const JWT_SECRET = process.env.JWT_SECRET;
 const JWT_EXPIRE_TIME = process.env.NODE_ENV == "DEV" ? null : "1h";
 
 module.exports = {
-    PORT,
-    MONGODB_URI,
-    JWT_SECRET,
-    JWT_EXPIRE_TIME
+  PORT,
+  MONGODB_URI,
+  JWT_SECRET,
+  JWT_EXPIRE_TIME,
 };
